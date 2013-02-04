@@ -1,18 +1,21 @@
 //
 //  EWAppDelegate.m
-//  TableEyeWitness
+//  TabletEyeWitness
 //
 //  Created by Sai Deep Tetali on 1/26/13.
 //  Copyright (c) 2013 Sai Deep Tetali. All rights reserved.
 //
 
 #import "EWAppDelegate.h"
+#import "Utils.h"
 
 @implementation EWAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    self.baseURL = @"http://cs.ucla.edu/~saideep/cldiwitness";
+    self.tabletItems = [Utils fetchTabletItems];
     return YES;
 }
 
@@ -31,6 +34,8 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    
+    self.tabletItems = [Utils fetchTabletItems];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application

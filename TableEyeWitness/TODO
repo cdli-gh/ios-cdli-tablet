@@ -1,0 +1,7 @@
+Replace loading image
+Replace synchronous download which is blocking the UI
+Figure out when to referesh data
+Utils has its own base url, everyone else uses delegate's baseURL
+
+
+
