@@ -1,14 +1,14 @@
 //
-//  TableEyeWitnessTests.m
-//  TableEyeWitnessTests
+//  TabletEyeWitnessTests.m
+//  TabletEyeWitnessTests
 //
 //  Created by Sai Deep Tetali on 1/26/13.
 //  Copyright (c) 2013 Sai Deep Tetali. All rights reserved.
 //
 
-#import "TableEyeWitnessTests.h"
+#import "TabletEyeWitnessTests.h"
 
-@implementation TableEyeWitnessTests
+@implementation TabletEyeWitnessTests
 
 - (void)setUp
 {
@@ -26,7 +26,7 @@
 
 - (void)testExample
 {
-    STFail(@"Unit tests are not implemented yet in TableEyeWitnessTests");
+    STFail(@"Unit tests are not implemented yet in TabletEyeWitnessTests");
 }
 
 @end

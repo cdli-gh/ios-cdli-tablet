@@ -1,6 +1,6 @@
 //
 //  EWDataViewController.h
-//  TableEyeWitness
+//  TabletEyeWitness
 //
 //  Created by Sai Deep Tetali on 1/26/13.
 //  Copyright (c) 2013 Sai Deep Tetali. All rights reserved.
@@ -10,7 +10,7 @@
 
 @interface EWDataViewController : UIViewController
 
-@property (strong, nonatomic) IBOutlet UILabel *dataLabel;
 @property (strong, nonatomic) id dataObject;
+@property (strong, nonatomic) NSString *baseURL;
 
 @end

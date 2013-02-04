@@ -1,13 +1,13 @@
 //
 //  EWModelController.m
-//  TableEyeWitness
+//  TabletEyeWitness
 //
 //  Created by Sai Deep Tetali on 1/26/13.
 //  Copyright (c) 2013 Sai Deep Tetali. All rights reserved.
 //
 
+#import "EWAppDelegate.h"
 #import "EWModelController.h"
-
 #import "EWDataViewController.h"
 
 /*
@@ -20,7 +20,7 @@
  */
 
 @interface EWModelController()
-@property (readonly, strong, nonatomic) NSArray *pageData;
+@property (strong, nonatomic) NSArray *pageData;
 @end
 
 @implementation EWModelController
@@ -30,14 +30,15 @@
     self = [super init];
     if (self) {
         // Create the data model.
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        _pageData = [[dateFormatter monthSymbols] copy];
+        EWAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+        self.pageData = appDelegate.tabletItems;
     }
     return self;
 }
 
+
 - (EWDataViewController *)viewControllerAtIndex:(NSUInteger)index storyboard:(UIStoryboard *)storyboard
-{   
+{
     // Return the data view controller for the given index.
     if (([self.pageData count] == 0) || (index >= [self.pageData count])) {
         return nil;
@@ -46,6 +47,7 @@
     // Create a new view controller and pass suitable data.
     EWDataViewController *dataViewController = [storyboard instantiateViewControllerWithIdentifier:@"EWDataViewController"];
     dataViewController.dataObject = self.pageData[index];
+    //dataViewController.url = [NSString stringWithFormat:@"http://localhost/%d.jpg", index+1];
     return dataViewController;
 }
 
