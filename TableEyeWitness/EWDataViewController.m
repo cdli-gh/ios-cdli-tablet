@@ -11,11 +11,15 @@
 #import "DescriptionView.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
+#define BLURB_HEIGHT_MULTIPLIER 0.2
+#define FULL_HEIGHT_MULTIPLIER 0.8
+
 @interface EWDataViewController ()
+
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
-@property (strong, nonatomic) IBOutlet DescriptionView *portraitDescriptionView;
-@property (strong, nonatomic) IBOutlet DescriptionView *landscapeDescriptionView;
-@property (strong, nonatomic) DescriptionView *descriptionView;
+@property (strong, nonatomic) IBOutlet DescriptionView *descriptionView;
+@property (nonatomic) BOOL showingFullDescription;
+@property (nonatomic, strong) NSLayoutConstraint *currentHeightConstraint;
 @end
 
 @implementation EWDataViewController
@@ -23,27 +27,48 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-    self.imageView.frame = self.view.bounds;
-    UIInterfaceOrientation orientation = [[UIDevice currentDevice] orientation];
+    self.showingFullDescription = NO;
+//    NSLayoutConstraint *cn = [NSLayoutConstraint constraintWithItem:self.descriptionView
+//                                                          attribute:NSLayoutAttributeLeft
+//                                                          relatedBy:NSLayoutRelationEqual
+//                                                             toItem:self.view
+//                                                          attribute:NSLayoutAttributeCenterX
+//                                                         multiplier:1.0
+//                                                           constant:-10];
+    //[self.view addConstraint:cn];
+
+    self.currentHeightConstraint = [NSLayoutConstraint constraintWithItem:self.descriptionView
+                                                                attribute:NSLayoutAttributeHeight
+                                                                relatedBy:NSLayoutRelationGreaterThanOrEqual
+                                                                   toItem:self.view
+                                                                attribute:NSLayoutAttributeHeight
+                                                               multiplier:BLURB_HEIGHT_MULTIPLIER
+                                                                 constant:0];
+    [self.view addConstraint:self.currentHeightConstraint];
+
+    self.imageView.userInteractionEnabled = YES;
     
-    if(orientation == UIInterfaceOrientationPortrait || orientation == UIInterfaceOrientationMaskPortraitUpsideDown) {
-        [self changeTheViewToPortrait:YES andDuration:0];
-    }
-    else if(orientation == UIInterfaceOrientationLandscapeRight || orientation == UIInterfaceOrientationLandscapeLeft)
-    {
-        [self changeTheViewToPortrait:NO andDuration:0];
-    }
-    //The simulator does not give a good value for this
-    else {
-        UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
-        if (orientation == UIInterfaceOrientationPortrait || orientation == UIInterfaceOrientationPortraitUpsideDown) {
-            [self changeTheViewToPortrait:YES andDuration:0];
-        }
-        else {
-            [self changeTheViewToPortrait:NO andDuration:0];
-        }
-    }    
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(toggleNavigationBar:)];
+    tapGestureRecognizer.numberOfTapsRequired = 1;
+    tapGestureRecognizer.numberOfTouchesRequired = 1;
+    [self.imageView addGestureRecognizer:tapGestureRecognizer];
+    
+    NSString *imageNameToLoad = @"loading";
+    NSString *pathToImage = [[NSBundle mainBundle] pathForResource:imageNameToLoad ofType:@"gif"];
+    UIImage *placeholderImage = [[UIImage alloc] initWithContentsOfFile:pathToImage];
+    
+    EWAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    NSString *baseURL = appDelegate.baseURL;
+    
+    NSDictionary *tabletItem = (NSDictionary *)self.dataObject;
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@", baseURL, tabletItem[@"url"]];
+    NSLog(@"BigPhoto: Trying to fetch %@", urlString);
+    
+    [self.imageView setImageWithURL:[NSURL URLWithString:urlString] placeholderImage:placeholderImage];
+    
+    self.descriptionView.titleLabel.text = tabletItem[@"blurb-title"];
+    self.descriptionView.descriptionField.text = tabletItem[@"blurb"];
+    
 }
 
 
@@ -56,52 +81,42 @@
 - (void)toggleNavigationBar:(UITapGestureRecognizer *)sender
 {
     if (sender.state == UIGestureRecognizerStateEnded) {
-        BOOL finalNavbarState = !self.navigationController.navigationBarHidden;
-        [self.navigationController setNavigationBarHidden:finalNavbarState animated:YES];
-
+        BOOL finalNavbarHidden = !self.navigationController.navigationBarHidden;
+        [self.navigationController setNavigationBarHidden:finalNavbarHidden animated:YES];
+        //description view and nav bar are displayed synchronously
+        float originalAlpha = self.descriptionView.alpha;
+        float startingAlpha = finalNavbarHidden?originalAlpha:0;
+        float endingAlpha = finalNavbarHidden?0:originalAlpha;
+        self.descriptionView.alpha = startingAlpha;
+        
+        if(!finalNavbarHidden)
+            self.descriptionView.hidden = NO;
+        
+        //NSLog(@"Staring alpha: %f, ending: %f", startingAlpha, endingAlpha);
+        
+        [UIView animateWithDuration:0.24
+                         animations:^{
+                             self.descriptionView.alpha = endingAlpha;
+                         }
+                         completion:^(BOOL finished) {
+                             if(finalNavbarHidden) {
+                                 self.descriptionView.hidden = YES;
+                                 self.descriptionView.alpha = originalAlpha;
+                             }
+                         }];
+        
         // NSLog(@"Got a tap");
-
     }
     
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
-    self.imageView.userInteractionEnabled = YES;
+    //keep nav bar and description view in sync
+    //they might go out of sync of another page removes the nav bar and we come back to this one
+    self.descriptionView.hidden = self.navigationController.navigationBarHidden;
     
-    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(toggleNavigationBar:)];
-    tapGestureRecognizer.numberOfTapsRequired = 1;
-    tapGestureRecognizer.numberOfTouchesRequired = 1;
-    [self.imageView addGestureRecognizer:tapGestureRecognizer];
-    
-    NSString *imageNameToLoad = @"loading"; //[NSString stringWithFormat:@"%d_full", index%32];
-    NSString *pathToImage = [[NSBundle mainBundle] pathForResource:imageNameToLoad ofType:@"gif"];
-    //NSLog(@"Path to image: %@", pathToImage);
-    UIImage *placeholderImage = [[UIImage alloc] initWithContentsOfFile:pathToImage];
-
-    EWAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    NSString *baseURL = appDelegate.baseURL;
-    
-    NSDictionary *tabletItem = (NSDictionary *)self.dataObject;
-    NSString *urlString = [NSString stringWithFormat:@"%@/%@", baseURL, tabletItem[@"url"]];
-    NSLog(@"BigPhoto: Trying to fetch %@", urlString);
-
-    [self.imageView setImageWithURL:[NSURL URLWithString:urlString] placeholderImage:placeholderImage];
-    //NSLog(@"Now trying to set label of description");
-    //self.descriptionView.label.text = tabletItem[@"blurb"];
-    
-}
-
-- (void)setDescriptionViewTo:(DescriptionView *)target
-{
-    NSDictionary *tabletItem = (NSDictionary *)self.dataObject;
-    target.label.text = tabletItem[@"blurb"];
-    self.descriptionView = target;
-//    NSLog(@"description view text: %@", self.descriptionView.label.text);
-//    NSLog(@"target view text: %@", target.label.text);
 }
 
 #pragma mark - InterfaceOrientationMethods
@@ -111,33 +126,78 @@
     return YES;
 }
 
-
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+//This will try to fit the entire descriptionView so that the descriptionField will not have to scroll
+//This is done by increasing the height until it reaches a maximum of 80% of the entire view
+//This is only done when full details are being displayed
+//TODO: See if this can be done automatically by auto layout
+- (void) setDescriptionTextHeightWithFullText: (BOOL) fullText
 {
-    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    if(UIInterfaceOrientationIsPortrait(toInterfaceOrientation))
-        [self changeTheViewToPortrait:YES andDuration:duration];
-    else if(UIInterfaceOrientationIsLandscape(toInterfaceOrientation))
-        [self changeTheViewToPortrait:NO andDuration:duration];
-}
-
-- (void)changeTheViewToPortrait:(BOOL)portrait andDuration:(NSTimeInterval)duration
-{
+    float finalHeightMultiplier = 0;
     
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:duration];
-    
-    if(portrait){
-        self.portraitDescriptionView.hidden = NO;
-        self.landscapeDescriptionView.hidden = YES;
-        [self setDescriptionViewTo:self.portraitDescriptionView];
+    if(fullText) {
+        float extraHeight = self.descriptionView.descriptionField.contentSize.height - CGRectGetHeight(self.descriptionView.descriptionField.frame);
+        //NSLog(@"Extra height: %f", extraHeight);
+        float mult = (CGRectGetHeight(self.descriptionView.frame) + extraHeight) / CGRectGetHeight(self.view.frame);
+        //NSLog(@"Optimal mult: %f", mult);
+        finalHeightMultiplier = MIN(mult, FULL_HEIGHT_MULTIPLIER);
+        
     }
-    else{
-        self.portraitDescriptionView.hidden = YES;
-        self.landscapeDescriptionView.hidden = NO;
-        [self setDescriptionViewTo:self.landscapeDescriptionView];
+    else {
+        finalHeightMultiplier = BLURB_HEIGHT_MULTIPLIER;
     }
     
-    [UIView commitAnimations];
+
+    [self.view removeConstraint:self.currentHeightConstraint];
+    self.currentHeightConstraint = [NSLayoutConstraint constraintWithItem:self.descriptionView
+                                                                attribute:NSLayoutAttributeHeight
+                                                                relatedBy:NSLayoutRelationGreaterThanOrEqual
+                                                                   toItem:self.view
+                                                                attribute:NSLayoutAttributeHeight
+                                                               multiplier:finalHeightMultiplier
+                                                                 constant:0];
+    
+
+    
+    [self.view addConstraint:self.currentHeightConstraint];
+    [self.view setNeedsUpdateConstraints];
+    [UIView animateWithDuration:0.25 animations:^{
+        [self.descriptionView layoutIfNeeded];
+    }];
+    //NSLog(@"Has ambigous layout? %d", self.view.hasAmbiguousLayout);
+
 }
+
+- (void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    if(self.showingFullDescription)
+        [self setDescriptionTextHeightWithFullText:YES];
+}
+
+#pragma mark - Buttons
+
+- (void) infoButtonTapped:(id)sender
+{
+//    UIInterfaceOrientation orientation = [[UIDevice currentDevice] orientation];
+    NSDictionary *tabletItem = (NSDictionary *)self.dataObject;
+    
+    NSString *buttonTitle;
+    
+    if(!self.showingFullDescription) {
+        self.descriptionView.titleLabel.text = tabletItem[@"full-title"];
+        self.descriptionView.descriptionField.text = tabletItem[@"full-info"];
+        buttonTitle = @"Less";
+        [self setDescriptionTextHeightWithFullText:YES];
+    }
+    else {
+        self.descriptionView.descriptionField.text = tabletItem[@"blurb"];
+        self.descriptionView.titleLabel.text = tabletItem[@"blurb-title"];
+        buttonTitle = @"More";
+        [self setDescriptionTextHeightWithFullText:NO];
+    }
+
+    [self.descriptionView.infoButton setTitle:buttonTitle forState:UIControlStateNormal];
+    [self.descriptionView.descriptionField sizeToFit];
+    self.showingFullDescription = !self.showingFullDescription;
+}
+
 @end

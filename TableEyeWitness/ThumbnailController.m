@@ -10,6 +10,7 @@
 #import "EWRootViewController.h"
 #import "EWAppDelegate.h"
 #import "ThumbnailCell.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface ThumbnailController ()
 
@@ -32,6 +33,12 @@
 	// Do any additional setup after loading the view.
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = YES;
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -52,7 +59,19 @@
     //
     ThumbnailCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"ThumbnailCell" forIndexPath:indexPath];
     
-    cell.label.text = @"hi";
+    EWAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    NSString *imageNameToLoad = @"loading"; //[NSString stringWithFormat:@"%d_full", index%32];
+    NSString *pathToImage = [[NSBundle mainBundle] pathForResource:imageNameToLoad ofType:@"gif"];
+    UIImage *placeholderImage = [[UIImage alloc] initWithContentsOfFile:pathToImage];
+    
+    NSString *baseURL = appDelegate.baseURL;
+    
+    NSDictionary *tabletItem = appDelegate.tabletItems[indexPath.row];
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@", baseURL, tabletItem[@"thumbnail-url"]];
+    //NSLog(@"Thumnail: Trying to fetch %@", urlString);
+    
+    [cell.imageView setImageWithURL:[NSURL URLWithString:urlString] placeholderImage:placeholderImage];
+    
     
     return cell;
 }
@@ -66,6 +85,8 @@
         NSIndexPath *selectedIndexPath = [[self.collectionView indexPathsForSelectedItems] objectAtIndex:0];
         EWRootViewController *rootViewController = [segue destinationViewController];
         rootViewController.startIndex = selectedIndexPath.row;
+        //bring back the navigation bar when viewing actual pictures 
+        self.navigationController.navigationBarHidden = NO;
     }
 }
 

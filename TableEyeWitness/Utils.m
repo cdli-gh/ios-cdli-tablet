@@ -10,14 +10,18 @@
 
 @implementation Utils
 
-+ (NSArray *) fetchTabletItems
++ (NSArray *) fetchTabletItemsAtURL: (NSString *)url
 {
-    NSString *url = @"http://cs.ucla.edu/~saideep/cldiwitness/info.json";
     NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:url]];
     NSURLResponse *response = nil;
     NSError *error = nil;
     NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    NSArray *tabletItems = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+    NSArray *tabletItems = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+    
+    for (NSMutableDictionary *item in tabletItems) {
+        item[@"full-info"] = [item[@"full-info"] stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
+        item[@"blurb"] = [item[@"blurb"] stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
+    }
     //NSLog(@"Got feed: %@", tabletItems);
     return tabletItems;
 }

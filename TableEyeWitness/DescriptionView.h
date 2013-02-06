@@ -10,5 +10,8 @@
 
 @interface DescriptionView : UIView
 
-@property (strong, nonatomic) IBOutlet UILabel *label;
+@property (strong, nonatomic) IBOutlet UITextView *descriptionField;
+@property (strong, nonatomic) IBOutlet UILabel *titleLabel;
+@property (strong, nonatomic) IBOutlet UIButton *infoButton;
+
 @end

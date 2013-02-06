@@ -47,7 +47,6 @@
     // Create a new view controller and pass suitable data.
     EWDataViewController *dataViewController = [storyboard instantiateViewControllerWithIdentifier:@"EWDataViewController"];
     dataViewController.dataObject = self.pageData[index];
-    //dataViewController.url = [NSString stringWithFormat:@"http://localhost/%d.jpg", index+1];
     return dataViewController;
 }
 

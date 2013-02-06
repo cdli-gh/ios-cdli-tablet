@@ -10,5 +10,5 @@
 
 @interface Utils : NSObject
 
-+ (NSArray *) fetchTabletItems;
++ (NSArray *) fetchTabletItemsAtURL: (NSString *)url;
 @end

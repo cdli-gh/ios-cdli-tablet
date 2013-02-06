@@ -1,7 +1,16 @@
-Replace loading image
-Replace synchronous download which is blocking the UI
-Figure out when to referesh data
-Utils has its own base url, everyone else uses delegate's baseURL
+- Replace loading.gif image
+- Replace synchronous download which is blocking the UI
+- Figure out when to referesh data
+- Do sanity checks on the initial json file and report error if all fields are not present in all tablet entries
+- The info button doesn't look like a button
+- Info button should show some state change when tapped
+- Use UIScrollView to be able to zoom into images, but manage page turns too
+- descriptionField is becoming too wide in landscape - make it not cross the center (+ padding) without creating unsat constraints
 
+Done:
 
+- In viewWillAppear of DataViewController, check to see if the navigation bar is present - if not hide the descriptionView - it might be visible because it's set in this view and paged to another view, then after hiding the navigation bar there the user could page back to find the nav bar missing but the dialog is present
 
+- Utils has its own base url, everyone else uses delegate's baseURL
+- Make the full text details' height depend on the text being displayed
+- Convert '\n' into the newline character in the app delegate, but writing a utils function

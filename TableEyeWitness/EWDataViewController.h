@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface EWDataViewController : UIViewController
+- (IBAction) infoButtonTapped: (id) sender;
 
 @property (strong, nonatomic) id dataObject;
 @property (strong, nonatomic) NSString *baseURL;
