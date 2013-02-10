@@ -6,6 +6,8 @@
 //  Copyright (c) 2013 Sai Deep Tetali. All rights reserved.
 //
 
+//This only exists to override intrinsicContentSize
+
 #import "DescriptionView.h"
 
 @implementation DescriptionView
@@ -27,5 +29,12 @@
     // Drawing code
 }
 */
+
+- (void) invalidateIntrinsicContentSize
+{
+    [super invalidateIntrinsicContentSize];
+    [self.descriptionField invalidateIntrinsicContentSize];
+    [self.infoButton invalidateIntrinsicContentSize];
+}
 
 @end

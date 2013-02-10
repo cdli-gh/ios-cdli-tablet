@@ -90,30 +90,27 @@
         <scene sceneID="7">
             <objects>
                 <viewController storyboardIdentifier="EWDataViewController" id="5" customClass="EWDataViewController" sceneMemberID="viewController">
-                    <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="12">
+                    <view key="view" autoresizesSubviews="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" restorationIdentifier="DataView" id="12" userLabel="Data View">
                         <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="NfL-2p-Z1P"/>
-                            <view alpha="0.79999999999999993" contentMode="bottomRight" translatesAutoresizingMaskIntoConstraints="NO" id="zWc-pT-3e9" customClass="DescriptionView">
+                            <view autoresizesSubviews="NO" alpha="0.69999999999999996" contentMode="bottomRight" restorationIdentifier="DescriptionView" translatesAutoresizingMaskIntoConstraints="NO" id="zWc-pT-3e9" customClass="DescriptionView">
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Title which describes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T3Y-94-1Qy" userLabel="Title">
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="32" id="qP3-6K-5eM"/>
-                                        </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DYV-bW-ulx">
-                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="39" id="Sfo-BH-LnM"/>
-                                            <constraint firstAttribute="width" constant="56" id="yYx-43-Quo"/>
+                                            <constraint firstAttribute="height" constant="21" type="user" id="Sfo-BH-LnM"/>
+                                            <constraint firstAttribute="width" constant="46" type="user" id="yYx-43-Quo"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                         <state key="normal" title="More">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <state key="highlighted">
@@ -123,7 +120,7 @@
                                             <action selector="infoButtonTapped:" destination="5" eventType="touchUpInside" id="s3d-DW-9l9"/>
                                         </connections>
                                     </button>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" indicatorStyle="black" editable="NO" text="Description" translatesAutoresizingMaskIntoConstraints="NO" id="PBN-Xd-KDw" userLabel="DescriptionField">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" indicatorStyle="black" editable="NO" text="Description" translatesAutoresizingMaskIntoConstraints="NO" id="PBN-Xd-KDw" userLabel="DescriptionField" customClass="DescriptionField">
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -132,16 +129,15 @@
                                 </subviews>
                                 <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <constraints>
-                                    <constraint firstItem="T3Y-94-1Qy" firstAttribute="leading" secondItem="zWc-pT-3e9" secondAttribute="leading" type="default" id="HSE-X5-odd"/>
-                                    <constraint firstItem="T3Y-94-1Qy" firstAttribute="trailing" secondItem="zWc-pT-3e9" secondAttribute="trailing" type="default" id="INr-lJ-9lh"/>
+                                    <constraint firstItem="T3Y-94-1Qy" firstAttribute="leading" secondItem="zWc-pT-3e9" secondAttribute="leading" type="default" id="1Oc-Io-jtn"/>
+                                    <constraint firstItem="PBN-Xd-KDw" firstAttribute="leading" secondItem="zWc-pT-3e9" secondAttribute="leading" type="default" id="DiW-u5-Wvb"/>
                                     <constraint firstItem="PBN-Xd-KDw" firstAttribute="top" secondItem="T3Y-94-1Qy" secondAttribute="bottom" constant="8" symbolic="YES" type="user" id="Kaa-dg-B7c"/>
-                                    <constraint firstItem="DYV-bW-ulx" firstAttribute="bottom" secondItem="zWc-pT-3e9" secondAttribute="bottom" type="default" id="Tna-iJ-VCU"/>
-                                    <constraint firstAttribute="trailing" secondItem="PBN-Xd-KDw" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="TxR-5p-U9V"/>
-                                    <constraint firstItem="DYV-bW-ulx" firstAttribute="top" secondItem="PBN-Xd-KDw" secondAttribute="bottom" constant="8" symbolic="YES" type="user" id="UeA-sv-fSg"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="216" type="user" id="a3M-bR-ndt"/>
+                                    <constraint firstItem="PBN-Xd-KDw" firstAttribute="trailing" secondItem="zWc-pT-3e9" secondAttribute="trailing" type="default" id="QAR-3w-4Gp"/>
+                                    <constraint firstItem="DYV-bW-ulx" firstAttribute="top" secondItem="PBN-Xd-KDw" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="SRS-Ul-5zZ"/>
                                     <constraint firstItem="T3Y-94-1Qy" firstAttribute="top" secondItem="zWc-pT-3e9" secondAttribute="top" type="user" id="cWz-13-AQf"/>
+                                    <constraint firstAttribute="bottom" secondItem="DYV-bW-ulx" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="hDs-Qb-Wsg"/>
                                     <constraint firstAttribute="trailing" secondItem="DYV-bW-ulx" secondAttribute="trailing" constant="20" symbolic="YES" type="user" id="u9S-iK-Ezm"/>
-                                    <constraint firstItem="PBN-Xd-KDw" firstAttribute="leading" secondItem="zWc-pT-3e9" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="x8y-R4-j6h"/>
+                                    <constraint firstItem="T3Y-94-1Qy" firstAttribute="trailing" secondItem="zWc-pT-3e9" secondAttribute="trailing" type="default" id="yF5-Dm-QOC"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="descriptionField" destination="PBN-Xd-KDw" id="GjV-MG-1wW"/>
@@ -153,11 +149,11 @@
                         <constraints>
                             <constraint firstItem="NfL-2p-Z1P" firstAttribute="trailing" secondItem="12" secondAttribute="trailing" type="default" id="4m0-7k-FZP"/>
                             <constraint firstItem="NfL-2p-Z1P" firstAttribute="bottom" secondItem="12" secondAttribute="bottom" type="default" id="95I-nr-Byv"/>
-                            <constraint firstItem="zWc-pT-3e9" firstAttribute="leading" secondItem="12" secondAttribute="leading" constant="390" id="CkB-yt-VXz"/>
-                            <constraint firstAttribute="bottom" secondItem="zWc-pT-3e9" secondAttribute="bottom" constant="20" symbolic="YES" type="user" id="LaJ-eG-omY"/>
+                            <constraint firstItem="zWc-pT-3e9" firstAttribute="leading" secondItem="12" secondAttribute="leading" priority="7" constant="390" type="user" id="CkB-yt-VXz"/>
                             <constraint firstItem="zWc-pT-3e9" firstAttribute="top" secondItem="12" secondAttribute="top" priority="100" constant="768" type="user" id="Rc3-xV-A43"/>
                             <constraint firstItem="NfL-2p-Z1P" firstAttribute="top" secondItem="12" secondAttribute="top" type="default" id="X9F-F7-8Vl"/>
                             <constraint firstAttribute="trailing" secondItem="zWc-pT-3e9" secondAttribute="trailing" constant="20" symbolic="YES" type="user" id="Zdc-Pu-TRW"/>
+                            <constraint firstItem="zWc-pT-3e9" firstAttribute="bottom" secondItem="12" secondAttribute="bottom" constant="-1" type="user" id="eY8-xY-dF9"/>
                             <constraint firstItem="NfL-2p-Z1P" firstAttribute="leading" secondItem="12" secondAttribute="leading" type="default" id="t8z-4h-BJe"/>
                         </constraints>
                         <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
@@ -172,6 +168,54 @@
             <point key="canvasLocation" x="1675" y="351"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="DescriptionField" superclassName="UITextView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DescriptionField.h"/>
+        </class>
+        <class className="DescriptionView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DescriptionView.h"/>
+            <relationships>
+                <relationship kind="outlet" name="descriptionField" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="infoButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="EWDataViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/EWDataViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="infoButtonTapped:"/>
+                <relationship kind="outlet" name="descriptionView" candidateClass="DescriptionView"/>
+                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+        <class className="EWRootViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/EWRootViewController.h"/>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="ThumbnailCell" superclassName="UICollectionViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ThumbnailCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+        <class className="ThumbnailController" superclassName="UICollectionViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ThumbnailController.h"/>
+        </class>
+        <class className="UICollectionReusableView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionReusableView.h"/>
+        </class>
+        <class className="UICollectionViewCell" superclassName="UICollectionReusableView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewCell.h"/>
+        </class>
+        <class className="UICollectionViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewController.h"/>
+        </class>
+        <class className="UICollectionViewFlowLayout" superclassName="UICollectionViewLayout">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewFlowLayout.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>
