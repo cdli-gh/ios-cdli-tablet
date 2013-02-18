@@ -45,6 +45,11 @@
     return size;
 }
 
+- (void) setBounds:(CGRect)bounds
+{
+    [super setBounds:bounds];
+    [self invalidateIntrinsicContentSize];
+}
 
 - (void) setText:(NSString *)text
 {

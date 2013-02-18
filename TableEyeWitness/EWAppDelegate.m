@@ -14,13 +14,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     //Override point for customization after application launch.
-#if TARGET_IPHONE_SIMULATOR
-    self.baseURL = @"http://localhost";
-#else
-    self.baseURL = @"http://cs.ucla.edu/~saideep/cldiwitness";
-#endif
+    self.baseURL = @"http://www.cdli.ucla.edu/cdlisearch/search/ipadweb";
 
-    NSString *feedURL = [NSString stringWithFormat:@"%@/info.json", self.baseURL];
+    NSString *feedURL = [NSString stringWithFormat:@"%@/generateJSON.php", self.baseURL];
     self.tabletItems = [Utils fetchTabletItemsAtURL: feedURL];
     return YES;
 }

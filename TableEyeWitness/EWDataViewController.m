@@ -9,6 +9,7 @@
 #import "EWDataViewController.h"
 #import "EWAppDelegate.h"
 #import "DescriptionView.h"
+#import "ImageScrollView.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <QuartzCore/QuartzCore.h>
 
@@ -18,7 +19,7 @@
 
 @interface EWDataViewController ()
 
-@property (strong, nonatomic) IBOutlet UIImageView *imageView;
+@property (strong, nonatomic) IBOutlet ImageScrollView *imageScrollView;
 @property (strong, nonatomic) IBOutlet DescriptionView *descriptionView;
 @property (nonatomic) BOOL showingFullDescription;
 @end
@@ -71,34 +72,18 @@
                                                                  constant:0];
     [self.view addConstraint:cn];
 
-
     //toggle nav bar when the imageview is tapped
-    self.imageView.userInteractionEnabled = YES;
+    self.imageScrollView.userInteractionEnabled = YES;
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(toggleNavigationBar:)];
     tapGestureRecognizer.numberOfTapsRequired = 1;
     tapGestureRecognizer.numberOfTouchesRequired = 1;
-    [self.imageView addGestureRecognizer:tapGestureRecognizer];
-    
-    //setup a loading image
-    NSString *imageNameToLoad = @"loading";
-    NSString *pathToImage = [[NSBundle mainBundle] pathForResource:imageNameToLoad ofType:@"gif"];
-    UIImage *placeholderImage = [[UIImage alloc] initWithContentsOfFile:pathToImage];
-    
-    EWAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    NSString *baseURL = appDelegate.baseURL;
-    
+    [self.imageScrollView addGestureRecognizer:tapGestureRecognizer];
+        
     //load the main image
     NSDictionary *tabletItem = (NSDictionary *)self.dataObject;
-    NSString *urlString = [NSString stringWithFormat:@"%@/%@", baseURL, tabletItem[@"url"]];
-    NSLog(@"BigPhoto: Trying to fetch %@", urlString);
-    
-    __weak EWDataViewController *current = self;
-    [self.imageView setImageWithURL:[NSURL URLWithString:urlString] placeholderImage:placeholderImage completed:^(UIImage *img, NSError *err, SDImageCacheType ct) {
-        //hack to reize the blurb height if the text is too much
-        //ideally this should be done in viewDidAppear or some such function
-        //but those seem to be called before text view has a non-zero frame size
-        [current setAppropriateDescriptionFieldHeight];
-    }];
+
+    self.imageScrollView.maxImageZoom = 2;
+    self.imageScrollView.imageURL = [NSURL URLWithString:tabletItem[@"url"]];
     
     self.descriptionView.titleLabel.text = tabletItem[@"blurb-title"];
     self.descriptionView.descriptionField.text = tabletItem[@"blurb"];
@@ -110,6 +95,9 @@
     self.descriptionView.layer.masksToBounds = YES;
     
     self.descriptionView.infoButton.layer.cornerRadius = 5;
+    
+    self.navigationItem.title = @"CDLI Tablet";
+
 }
 
 
@@ -144,7 +132,12 @@
                                  self.descriptionView.alpha = originalAlpha;
                              }
                          }];
-        
+
+//        float newScale = [self.scrollView zoomScale] * 1.5;
+//        CGRect zoomRect = [self zoomRectForScale:newScale withCenter:[sender locationInView:sender.view]];
+//        NSLog(@"Trying to zoom");
+//        [self.scrollView zoomToRect:zoomRect animated:YES];
+
         // NSLog(@"Got a tap");
     }
     
@@ -153,6 +146,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
     //keep nav bar and description view in sync
     //they might go out of sync of another page removes the nav bar and we come back to this one
     self.descriptionView.hidden = self.navigationController.navigationBarHidden;
@@ -173,11 +167,6 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return YES;
-}
-
-- (void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
-{
-    [self setAppropriateDescriptionFieldHeight];
 }
 
 #pragma mark - Buttons

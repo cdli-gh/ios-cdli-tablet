@@ -11,6 +11,7 @@
 #import "EWAppDelegate.h"
 #import "ThumbnailCell.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import <QuartzCore/QuartzCore.h>
 
 @interface ThumbnailController ()
 
@@ -36,7 +37,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.navigationController.navigationBarHidden = YES;
+    //self.navigationController.navigationBarHidden = YES;
 }
 
 - (void)didReceiveMemoryWarning
@@ -64,13 +65,14 @@
     NSString *pathToImage = [[NSBundle mainBundle] pathForResource:imageNameToLoad ofType:@"gif"];
     UIImage *placeholderImage = [[UIImage alloc] initWithContentsOfFile:pathToImage];
     
-    NSString *baseURL = appDelegate.baseURL;
-    
     NSDictionary *tabletItem = appDelegate.tabletItems[indexPath.row];
-    NSString *urlString = [NSString stringWithFormat:@"%@/%@", baseURL, tabletItem[@"thumbnail-url"]];
     //NSLog(@"Thumnail: Trying to fetch %@", urlString);
     
-    [cell.imageView setImageWithURL:[NSURL URLWithString:urlString] placeholderImage:placeholderImage];
+    cell.layer.cornerRadius = 5;
+    cell.layer.borderWidth = 1;
+    cell.layer.borderColor = CGColorRetain([[UIColor darkGrayColor] CGColor]);
+    
+    [cell.imageView setImageWithURL:[NSURL URLWithString:tabletItem[@"thumbnail-url"]] placeholderImage:placeholderImage];
     
     
     return cell;
@@ -85,8 +87,6 @@
         NSIndexPath *selectedIndexPath = [[self.collectionView indexPathsForSelectedItems] objectAtIndex:0];
         EWRootViewController *rootViewController = [segue destinationViewController];
         rootViewController.startIndex = selectedIndexPath.row;
-        //bring back the navigation bar when viewing actual pictures 
-        self.navigationController.navigationBarHidden = NO;
     }
 }
 

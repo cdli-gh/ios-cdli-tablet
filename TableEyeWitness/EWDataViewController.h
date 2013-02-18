@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EWDataViewController : UIViewController
+@interface EWDataViewController : UIViewController <UIScrollViewDelegate>
 - (IBAction) infoButtonTapped: (id) sender;
 
 @property (strong, nonatomic) id dataObject;
