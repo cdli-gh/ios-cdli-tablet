@@ -37,7 +37,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    //self.navigationController.navigationBarHidden = YES;
+    [[self collectionView] reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -56,8 +56,6 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath;
 {
-    // we're going to use a custom UICollectionViewCell, which will hold an image and its label
-    //
     ThumbnailCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"ThumbnailCell" forIndexPath:indexPath];
     
     EWAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
@@ -69,7 +67,7 @@
     //NSLog(@"Thumnail: Trying to fetch %@", urlString);
     
     cell.layer.cornerRadius = 5;
-    cell.layer.borderWidth = 1;
+    cell.layer.borderWidth = 1.5;
     cell.layer.borderColor = CGColorRetain([[UIColor darkGrayColor] CGColor]);
     
     [cell.imageView setImageWithURL:[NSURL URLWithString:tabletItem[@"thumbnail-url"]] placeholderImage:placeholderImage];

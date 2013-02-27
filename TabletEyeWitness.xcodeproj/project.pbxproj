@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		38000BD516DDFF380030EEBE /* cdliapp_icon1024_600.png in Resources */ = {isa = PBXBuildFile; fileRef = 38000BD416DDFF380030EEBE /* cdliapp_icon1024_600.png */; };
+		38000BD716DDFF590030EEBE /* cdliapp_icon1024_600_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 38000BD616DDFF590030EEBE /* cdliapp_icon1024_600_small.png */; };
 		384D8F3816B88B1F00AA80FA /* ThumbnailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 384D8F3716B88B1F00AA80FA /* ThumbnailCell.m */; };
 		3860EF5F16B4DC43009791D9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3860EF5E16B4DC43009791D9 /* UIKit.framework */; };
 		3860EF6116B4DC43009791D9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3860EF6016B4DC43009791D9 /* Foundation.framework */; };
@@ -55,6 +57,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		38000BD416DDFF380030EEBE /* cdliapp_icon1024_600.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cdliapp_icon1024_600.png; sourceTree = "<group>"; };
+		38000BD616DDFF590030EEBE /* cdliapp_icon1024_600_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cdliapp_icon1024_600_small.png; sourceTree = "<group>"; };
 		384D8F3616B88B1F00AA80FA /* ThumbnailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThumbnailCell.h; sourceTree = "<group>"; };
 		384D8F3716B88B1F00AA80FA /* ThumbnailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThumbnailCell.m; sourceTree = "<group>"; };
 		3860EF5A16B4DC43009791D9 /* TabletEyeWitness.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TabletEyeWitness.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -135,6 +139,8 @@
 		3860EF4F16B4DC43009791D9 = {
 			isa = PBXGroup;
 			children = (
+				38000BD616DDFF590030EEBE /* cdliapp_icon1024_600_small.png */,
+				38000BD416DDFF380030EEBE /* cdliapp_icon1024_600.png */,
 				38BE482F16CB8C4500D2AAD4 /* cdliapp_icon1024x124_600ppi_smaller.png */,
 				38BE482D16CB8C1500D2AAD4 /* cdliapp_icon1024x124_600ppi.png */,
 				3861403316CAFB77009BD343 /* Default-Landscape@2x~ipad.png */,
@@ -347,6 +353,8 @@
 				38BE482C16CB8AA100D2AAD4 /* loading.jpg in Resources */,
 				38BE482E16CB8C1500D2AAD4 /* cdliapp_icon1024x124_600ppi.png in Resources */,
 				38BE483016CB8C4500D2AAD4 /* cdliapp_icon1024x124_600ppi_smaller.png in Resources */,
+				38000BD516DDFF380030EEBE /* cdliapp_icon1024_600.png in Resources */,
+				38000BD716DDFF590030EEBE /* cdliapp_icon1024_600_small.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

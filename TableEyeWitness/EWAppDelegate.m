@@ -16,7 +16,7 @@
     //Override point for customization after application launch.
     self.baseURL = @"http://www.cdli.ucla.edu/cdlisearch/search/ipadweb";
 
-    NSString *feedURL = [NSString stringWithFormat:@"%@/generateJSON.php", self.baseURL];
+    NSString *feedURL = [NSString stringWithFormat:@"%@/generateJSON.php?all=true", self.baseURL];
     self.tabletItems = [Utils fetchTabletItemsAtURL: feedURL];
     return YES;
 }
@@ -37,13 +37,14 @@
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     
-    NSString *feedURL = [NSString stringWithFormat:@"%@/info.json", self.baseURL];
-    self.tabletItems = [Utils fetchTabletItemsAtURL:feedURL];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    NSLog(@"Rereshing data");
+    NSString *feedURL = [NSString stringWithFormat:@"%@/generateJSON.php?all=true", self.baseURL];
+    self.tabletItems = [Utils fetchTabletItemsAtURL: feedURL];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

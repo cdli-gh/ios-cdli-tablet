@@ -1,16 +1,16 @@
+Client:
+
 - Replace loading.gif image
 - Replace synchronous download which is blocking the UI
 - Figure out when to referesh data
 - Do sanity checks on the initial json file and report error if all fields are not present in all tablet entries
-- Info button should show some state change when tapped
-- Use UIScrollView to be able to zoom into images, but manage page turns too
 - Double tap should zoom in images
-- CDLI as the title in the nav bar
 - Hyperlinks in the description
 - CDLI link at the bottom
 - Info button should have a larger tap area
 - 5 thumbnails in a column
-- the server should reupload an image if changes need to be made
+- Let the landing page appear slower
+- Animate some thumbnails during landing?
 
 Done:
 
@@ -20,6 +20,15 @@ Done:
 - Make the full text details' height depend on the text being displayed
 - Convert '\n' into the newline character in the app delegate, but writing a utils function
 - descriptionField is becoming too wide in landscape - make it not cross the center (+ padding) without creating unsat constraints
-- width of descriptionField = 1/3 width of entire window (review)
-- The info button doesn't look like a button (review)
-- put a frame around the thumbnail
+- width of descriptionField = 1/3 width of entire window
+- Use UIScrollView to be able to zoom into images, but manage page turns too
+- The info button doesn't look like a button
+- Info button should show some state change when tapped
+- put a frame around the thumbnail (review)
+- CDLI as the title in the nav bar (review)
+
+
+Server:
+
+- Do not queue multiple images to be displayed on the same day
+- the server should reupload an image if changes need to be made
