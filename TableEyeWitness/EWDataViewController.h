@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EWDataViewController : UIViewController <UIScrollViewDelegate>
+@interface EWDataViewController : UIViewController <UIScrollViewDelegate, UIWebViewDelegate>
 - (IBAction) infoButtonTapped: (id) sender;
 
 @property (strong, nonatomic) id dataObject;
+@property (nonatomic) int dataIndex;
 @property (strong, nonatomic) NSString *baseURL;
 
 @end

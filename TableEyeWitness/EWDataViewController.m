@@ -29,18 +29,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.showingFullDescription = NO;
     
-    //approximately center the view (with 10 point padding)
-//    NSLayoutConstraint *cn = [NSLayoutConstraint constraintWithItem:self.descriptionView
-//                                                          attribute:NSLayoutAttributeLeading
-//                                                          relatedBy:NSLayoutRelationEqual
-//                                                             toItem:self.view
-//                                                          attribute:NSLayoutAttributeCenterX
-//                                                         multiplier:1.0
-//                                                           constant:-10];
-//    [self.view addConstraint:cn];
-
     //description view width is one third of the main view's width
     NSLayoutConstraint *cn = [NSLayoutConstraint constraintWithItem:self.descriptionView
                                                           attribute:NSLayoutAttributeWidth
@@ -79,14 +68,22 @@
     tapGestureRecognizer.numberOfTouchesRequired = 1;
     [self.imageScrollView addGestureRecognizer:tapGestureRecognizer];
         
-    //load the main image
     NSDictionary *tabletItem = (NSDictionary *)self.dataObject;
 
+    //load the main image
     self.imageScrollView.maxImageZoom = 2;
     self.imageScrollView.imageURL = [NSURL URLWithString:tabletItem[@"url"]];
-    
-    self.descriptionView.titleLabel.text = tabletItem[@"blurb-title"];
-    self.descriptionView.descriptionField.text = tabletItem[@"blurb"];
+
+
+    self.descriptionView.descriptionField.delegate = self;
+    self.descriptionView.descriptionField.shouldSizeDown = false;
+
+    //load title and description
+    EWAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    if([appDelegate.pageShowingMore[@(self.dataIndex)] boolValue])
+        [self showMore];
+    else
+        [self showLess];
     
     //setup the look of the views
     self.descriptionView.layer.cornerRadius = 10;
@@ -100,6 +97,38 @@
 
 }
 
+- (void) viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    EWAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    // NSLog(@"Saving state at index %d to: %d", self.dataIndex, self.showingFullDescription);
+    appDelegate.pageShowingMore[@(self.dataIndex)] = @(self.showingFullDescription);
+}
+
+- (void)showLess
+{
+    self.descriptionView.titleLabel.text = self.dataObject[@"blurb-title"];
+    [self.descriptionView.descriptionField loadHTMLString:[self htmlFromText:self.dataObject[@"blurb"]] baseURL:nil];
+    [self.descriptionView.infoButton setTitle:@"More" forState:UIControlStateNormal];
+    self.showingFullDescription = NO;
+}
+
+- (void) showMore
+{
+    self.descriptionView.titleLabel.text = self.dataObject[@"full-title"];
+    //self.descriptionView.descriptionField.text = tabletItem[@"full-info"];
+    [self.descriptionView.descriptionField loadHTMLString:[self htmlFromText:self.dataObject[@"full-info"]] baseURL:nil];
+    [self.descriptionView.infoButton setTitle:@"Less" forState:UIControlStateNormal];
+    self.showingFullDescription = YES;
+}
+
+- (NSString *)htmlFromText: (NSString *)text
+{
+    text = [text stringByReplacingOccurrencesOfString:@"\n" withString:@"<br />"];
+    NSString *html = [NSString stringWithFormat:@"<html><head></head><body text=\"white\" > %@ </body></html>", text];
+    
+    return html;
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -119,9 +148,7 @@
         
         if(!finalNavbarHidden)
             self.descriptionView.hidden = NO;
-        
-        //NSLog(@"Staring alpha: %f, ending: %f", startingAlpha, endingAlpha);
-        
+                
         [UIView animateWithDuration:0.24
                          animations:^{
                              self.descriptionView.alpha = endingAlpha;
@@ -133,14 +160,7 @@
                              }
                          }];
 
-//        float newScale = [self.scrollView zoomScale] * 1.5;
-//        CGRect zoomRect = [self zoomRectForScale:newScale withCenter:[sender locationInView:sender.view]];
-//        NSLog(@"Trying to zoom");
-//        [self.scrollView zoomToRect:zoomRect animated:YES];
-
-        // NSLog(@"Got a tap");
     }
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -173,24 +193,32 @@
 
 - (void) infoButtonTapped:(id)sender
 {
-    NSDictionary *tabletItem = (NSDictionary *)self.dataObject;
-    
-    NSString *buttonTitle;
-    
     if(!self.showingFullDescription) {
-        self.descriptionView.titleLabel.text = tabletItem[@"full-title"];
-        self.descriptionView.descriptionField.text = tabletItem[@"full-info"];
-        buttonTitle = @"Less";
+        self.descriptionView.descriptionField.shouldSizeDown = false;
+        [self showMore];
     }
     else {
-        self.descriptionView.descriptionField.text = tabletItem[@"blurb"];
-        self.descriptionView.titleLabel.text = tabletItem[@"blurb-title"];
-        buttonTitle = @"More";
+        self.descriptionView.descriptionField.shouldSizeDown = true;
+        [self showLess];
     }
+}
 
-    [self setAppropriateDescriptionFieldHeight];
-    [self.descriptionView.infoButton setTitle:buttonTitle forState:UIControlStateNormal];
-    self.showingFullDescription = !self.showingFullDescription;
+#pragma mark - UIWebView delegate
+
+- (void) webViewDidFinishLoad:(UIWebView *)webView
+{
+        [self setAppropriateDescriptionFieldHeight];
+}
+
+
+-(BOOL) webView:(UIWebView *)inWeb shouldStartLoadWithRequest:(NSURLRequest *)inRequest navigationType:(UIWebViewNavigationType)inType
+{
+    if ( inType == UIWebViewNavigationTypeLinkClicked ) {
+        [[UIApplication sharedApplication] openURL:[inRequest URL]];
+        return NO;
+    }
+    
+    return YES;
 }
 
 @end

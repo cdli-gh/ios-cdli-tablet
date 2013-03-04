@@ -18,6 +18,9 @@
 
     NSString *feedURL = [NSString stringWithFormat:@"%@/generateJSON.php?all=true", self.baseURL];
     self.tabletItems = [Utils fetchTabletItemsAtURL: feedURL];
+    self.pageShowingMore = [[NSMutableDictionary alloc] initWithCapacity:[self.tabletItems count]];
+    for(int i = 0; i < [self.tabletItems count]; i++)
+        self.pageShowingMore[@(i)] = @(false);
     return YES;
 }
 

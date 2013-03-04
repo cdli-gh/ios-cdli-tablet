@@ -5,10 +5,7 @@ Client:
 - Figure out when to referesh data
 - Do sanity checks on the initial json file and report error if all fields are not present in all tablet entries
 - Double tap should zoom in images
-- Hyperlinks in the description
-- CDLI link at the bottom
 - Info button should have a larger tap area
-- 5 thumbnails in a column
 - Let the landing page appear slower
 - Animate some thumbnails during landing?
 
@@ -26,7 +23,9 @@ Done:
 - Info button should show some state change when tapped
 - put a frame around the thumbnail (review)
 - CDLI as the title in the nav bar (review)
-
+- 5 thumbnails in a column (review)
+- CDLI link at the bottom (done individually by adding html in the description)
+- Hyperlinks in the description (review)
 
 Server:
 

@@ -1,0 +1,76 @@
+//
+//  DescriptionWebView.m
+//  TabletEyeWitness
+//
+//  Created by Sai Deep Tetali on 2/27/13.
+//  Copyright (c) 2013 Sai Deep Tetali. All rights reserved.
+//
+
+#import "DescriptionWebView.h"
+
+@implementation DescriptionWebView
+
+- (id)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        // Initialization code
+        self.shouldSizeDown = false;
+    }
+    return self;
+}
+
+- (id) initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if(self) {
+        self.shouldSizeDown = false;
+    }
+    return self;
+}
+
+- (CGSize) intrinsicContentSize
+{
+    CGSize size;
+    //NSLog(@"Intrinsic height: %f for text: %@, length: %d", self.contentSize.height, self.text, self.text.length);
+    //NSLog(@"Frame height: %f", self.frame.size.height);
+    
+//        CGSize contentSize = CGSizeMake(
+//                                        [[self stringByEvaluatingJavaScriptFromString:@"document.body.scrollWidth;"] floatValue],
+//                                        [[self stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight;"] floatValue]);
+    
+//    CGSize contentSize = CGSizeMake(self.scrollView.contentSize.width,
+//                                    [[self stringByEvaluatingJavaScriptFromString: @"document.body.offsetHeight"] integerValue] + 10);
+
+    //+10 is a hack, otherwise the bottom line gets chipped off
+
+    CGSize contentSize;
+
+    if(!self.shouldSizeDown)
+        contentSize = self.scrollView.contentSize;
+    else
+        contentSize = CGSizeMake(self.scrollView.contentSize.width,
+                                        [[self stringByEvaluatingJavaScriptFromString: @"document.body.offsetHeight"] integerValue] + 10);
+        
+    
+    size.width = contentSize.width;
+    size.height = contentSize.height;
+    
+    //NSLog(@"Intrinsic height: %f, widght: %f", contentSize.height, contentSize.width);
+
+    return size;
+}
+
+- (void) setBounds:(CGRect)bounds
+{
+    [super setBounds:bounds];
+    [self invalidateIntrinsicContentSize];
+}
+
+- (void) setFrame:(CGRect)frame
+{
+    [super setFrame:frame];
+    [self invalidateIntrinsicContentSize];
+}
+
+@end

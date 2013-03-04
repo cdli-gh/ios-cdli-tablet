@@ -193,7 +193,7 @@
     
     [self configureForImageSize:placeholderImage.size];
 
-    NSLog(@"BigPhoto: Trying to fetch %@", self.imageURL);
+    //NSLog(@"BigPhoto: Trying to fetch %@", self.imageURL);
 
     __weak ImageScrollView *current = self;
     [_zoomView setImageWithURL:self.imageURL placeholderImage:placeholderImage completed:^(UIImage *img, NSError *err, SDImageCacheType ct) {

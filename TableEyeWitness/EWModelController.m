@@ -47,6 +47,7 @@
     // Create a new view controller and pass suitable data.
     EWDataViewController *dataViewController = [storyboard instantiateViewControllerWithIdentifier:@"EWDataViewController"];
     dataViewController.dataObject = self.pageData[index];
+    dataViewController.dataIndex = index;
     return dataViewController;
 }
 
