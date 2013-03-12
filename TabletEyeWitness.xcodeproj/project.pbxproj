@@ -521,6 +521,8 @@
 		3860EF9A16B4DC45009791D9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Robert Englund (9Y48E9T24H)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Robert Englund (9Y48E9T24H)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/TableEyeWitness\"",
@@ -531,6 +533,8 @@
 				INFOPLIST_FILE = "TableEyeWitness/TabletEyeWitness-Info.plist";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = TabletEyeWitness;
+				PROVISIONING_PROFILE = "4D32CE86-B91F-4E4F-8BBE-432FA77EAB59";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "4D32CE86-B91F-4E4F-8BBE-432FA77EAB59";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -538,8 +542,8 @@
 		3860EF9B16B4DC45009791D9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Robert Englund (9Y48E9T24H)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Robert Englund (9Y48E9T24H)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/TableEyeWitness\"",
@@ -550,8 +554,8 @@
 				INFOPLIST_FILE = "TableEyeWitness/TabletEyeWitness-Info.plist";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = TabletEyeWitness;
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "4D32CE86-B91F-4E4F-8BBE-432FA77EAB59";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "4D32CE86-B91F-4E4F-8BBE-432FA77EAB59";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

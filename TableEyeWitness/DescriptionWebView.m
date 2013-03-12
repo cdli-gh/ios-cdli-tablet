@@ -46,12 +46,19 @@
 
     CGSize contentSize;
 
+//    float oldFrameHeight = self.frame.size.height;
+//    CGRect frame = self.frame;
+//    frame.size.height = 1;
+//    contentSize = [self sizeThatFits:CGSizeZero];
+//    frame.size.height = oldFrameHeight;
+//    self.frame = frame;    
+
     if(!self.shouldSizeDown)
         contentSize = self.scrollView.contentSize;
     else
         contentSize = CGSizeMake(self.scrollView.contentSize.width,
-                                        [[self stringByEvaluatingJavaScriptFromString: @"document.body.offsetHeight"] integerValue] + 10);
-        
+                                [[self stringByEvaluatingJavaScriptFromString: @"document.body.offsetHeight"] integerValue] + 10);
+    
     
     size.width = contentSize.width;
     size.height = contentSize.height;

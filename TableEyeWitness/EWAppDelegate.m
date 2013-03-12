@@ -13,10 +13,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    //Override point for customization after application launch.
     self.baseURL = @"http://www.cdli.ucla.edu/cdlisearch/search/ipadweb";
 
-    NSString *feedURL = [NSString stringWithFormat:@"%@/generateJSON.php?all=true", self.baseURL];
+    NSString *feedURL = [NSString stringWithFormat:@"%@/json", self.baseURL];
     self.tabletItems = [Utils fetchTabletItemsAtURL: feedURL];
     self.pageShowingMore = [[NSMutableDictionary alloc] initWithCapacity:[self.tabletItems count]];
     for(int i = 0; i < [self.tabletItems count]; i++)
