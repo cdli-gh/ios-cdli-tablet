@@ -207,7 +207,7 @@
 
 - (void) webViewDidFinishLoad:(UIWebView *)webView
 {
-        [self setAppropriateDescriptionFieldHeight];
+    [self setAppropriateDescriptionFieldHeight];
 }
 
 

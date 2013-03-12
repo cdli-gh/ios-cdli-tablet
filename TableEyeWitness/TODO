@@ -8,6 +8,7 @@ Client:
 - Info button should have a larger tap area
 - Let the landing page appear slower
 - Animate some thumbnails during landing?
+- Set appropriate properties to atomic if accessing through GCD
 
 Done:
 

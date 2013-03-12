@@ -13,13 +13,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.baseURL = @"http://www.cdli.ucla.edu/cdlisearch/search/ipadweb";
+//    self.baseURL = @"http://www.cdli.ucla.edu/cdlisearch/search/ipadweb";
 
-    NSString *feedURL = [NSString stringWithFormat:@"%@/json", self.baseURL];
-    self.tabletItems = [Utils fetchTabletItemsAtURL: feedURL];
-    self.pageShowingMore = [[NSMutableDictionary alloc] initWithCapacity:[self.tabletItems count]];
-    for(int i = 0; i < [self.tabletItems count]; i++)
-        self.pageShowingMore[@(i)] = @(false);
+//    NSString *feedURL = [NSString stringWithFormat:@"%@/json", self.baseURL];
+//    self.tabletItems = [Utils fetchTabletItemsAtURL: feedURL];
+//    self.pageShowingMore = [[NSMutableDictionary alloc] initWithCapacity:[self.tabletItems count]];
+//    for(int i = 0; i < [self.tabletItems count]; i++)
+//        self.pageShowingMore[@(i)] = @(false);
     return YES;
 }
 
@@ -44,9 +44,9 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    NSLog(@"Rereshing data");
-    NSString *feedURL = [NSString stringWithFormat:@"%@/generateJSON.php?all=true", self.baseURL];
-    self.tabletItems = [Utils fetchTabletItemsAtURL: feedURL];
+//    NSLog(@"Rereshing data");
+//    NSString *feedURL = [NSString stringWithFormat:@"%@/generateJSON.php?all=true", self.baseURL];
+//    self.tabletItems = [Utils fetchTabletItemsAtURL: feedURL];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

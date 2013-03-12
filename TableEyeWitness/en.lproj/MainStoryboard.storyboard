@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12C60" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="aNC-1j-Ggd">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12C60" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="tAG-pG-nUX">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -88,6 +88,96 @@
             </objects>
             <point key="canvasLocation" x="-53" y="383"/>
         </scene>
+        <!--Landing View Controller-->
+        <scene sceneID="eUt-26-dgc">
+            <objects>
+                <viewController id="tAG-pG-nUX" customClass="LandingViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bfF-km-vaM">
+                        <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="basic_thumbnail.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="LcY-VG-wPt"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="basic_thumbnail.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="al8-mZ-cYc">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="glG-SK-Hz6"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="basic_thumbnail.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="2zb-bb-MuF">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="O4l-E0-hYm"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="basic_thumbnail.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="qeN-Qi-LWq"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="basic_thumbnail.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Tlf-Co-Iqu"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="basic_thumbnail.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="ONy-PF-shM"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="basic_thumbnail.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Ysg-hC-DTv">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="cbJ-UD-O7O"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="basic_thumbnail.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="87q-0C-op0">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="0hk-nK-1KG"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="basic_thumbnail.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="TVo-3x-KM6">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="3wa-dZ-iCr"/>
+                                    <constraint firstAttribute="width" constant="200" id="RPF-Ka-GDW"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="2zb-bb-MuF" firstAttribute="leading" secondItem="al8-mZ-cYc" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="6RW-fs-L77"/>
+                            <constraint firstItem="al8-mZ-cYc" firstAttribute="leading" secondItem="LcY-VG-wPt" secondAttribute="leading" type="default" id="8Gp-oX-c3c"/>
+                            <constraint firstItem="ONy-PF-shM" firstAttribute="leading" secondItem="LcY-VG-wPt" secondAttribute="leading" type="default" id="A8o-fn-MAG"/>
+                            <constraint firstItem="LcY-VG-wPt" firstAttribute="leading" secondItem="87q-0C-op0" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="BcR-Ab-i6C"/>
+                            <constraint firstItem="TVo-3x-KM6" firstAttribute="top" secondItem="al8-mZ-cYc" secondAttribute="top" type="default" id="DX9-Ti-NyC"/>
+                            <constraint firstItem="Ysg-hC-DTv" firstAttribute="top" secondItem="87q-0C-op0" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="ElP-kC-ZRu"/>
+                            <constraint firstItem="87q-0C-op0" firstAttribute="top" secondItem="LcY-VG-wPt" secondAttribute="top" type="default" id="F93-2Q-KoO"/>
+                            <constraint firstItem="Tlf-Co-Iqu" firstAttribute="leading" secondItem="qeN-Qi-LWq" secondAttribute="leading" type="default" id="Het-Co-rVB"/>
+                            <constraint firstItem="qeN-Qi-LWq" firstAttribute="top" secondItem="LcY-VG-wPt" secondAttribute="top" type="default" id="IU2-qJ-c4V"/>
+                            <constraint firstItem="qeN-Qi-LWq" firstAttribute="leading" secondItem="2zb-bb-MuF" secondAttribute="leading" type="default" id="IWp-mQ-6kI"/>
+                            <constraint firstItem="ONy-PF-shM" firstAttribute="bottom" secondItem="Tlf-Co-Iqu" secondAttribute="bottom" type="default" id="KC5-6I-2W4"/>
+                            <constraint firstItem="Tlf-Co-Iqu" firstAttribute="trailing" secondItem="qeN-Qi-LWq" secondAttribute="trailing" type="default" id="Msh-Uf-8MV"/>
+                            <constraint firstItem="al8-mZ-cYc" firstAttribute="leading" secondItem="TVo-3x-KM6" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="TwO-ar-xkx"/>
+                            <constraint firstItem="LcY-VG-wPt" firstAttribute="top" secondItem="al8-mZ-cYc" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="UQL-ZU-rcV"/>
+                            <constraint firstItem="qeN-Qi-LWq" firstAttribute="trailing" secondItem="2zb-bb-MuF" secondAttribute="trailing" type="default" id="Vye-WN-fsv"/>
+                            <constraint firstItem="TVo-3x-KM6" firstAttribute="leading" secondItem="87q-0C-op0" secondAttribute="leading" type="default" id="cHu-jW-udT"/>
+                            <constraint firstItem="Ysg-hC-DTv" firstAttribute="top" secondItem="ONy-PF-shM" secondAttribute="top" type="default" id="cuy-8g-g9Y"/>
+                            <constraint firstItem="Tlf-Co-Iqu" firstAttribute="top" secondItem="qeN-Qi-LWq" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="d60-zj-FuN"/>
+                            <constraint firstItem="al8-mZ-cYc" firstAttribute="centerX" secondItem="bfF-km-vaM" secondAttribute="centerX" type="default" id="gmc-jT-rtL"/>
+                            <constraint firstItem="qeN-Qi-LWq" firstAttribute="leading" secondItem="LcY-VG-wPt" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="ivP-mH-Q9t"/>
+                            <constraint firstItem="87q-0C-op0" firstAttribute="leading" secondItem="Ysg-hC-DTv" secondAttribute="leading" type="default" id="k2x-BE-TnI"/>
+                            <constraint firstItem="ONy-PF-shM" firstAttribute="top" secondItem="LcY-VG-wPt" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="oCe-B4-rhS"/>
+                            <constraint firstItem="qeN-Qi-LWq" firstAttribute="top" secondItem="2zb-bb-MuF" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="oOk-fQ-2GU"/>
+                            <constraint firstItem="ONy-PF-shM" firstAttribute="leading" secondItem="Ysg-hC-DTv" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="pAr-bL-zvj"/>
+                            <constraint firstItem="Tlf-Co-Iqu" firstAttribute="leading" secondItem="ONy-PF-shM" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="pIw-zc-DqS"/>
+                            <constraint firstItem="Ysg-hC-DTv" firstAttribute="bottom" secondItem="ONy-PF-shM" secondAttribute="bottom" type="default" id="pkO-Mc-11O"/>
+                            <constraint firstItem="qeN-Qi-LWq" firstAttribute="centerY" secondItem="bfF-km-vaM" secondAttribute="centerY" type="default" id="vZz-oT-khb"/>
+                            <constraint firstItem="87q-0C-op0" firstAttribute="top" secondItem="TVo-3x-KM6" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="wwi-0v-JhP"/>
+                            <constraint firstItem="ONy-PF-shM" firstAttribute="top" secondItem="Tlf-Co-Iqu" secondAttribute="top" type="default" id="z5L-N8-M3S"/>
+                            <constraint firstItem="2zb-bb-MuF" firstAttribute="top" secondItem="al8-mZ-cYc" secondAttribute="top" type="default" id="zlM-vv-bZe"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="i00" destination="TVo-3x-KM6" id="LT7-ZU-FSu"/>
+                        <outlet property="i01" destination="al8-mZ-cYc" id="c6e-2j-dQO"/>
+                        <outlet property="i02" destination="2zb-bb-MuF" id="7Ir-dQ-HXu"/>
+                        <outlet property="i10" destination="87q-0C-op0" id="J5I-Z7-UzN"/>
+                        <outlet property="i11" destination="LcY-VG-wPt" id="Rqp-I8-nG0"/>
+                        <outlet property="i12" destination="qeN-Qi-LWq" id="DdH-d8-jUI"/>
+                        <outlet property="i20" destination="Ysg-hC-DTv" id="LAq-IK-GgK"/>
+                        <outlet property="i21" destination="ONy-PF-shM" id="fj8-SH-ByC"/>
+                        <outlet property="i22" destination="Tlf-Co-Iqu" id="9Rq-PQ-mx7"/>
+                        <segue destination="aNC-1j-Ggd" kind="modal" identifier="ShowRoot" modalTransitionStyle="crossDissolve" id="pGq-kE-b3g"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JIa-qB-9YB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1894" y="403"/>
+        </scene>
         <!--Data View Controller-->
         <scene sceneID="7">
             <objects>
@@ -168,6 +258,74 @@
             <point key="canvasLocation" x="1675" y="351"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="basic_thumbnail.jpg" width="400" height="299"/>
+    </resources>
+    <classes>
+        <class className="DescriptionView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DescriptionView.h"/>
+            <relationships>
+                <relationship kind="outlet" name="descriptionField" candidateClass="DescriptionWebView"/>
+                <relationship kind="outlet" name="infoButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="DescriptionWebView" superclassName="UIWebView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DescriptionWebView.h"/>
+        </class>
+        <class className="EWDataViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/EWDataViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="infoButtonTapped:"/>
+                <relationship kind="outlet" name="descriptionView" candidateClass="DescriptionView"/>
+                <relationship kind="outlet" name="imageScrollView" candidateClass="ImageScrollView"/>
+            </relationships>
+        </class>
+        <class className="EWRootViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/EWRootViewController.h"/>
+        </class>
+        <class className="ImageScrollView" superclassName="UIScrollView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ImageScrollView.h"/>
+        </class>
+        <class className="LandingViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/LandingViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="i00" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="i01" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="i02" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="i10" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="i11" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="i12" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="i20" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="i21" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="i22" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="ThumbnailCell" superclassName="UICollectionViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ThumbnailCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+        <class className="ThumbnailController" superclassName="UICollectionViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ThumbnailController.h"/>
+        </class>
+        <class className="UICollectionReusableView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionReusableView.h"/>
+        </class>
+        <class className="UICollectionViewCell" superclassName="UICollectionReusableView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewCell.h"/>
+        </class>
+        <class className="UICollectionViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewController.h"/>
+        </class>
+        <class className="UICollectionViewFlowLayout" superclassName="UICollectionViewLayout">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewFlowLayout.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>

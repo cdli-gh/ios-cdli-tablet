@@ -67,7 +67,7 @@
     //NSLog(@"Thumnail: Trying to fetch %@", urlString);
     
     cell.layer.cornerRadius = 5;
-    cell.layer.borderWidth = 1.5;
+    cell.layer.borderWidth = 3.5;
     cell.layer.borderColor = CGColorRetain([[UIColor darkGrayColor] CGColor]);
     
     [cell.imageView setImageWithURL:[NSURL URLWithString:tabletItem[@"thumbnail-url"]] placeholderImage:placeholderImage];

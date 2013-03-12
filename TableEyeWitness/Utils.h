@@ -11,4 +11,9 @@
 @interface Utils : NSObject
 
 + (NSArray *) fetchTabletItemsAtURL: (NSString *)url;
++ (NSString *) cachePath;
++ (NSData *) loadCachedJSON;
++ (void) cacheJSON: (NSData *) json;
++ (NSString *) JSONCachedPath;
+
 @end

@@ -12,7 +12,7 @@
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) NSArray *tabletItems;
-@property (strong, nonatomic) NSString *baseURL;
+//@property (strong, nonatomic) NSString *baseURL;
 @property (strong, nonatomic) NSMutableDictionary *pageShowingMore;
 
 @end

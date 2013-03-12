@@ -28,4 +28,39 @@
     return tabletItems;
 }
 
++ (NSString *) cachePath
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    NSString *cachePath = [paths objectAtIndex:0];
+    BOOL isDir = NO;
+    NSError *error;
+    if (! [[NSFileManager defaultManager] fileExistsAtPath:cachePath isDirectory:&isDir] && isDir == NO) {
+        [[NSFileManager defaultManager] createDirectoryAtPath:cachePath withIntermediateDirectories:NO attributes:nil error:&error];
+    }
+    
+    return cachePath;
+}
+
++ (NSString *) JSONCachedPath
+{
+    return [[Utils cachePath] stringByAppendingPathComponent:@"cached.json"];
+}
+
++ (void) cacheJSON: (NSData *) json
+{
+    NSString *filePath =  [Utils JSONCachedPath];
+    [json writeToFile:filePath atomically:YES];
+}
+
++ (NSData *) loadCachedJSON
+{
+    NSString *filePath = [Utils JSONCachedPath];
+    NSError *error = nil;
+    NSData *data = [NSData dataWithContentsOfFile:filePath options:nil error:&error];
+    if(error != nil)
+        return nil;
+    
+    return data;
+}
+
 @end
