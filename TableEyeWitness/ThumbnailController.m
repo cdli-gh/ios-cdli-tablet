@@ -12,8 +12,9 @@
 #import "ThumbnailCell.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <QuartzCore/QuartzCore.h>
+#import "Utils.h"
 
-@interface ThumbnailController ()
+@interface ThumbnailController () <FetchedEntries>
 
 @end
 
@@ -32,12 +33,13 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    EWAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    delegate.refreshResponder = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [[self collectionView] reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -88,4 +90,11 @@
     }
 }
 
+#pragma mark - FetchedEntries delegate
+
+- (void)fetchedEntries:(NSArray *)entries
+{
+    //NSLog(@"Thumbnails refreshing");
+    [[self collectionView] reloadData];
+}
 @end

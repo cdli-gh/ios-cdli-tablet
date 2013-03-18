@@ -14,8 +14,8 @@
 		<dict>
 			<key>CFBundleIconFiles</key>
 			<array>
-				<string>cdliapp_icon1024x1024b_600ppi.png</string>
-				<string>cdliapp_icon1024x1024b_600ppi_smaller.png</string>
+				<string>cdliapp_icon1024x1024c_600ppi.png</string>
+				<string>cdliapp_icon1024x1024c_600ppi_smaller.png</string>
 			</array>
 		</dict>
 	</dict>

@@ -7,6 +7,7 @@
 //
 
 #import "Utils.h"
+#import "OHURLLoader.h"
 
 @implementation Utils
 
@@ -61,6 +62,40 @@
         return nil;
     
     return data;
+}
+
++ (NSArray *) loadJSONData: (NSData *)JSONData
+{
+    NSError *error = nil;
+    NSArray *tabletItems = [NSJSONSerialization JSONObjectWithData:JSONData options:NSJSONReadingMutableContainers error:&error];
+    
+    //NSLog(@"Tablet items: %@", tabletItems);
+    
+    for (NSMutableDictionary *item in tabletItems) {
+        item[@"full-info"] = [item[@"full-info"] stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
+        item[@"blurb"] = [item[@"blurb"] stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
+    }
+    
+    return tabletItems;
+}
+
+
++ (void)refreshDataAtURL:(NSString *)feedURL withHandler:(id<FetchedEntries>)refreshHandler {
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:feedURL]];
+    
+    OHURLLoader* loader = [OHURLLoader URLLoaderWithRequest:request];
+	[loader startRequestWithCompletion:^(NSData* receivedData, NSInteger httpStatusCode) {
+		NSLog(@"Refreshed");
+        NSArray *tabletItems = [Utils loadJSONData:receivedData];
+        [Utils cacheJSON:receivedData];
+        [refreshHandler fetchedEntries:tabletItems];
+        
+	} errorHandler:^(NSError* error) {
+		NSLog(@"Could not referesh data!!! %@", error);
+        if([refreshHandler respondsToSelector:@selector(fetchedEntriesFailedWithError:)]) {
+            [refreshHandler fetchedEntriesFailedWithError:error];
+        }
+	}];
 }
 
 @end

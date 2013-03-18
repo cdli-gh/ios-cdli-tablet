@@ -11,6 +11,7 @@
 #import "Utils.h"
 #import "OHURLLoader.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#include "TargetConditionals.h"
 
 @interface LandingViewController ()
 
@@ -25,7 +26,6 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        [self refreshData];
     }
     return self;
 }
@@ -34,7 +34,6 @@
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        [self refreshData];
     }
     return self;
 }
@@ -44,19 +43,32 @@
     [super viewDidLoad];
     //Views are processed in the order given by this array for animations
 	// To animate them one row at a time
+    
 //    self.imageViews = @[self.i00, self.i01, self.i02,
 //                        self.i10, self.i11, self.i12,
 //                        self.i20, self.i21, self.i22];
 
     // For a circular kind of animation
-    self.imageViews = @[self.i00, self.i01, self.i02,
-                        self.i12, self.i22, self.i21,
-                        self.i20, self.i10, self.i11];
+//    self.imageViews = @[self.i00, self.i01, self.i02,
+//                        self.i12, self.i22, self.i21,
+//                        self.i20, self.i10, self.i11];
 
+    NSMutableArray *allImageViews = [[NSMutableArray alloc] initWithObjects:
+                                                                self.i00, self.i01, self.i02,
+                                                                self.i10, self.i11, self.i12,
+                                                                self.i20, self.i21, self.i22
+    
+                                      , nil];
+    
+    
+    //randomize image placement
+    
+    [self shuffleArray:allImageViews];
+    self.imageViews = allImageViews;
     
     NSData *JSONData = [Utils loadCachedJSON];
     if(JSONData != nil) {
-        self.cachedItems = [self loadJSONData:JSONData];
+        self.cachedItems = [Utils loadJSONData:JSONData];
         //NSLog(@"Total items in json cache: %d", self.cachedItems.count);
     }
     else {
@@ -67,11 +79,29 @@
     [self initializeImages];
 }
 
+- (void)shuffleArray:(NSMutableArray *)array
+{
+    NSUInteger count = [array count];
+    for (NSUInteger i = 0; i < count; ++i) {
+        // Select a random element between i and end of array to swap with.
+        NSInteger nElements = count - i;
+        NSInteger n = (arc4random() % nElements) + i;
+        [array exchangeObjectAtIndex:i withObjectAtIndex:n];
+    }
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     float delay = 0;
+
+    //perform faster animations on the simulator
+
+#if !(TARGET_IPHONE_SIMULATOR)
     float duration = 0.4;
+#else
+    float duration = 0.1;
+#endif
     
     for(int i = 0; i < self.imageViews.count; i++) {
         UIImageView *iv = self.imageViews[i];
@@ -110,44 +140,6 @@
             cachedImagesIndex--;
         }
     }
-}
-
-- (void)refreshData {
-    EWAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-    NSString *feedURL = [NSString stringWithFormat:@"http://www.cdli.ucla.edu/cdlisearch/search/ipadweb/json?all=true"];
-    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:feedURL]];
-    
-    OHURLLoader* loader = [OHURLLoader URLLoaderWithRequest:request];
-	[loader startRequestWithCompletion:^(NSData* receivedData, NSInteger httpStatusCode) {
-		NSLog(@"Refreshed");
-
-        NSArray *tabletItems = [self loadJSONData:receivedData];
-        
-        delegate.tabletItems = tabletItems;
-        delegate.pageShowingMore = [[NSMutableDictionary alloc] initWithCapacity:[tabletItems count]];
-        for(int i = 0; i < [delegate.tabletItems count]; i++)
-            delegate.pageShowingMore[@(i)] = @(false);
-        
-        [Utils cacheJSON:receivedData];
-
-	} errorHandler:^(NSError* error) {
-		NSLog(@"Could not referesh data!!! %@", error);
-	}];
-}
-
-- (NSArray *) loadJSONData: (NSData *)JSONData
-{
-    NSError *error = nil;
-    NSArray *tabletItems = [NSJSONSerialization JSONObjectWithData:JSONData options:NSJSONReadingMutableContainers error:&error];
-    
-    //NSLog(@"Tablet items: %@", tabletItems);
-    
-    for (NSMutableDictionary *item in tabletItems) {
-        item[@"full-info"] = [item[@"full-info"] stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
-        item[@"blurb"] = [item[@"blurb"] stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
-    }
-    
-    return tabletItems;
 }
 
 - (void)didReceiveMemoryWarning

@@ -125,7 +125,13 @@
 - (NSString *)htmlFromText: (NSString *)text
 {
     text = [text stringByReplacingOccurrencesOfString:@"\n" withString:@"<br />"];
-    NSString *html = [NSString stringWithFormat:@"<html><head></head><body text=\"white\" > %@ </body></html>", text];
+    NSString *html = [NSString stringWithFormat:
+                      @"<html><head>"
+                      @"<style type=\"text/css\">"
+                        @"body { font-family: Optima, \"Gill Sans\", sans-serif; font-size: 1em }"
+                      @"</style>"
+                      @"</head><body text=\"white\"> %@ </body></html>",
+                      text];
     
     return html;
 }
