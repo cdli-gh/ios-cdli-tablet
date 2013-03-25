@@ -7,7 +7,7 @@
 //
 
 #import "LandingViewController.h"
-#import "EWAppDelegate.h"
+#import "AppDelegate.h"
 #import "Utils.h"
 #import "OHURLLoader.h"
 #import <SDWebImage/UIImageView+WebCache.h>
@@ -110,8 +110,11 @@
                              iv.alpha = 1;
                          }
                          completion:^(BOOL finished) {
-                             if(i == self.imageViews.count - 1)
+                             if(i == self.imageViews.count - 1) {
+                                 AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+                                 delegate.noThumbnails = YES;
                                  [self performSegueWithIdentifier:@"ShowRoot" sender:self];
+                             }
                          }
          ];
         
@@ -121,23 +124,25 @@
 
 - (void) initializeImages
 {
-    int cachedImagesIndex = self.cachedItems.count - 1;
+    int cachedImagesIndex = 0;
     
     for (UIImageView *iv in self.imageViews) {
         iv.alpha = 0;
-        if(cachedImagesIndex >= 0) {
+        if(cachedImagesIndex < self.cachedItems.count) {
             NSMutableDictionary *item = self.cachedItems[cachedImagesIndex];
             [[SDImageCache sharedImageCache]
                 queryDiskCacheForKey:item[@"thumbnail-url"]
                 done:^(UIImage *image, SDImageCacheType type) {
-                    if(image != nil)
+                    if(image != nil) {
+                        // NSLog(@"Found cache for %@", item[@"blurb-title"]);
                         [iv setImage:image];
+                    }
                     else
-                        NSLog(@"No cached imaged for: %@", item[@"thumbnail-url"]);
+                        NSLog(@"No cached imaged for: %@ (URL: %@)", item[@"blurb-title"], item[@"thumbnail-url"]);
                 }
              ];
             
-            cachedImagesIndex--;
+            cachedImagesIndex++;
         }
     }
 }

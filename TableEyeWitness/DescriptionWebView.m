@@ -15,7 +15,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        self.shouldSizeDown = false;
+        self.shouldSizeAccurate = false;
     }
     return self;
 }
@@ -24,7 +24,7 @@
 {
     self = [super initWithCoder:aDecoder];
     if(self) {
-        self.shouldSizeDown = false;
+        self.shouldSizeAccurate = false;
     }
     return self;
 }
@@ -53,8 +53,11 @@
 //    frame.size.height = oldFrameHeight;
 //    self.frame = frame;    
 
-    if(!self.shouldSizeDown)
-        contentSize = self.scrollView.contentSize;
+    if(!self.shouldSizeAccurate) {
+        //contentSize = self.scrollView.contentSize;
+        //hack because scrollView's contentSize is a bigger than what the required size 
+        contentSize = CGSizeMake(self.scrollView.contentSize.width, self.scrollView.contentSize.height - 10);
+    }
     else
         contentSize = CGSizeMake(self.scrollView.contentSize.width,
                                 [[self stringByEvaluatingJavaScriptFromString: @"document.body.offsetHeight"] integerValue] + 10);

@@ -10,6 +10,7 @@
 
 @interface DescriptionWebView : UIWebView
 
-@property (nonatomic) BOOL shouldSizeDown;
+//setting this to true will take longer time to get the right size
+@property (nonatomic) BOOL shouldSizeAccurate;
 
 @end

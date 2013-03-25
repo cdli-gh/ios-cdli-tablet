@@ -7,8 +7,8 @@
 //
 
 #import "ThumbnailController.h"
-#import "EWRootViewController.h"
-#import "EWAppDelegate.h"
+#import "PageRootViewController.h"
+#import "AppDelegate.h"
 #import "ThumbnailCell.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <QuartzCore/QuartzCore.h>
@@ -33,13 +33,19 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    EWAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
     delegate.refreshResponder = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    if(delegate.noThumbnails) {
+//        NSLog(@"Setting timer");
+        delegate.noThumbnails = NO;
+        [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(timerShowFirstImage) userInfo:nil repeats:NO];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -52,7 +58,7 @@
 
 - (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section;
 {
-    EWAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     return appDelegate.tabletItems.count;
 }
 
@@ -60,7 +66,7 @@
 {
     ThumbnailCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"ThumbnailCell" forIndexPath:indexPath];
     
-    EWAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     NSString *imageNameToLoad = @"loading"; //[NSString stringWithFormat:@"%d_full", index%32];
     NSString *pathToImage = [[NSBundle mainBundle] pathForResource:imageNameToLoad ofType:@"gif"];
     UIImage *placeholderImage = [[UIImage alloc] initWithContentsOfFile:pathToImage];
@@ -85,7 +91,7 @@
     if ([[segue identifier] isEqualToString:@"ShowDetail"])
     {
         NSIndexPath *selectedIndexPath = [[self.collectionView indexPathsForSelectedItems] objectAtIndex:0];
-        EWRootViewController *rootViewController = [segue destinationViewController];
+        PageRootViewController *rootViewController = [segue destinationViewController];
         rootViewController.startIndex = selectedIndexPath.row;
     }
 }
@@ -94,7 +100,17 @@
 
 - (void)fetchedEntries:(NSArray *)entries
 {
-    //NSLog(@"Thumbnails refreshing");
+//    NSLog(@"Thumbnails refreshing");
     [[self collectionView] reloadData];
+}
+
+#pragma mark - Timer delegate
+
+- (void)timerShowFirstImage
+{
+//    NSLog(@"Timer fired");
+    NSIndexPath *path = [NSIndexPath indexPathForRow:0 inSection:0];
+    [[self collectionView] selectItemAtIndexPath:path animated:YES scrollPosition:UICollectionViewScrollPositionNone];
+    [self performSegueWithIdentifier:@"ShowDetail" sender:self];
 }
 @end
