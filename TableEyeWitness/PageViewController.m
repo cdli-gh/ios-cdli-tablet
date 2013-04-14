@@ -130,6 +130,7 @@
                       @"<html><head>"
                       @"<style type=\"text/css\">"
                         @"body { font-family: Optima, \"Gill Sans\", sans-serif; font-size: 1em }"
+                        @"a:link { color:#AD90FF; } "
                       @"</style>"
                       @"</head><body text=\"white\"> %@ </body></html>",
                       text];

@@ -8,8 +8,16 @@
 
 #import "Utils.h"
 #import "OHURLLoader.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+
+static NSArray *colorMap = nil;
 
 @implementation Utils
+
++ (void) initialize
+{
+    colorMap = @[[UIColor whiteColor], [UIColor orangeColor], [UIColor lightGrayColor], [UIColor cyanColor], [UIColor purpleColor], [UIColor redColor], [UIColor greenColor], [UIColor magentaColor]];
+}
 
 + (NSArray *) fetchTabletItemsAtURL: (NSString *)url
 {
@@ -64,6 +72,40 @@
     return data;
 }
 
++ (void) assignColors: (NSArray *) entries
+{
+    NSMutableDictionary *distinctThemes = [[NSMutableDictionary alloc] init];
+    for (NSMutableDictionary *item in entries) {
+        NSString *theme = item[@"theme"];
+        if(distinctThemes[theme] == nil)
+            distinctThemes[theme] = @(1);
+        else
+            distinctThemes[theme] = [NSNumber numberWithInt:[distinctThemes[theme] intValue] + 1];
+    }
+    
+    
+    NSArray *keys = [distinctThemes allKeys];
+    
+    NSArray *sortedKeys = [keys sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
+        NSString *first = [distinctThemes objectForKey:a];
+        NSString *second = [distinctThemes objectForKey:b];
+        //sort descending
+        return -1 * [first compare:second];
+    }];
+    
+    NSMutableDictionary *themeColor = [[NSMutableDictionary alloc] init];
+    for (int i = 0; i < [sortedKeys count] && i < [colorMap count]; i++) {
+        themeColor[sortedKeys[i]] = colorMap[i];
+    }
+    
+    //if we have fewer distinct colors than we have themes, we use the default color assigned to them i.e. lightGrey
+    
+    for (NSMutableDictionary *item in entries) {
+        if(themeColor[item[@"theme"]] != nil)
+            item[@"color"] = themeColor[item[@"theme"]];
+    }
+}
+
 + (NSArray *) loadJSONData: (NSData *)JSONData
 {
     NSError *error = nil;
@@ -74,13 +116,17 @@
     for (NSMutableDictionary *item in tabletItems) {
         item[@"full-info"] = [item[@"full-info"] stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
         item[@"blurb"] = [item[@"blurb"] stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
+        item[@"color"] = [UIColor lightGrayColor];
     }
+    
+    [Utils assignColors:tabletItems];
     
     return tabletItems;
 }
 
 
-+ (void)refreshDataAtURL:(NSString *)feedURL withHandler:(id<FetchedEntries>)refreshHandler {
++ (void) refreshDataAtURL: (NSString *)feedURL withHandler:(id<FetchedEntries>)refreshHandler
+{
     NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:feedURL]];
     
     OHURLLoader* loader = [OHURLLoader URLLoaderWithRequest:request];
@@ -96,6 +142,22 @@
             [refreshHandler fetchedEntriesFailedWithError:error];
         }
 	}];
+}
+
++ (void) downloadImageAtURL: (NSString *)imageURL
+{
+    //NSLog(@"Downloading: %@", imageURL);
+    
+    SDWebImageManager *manager = [SDWebImageManager sharedManager];
+    [manager downloadWithURL:[NSURL URLWithString:imageURL]
+                     options:0
+                    progress:^(NSUInteger receivedSize, long long expectedSize)
+     {
+         // progression tracking code
+     }
+                   completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished)
+     {
+     }];
 }
 
 @end

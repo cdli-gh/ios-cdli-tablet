@@ -9,6 +9,9 @@
 #import "AppDelegate.h"
 #import "ModelController.h"
 #import "PageViewController.h"
+#import "Utils.h"
+
+#define CACHE_LIMIT 2
 
 /*
  A controller object that manages a simple model -- a collection of month names.
@@ -48,6 +51,7 @@
     PageViewController *dataViewController = [storyboard instantiateViewControllerWithIdentifier:@"EWDataViewController"];
     dataViewController.dataObject = self.pageData[index];
     dataViewController.dataIndex = index;
+    
     return dataViewController;
 }
 
@@ -60,6 +64,7 @@
 
 #pragma mark - Page View Controller Data Source
 
+//Also caches images for the next 'CACHE_LIMIT' viewcontrollers in the 'left' direction
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
 {
     NSUInteger index = [self indexOfViewController:(PageViewController *)viewController];
@@ -68,9 +73,14 @@
     }
     
     index--;
+    
+    for(int i = index; i > 0 && i > index - CACHE_LIMIT; i--)
+        [Utils downloadImageAtURL:self.pageData[i][@"url"]];
+
     return [self viewControllerAtIndex:index storyboard:viewController.storyboard];
 }
 
+//Also caches images for the next 'CACHE_LIMIT' viewcontrollers in the 'right' direction
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
 {
     NSUInteger index = [self indexOfViewController:(PageViewController *)viewController];
@@ -79,9 +89,15 @@
     }
     
     index++;
+    
+    for(int i = index; i < [self.pageData count] && i < index + CACHE_LIMIT; i++)
+        [Utils downloadImageAtURL:self.pageData[i][@"url"]];
+
+    
     if (index == [self.pageData count]) {
         return nil;
     }
+ 
     return [self viewControllerAtIndex:index storyboard:viewController.storyboard];
 }
 

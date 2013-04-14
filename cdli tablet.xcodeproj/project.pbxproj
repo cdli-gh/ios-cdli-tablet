@@ -56,6 +56,7 @@
 		38E6930916C26BB6003C55DF /* DescriptionField.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E6930816C26BB6003C55DF /* DescriptionField.m */; };
 		38E700D616B7B9DB001E39A1 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E700D516B7B9DB001E39A1 /* Utils.m */; };
 		38E700E616B7C455001E39A1 /* DescriptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E700E516B7C455001E39A1 /* DescriptionView.m */; };
+		38F85B88171409BB00C7F2FF /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38F85B87171409BB00C7F2FF /* MessageUI.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -135,6 +136,7 @@
 		38E700D516B7B9DB001E39A1 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 		38E700E416B7C455001E39A1 /* DescriptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DescriptionView.h; sourceTree = "<group>"; };
 		38E700E516B7C455001E39A1 /* DescriptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DescriptionView.m; sourceTree = "<group>"; };
+		38F85B87171409BB00C7F2FF /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +144,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38F85B88171409BB00C7F2FF /* MessageUI.framework in Frameworks */,
 				38D5C4F816B53640002E02D8 /* ImageIO.framework in Frameworks */,
 				3860EF5F16B4DC43009791D9 /* UIKit.framework in Frameworks */,
 				3860EF6116B4DC43009791D9 /* Foundation.framework in Frameworks */,
@@ -166,6 +169,7 @@
 		3860EF4F16B4DC43009791D9 = {
 			isa = PBXGroup;
 			children = (
+				38F85B87171409BB00C7F2FF /* MessageUI.framework */,
 				38DBD051170039DC007238D5 /* cdliapp_icon1024x1024d_600ppi copy_smaller.png */,
 				38DBD04F170039AF007238D5 /* cdliapp_icon1024x1024d_600ppi copy.png */,
 				3835209416F693D3002BE780 /* cdliapp_icon1024x1024c_600ppi_smaller.png */,

@@ -76,7 +76,7 @@
     
     cell.layer.cornerRadius = 5;
     cell.layer.borderWidth = 3.5;
-    cell.layer.borderColor = CGColorRetain([[UIColor darkGrayColor] CGColor]);
+    cell.layer.borderColor = CGColorRetain([tabletItem[@"color"] CGColor]);
     
     [cell.imageView setImageWithURL:[NSURL URLWithString:tabletItem[@"thumbnail-url"]] placeholderImage:placeholderImage];
     

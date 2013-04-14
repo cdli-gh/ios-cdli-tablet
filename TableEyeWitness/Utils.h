@@ -19,12 +19,10 @@
 
 @interface Utils : NSObject
 
-+ (NSArray *) fetchTabletItemsAtURL: (NSString *)url;
-+ (NSString *) cachePath;
 + (NSData *) loadCachedJSON;
 + (void) cacheJSON: (NSData *) json;
-+ (NSString *) JSONCachedPath;
 + (NSArray *) loadJSONData: (NSData *)JSONData;
-+ (void)refreshDataAtURL:(NSString *)feedURL withHandler:(id<FetchedEntries>)refreshHandler;
++ (void) refreshDataAtURL: (NSString *)feedURL withHandler:(id<FetchedEntries>)refreshHandler;
++ (void) downloadImageAtURL: (NSString *)imageURL;
 
 @end
