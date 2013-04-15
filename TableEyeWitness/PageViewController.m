@@ -12,6 +12,7 @@
 #import "ImageScrollView.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <QuartzCore/QuartzCore.h>
+#import "SVProgressHUD.h"
 
 
 #define BLURB_HEIGHT_MULTIPLIER 0.2
@@ -69,7 +70,7 @@
     [self.imageScrollView addGestureRecognizer:tapGestureRecognizer];
         
     NSDictionary *tabletItem = (NSDictionary *)self.dataObject;
-
+    
     //load the main image
     self.imageScrollView.maxImageZoom = 2;
     self.imageScrollView.imageURL = [NSURL URLWithString:tabletItem[@"url"]];
@@ -109,7 +110,7 @@
 - (void) showLess
 {
     self.descriptionView.titleLabel.text = self.dataObject[@"blurb-title"];
-    [self.descriptionView.descriptionField loadHTMLString:[self htmlFromText:self.dataObject[@"blurb"]] baseURL:nil];
+    [self.descriptionView.descriptionField loadHTMLString:[self htmlFromText:self.dataObject[@"blurb"] andDate:self.dataObject[@"date"]] baseURL:nil];
     [self.descriptionView.infoButton setTitle:@"More" forState:UIControlStateNormal];
     self.showingFullDescription = NO;
 }
@@ -118,12 +119,12 @@
 {
     self.descriptionView.titleLabel.text = self.dataObject[@"full-title"];
     //self.descriptionView.descriptionField.text = tabletItem[@"full-info"];
-    [self.descriptionView.descriptionField loadHTMLString:[self htmlFromText:self.dataObject[@"full-info"]] baseURL:nil];
+    [self.descriptionView.descriptionField loadHTMLString:[self htmlFromText:self.dataObject[@"full-info"] andDate:@""] baseURL:nil];
     [self.descriptionView.infoButton setTitle:@"Less" forState:UIControlStateNormal];
     self.showingFullDescription = YES;
 }
 
-- (NSString *) htmlFromText: (NSString *)text
+- (NSString *) htmlFromText: (NSString *)text andDate: (NSString *) date
 {
     text = [text stringByReplacingOccurrencesOfString:@"\n" withString:@"<br />"];
     NSString *html = [NSString stringWithFormat:
@@ -132,8 +133,10 @@
                         @"body { font-family: Optima, \"Gill Sans\", sans-serif; font-size: 1em }"
                         @"a:link { color:#AD90FF; } "
                       @"</style>"
-                      @"</head><body text=\"white\"> %@ </body></html>",
-                      text];
+                      @"</head><body text=\"white\"> %@"
+                      "<p align=\"right\"><font size=\"-1\"><i>%@</i></font></p>"
+                      "</body></html>",
+                      text, date];
     
     return html;
 }
@@ -178,6 +181,21 @@
     //keep nav bar and description view in sync
     //they might go out of sync of another page removes the nav bar and we come back to this one
     self.descriptionView.hidden = self.navigationController.navigationBarHidden;
+}
+
+- (void) viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    if([SVProgressHUD isVisible])
+        self.imageScrollView.showingProgress = NO;
+    else
+        self.imageScrollView.showingProgress = YES;
+}
+
+- (void) viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    self.imageScrollView.showingProgress = NO;
 }
 
 //This will try to fit the entire descriptionView so that the descriptionField will not have to scroll

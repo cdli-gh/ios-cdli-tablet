@@ -48,6 +48,7 @@
 #import <Foundation/Foundation.h>
 #import "ImageScrollView.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "SVProgressHUD.h"
 
 #define TILE_IMAGES 0
 
@@ -178,13 +179,6 @@
     NSString *pathToImage = [[NSBundle mainBundle] pathForResource:imageNameToLoad ofType:@"jpg"];
     UIImage *placeholderImage = [[UIImage alloc] initWithContentsOfFile:pathToImage];
 
-    //hack to get the right image size
-    //use the loading image and fix the initial size values to the screen size
-    //or use a full-res loading image
-//    NSString *imageNameToLoad = @"test";
-//    NSString *pathToImage = [[NSBundle mainBundle] pathForResource:imageNameToLoad ofType:@"jpg"];
-//    UIImage *placeholderImage = [[UIImage alloc] initWithContentsOfFile:pathToImage];
-
     // make a new UIImageView for the new image
     _zoomView = [[UIImageView alloc] initWithImage:placeholderImage];
     _zoomView.contentMode = UIViewContentModeScaleAspectFit;
@@ -196,9 +190,27 @@
     //NSLog(@"BigPhoto: Trying to fetch %@", self.imageURL);
 
     __weak ImageScrollView *current = self;
-    [_zoomView setImageWithURL:self.imageURL placeholderImage:placeholderImage completed:^(UIImage *img, NSError *err, SDImageCacheType ct) {
-        [current configureForImageSize:img.size];
-    }];
+    
+    // this will be set to true by the caller when it's appropriate to show it
+    // i.e. when the view becomes visible
+    self.showingProgress = NO;
+    
+    [_zoomView setImageWithURL:self.imageURL placeholderImage:nil options:SDWebImageRetryFailed
+                      progress:^(NSUInteger receivedSize, long long expectedSize) {
+                          if(current.showingProgress) {
+                              float progressSoFar = receivedSize / expectedSize;
+                              [SVProgressHUD showProgress:progressSoFar status:@"Loading"];
+                          }
+                      }
+                     completed:^(UIImage *img, NSError *err, SDImageCacheType ct) {
+                         [current configureForImageSize:img.size];
+                         current.showingProgress = NO;
+                         [SVProgressHUD dismiss];
+                         if(img == nil) {
+                             [SVProgressHUD showErrorWithStatus:@"Could not load image"];
+                         }
+                     }
+     ];
 
 }
 

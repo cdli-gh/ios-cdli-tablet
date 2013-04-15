@@ -68,7 +68,7 @@
     
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     NSString *imageNameToLoad = @"loading"; //[NSString stringWithFormat:@"%d_full", index%32];
-    NSString *pathToImage = [[NSBundle mainBundle] pathForResource:imageNameToLoad ofType:@"gif"];
+    NSString *pathToImage = [[NSBundle mainBundle] pathForResource:imageNameToLoad ofType:@"jpg"];
     UIImage *placeholderImage = [[UIImage alloc] initWithContentsOfFile:pathToImage];
     
     NSDictionary *tabletItem = appDelegate.tabletItems[indexPath.row];

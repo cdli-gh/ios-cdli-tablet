@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import "Utils.h"
 
+#define APPSTORE_BUILD 1
+
 @interface AppDelegate () <FetchedEntries>
 @end
 
@@ -45,7 +47,14 @@
 
     NSLog(@"Rereshing data (became active)");
     
-    NSString *feedURL = [NSString stringWithFormat:@"http://www.cdli.ucla.edu/cdlisearch/search/ipadweb/json?all=true"];
+#ifdef APPSTORE_BUILD
+    NSString *feedURL = [NSString stringWithFormat:@"http://www.cdli.ucla.edu/cdlisearch/search/ipadweb/json"]
+    ;
+#else
+    NSString *feedURL = [NSString stringWithFormat:@"http://www.cdli.ucla.edu/cdlisearch/search/ipadweb/json?all=true"]
+    ;
+#endif
+    
     [Utils refreshDataAtURL:feedURL withHandler:self];
 }
 

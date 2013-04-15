@@ -10,6 +10,7 @@
 #import "ModelController.h"
 #import "PageViewController.h"
 #import <MessageUI/MFMailComposeViewController.h>
+#import "SVProgressHUD.h"
 
 @interface PageRootViewController () <MFMailComposeViewControllerDelegate>
 @property (readonly, strong, nonatomic) ModelController *modelController;
@@ -21,7 +22,7 @@
 
 @synthesize modelController = _modelController;
 
-- (void)viewDidLoad
+- (void) viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
@@ -30,6 +31,12 @@
     self.pageViewController.delegate = self;
 
     PageViewController *startingViewController = [self.modelController viewControllerAtIndex:self.startIndex storyboard:self.storyboard];
+    
+    if(startingViewController == nil) {
+        [SVProgressHUD showErrorWithStatus:@"Could not load entries, check your internet connection"];
+        return;
+    }
+    
     NSArray *viewControllers = @[startingViewController];
     [self.pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:NULL];
 
@@ -40,22 +47,47 @@
 
     // Set the page view controller's bounds using an inset rect so that self's view is visible around the edges of the pages.
     CGRect pageViewRect = self.view.bounds;
-    //pageViewRect = CGRectInset(pageViewRect, 40.0, 40.0);
     self.pageViewController.view.frame = pageViewRect;
 
     [self.pageViewController didMoveToParentViewController:self];
 
     // Add the page view controller's gesture recognizers to the book view controller's view so that the gestures are started more easily.
     self.view.gestureRecognizers = self.pageViewController.gestureRecognizers;
+    
+    UIButton *infoButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
+	[infoButton addTarget:self action:@selector(showAbout:) forControlEvents:UIControlEventTouchUpInside];
+    
+	UIBarButtonItem *aboutButton = [[UIBarButtonItem alloc] initWithCustomView:infoButton];
+    
+    UIBarButtonItem *space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
+                                                                          target:nil
+                                                                          action:nil];
+    space.width = 15;
+    
+    UIBarButtonItem *shareButton = [[UIBarButtonItem alloc]
+                               initWithTitle:@"Share"
+                               style:UIBarButtonItemStylePlain
+                               target:self
+                               action:@selector(showEmail:)];
+    
+//    UIBarButtonItem *aboutButton = [[UIBarButtonItem alloc]
+//                               initWithTitle:@"About"
+//                               style:UIBarButtonItemStylePlain
+//                               target:self
+//                               action:@selector(showAbout:)];
+    
+    NSArray *arrBtns = [[NSArray alloc]initWithObjects:aboutButton, space, shareButton, nil];
+
+    self.navigationItem.rightBarButtonItems = arrBtns;
 }
 
-- (void)didReceiveMemoryWarning
+- (void) didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-- (ModelController *)modelController
+- (ModelController *) modelController
 {
      // Return the model controller object, creating it if necessary.
      // In more complex implementations, the model controller may be passed to the view controller.
@@ -104,9 +136,14 @@
 //    return UIPageViewControllerSpineLocationMid;
 //}
 
-#pragma mark - Email button
+#pragma mark - Button actions
 
--(IBAction)showEmail:(id)sender
+- (IBAction) showAbout: (id)sender
+{
+    [self performSegueWithIdentifier:@"ShowAboutPage" sender:self];
+}
+
+- (IBAction) showEmail: (id)sender
 {
     PageViewController *currentViewController = self.pageViewController.viewControllers[0];
     NSDictionary *tabletItem = (NSDictionary *)currentViewController.dataObject;

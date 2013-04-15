@@ -15,6 +15,11 @@
 		3835209316F693B9002BE780 /* cdliapp_icon1024x1024c_600ppi.png in Resources */ = {isa = PBXBuildFile; fileRef = 3835209216F693B9002BE780 /* cdliapp_icon1024x1024c_600ppi.png */; };
 		3835209516F693D3002BE780 /* cdliapp_icon1024x1024c_600ppi_smaller.png in Resources */ = {isa = PBXBuildFile; fileRef = 3835209416F693D3002BE780 /* cdliapp_icon1024x1024c_600ppi_smaller.png */; };
 		384D8F3816B88B1F00AA80FA /* ThumbnailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 384D8F3716B88B1F00AA80FA /* ThumbnailCell.m */; };
+		385F828E171A566E0059264F /* loading.png in Resources */ = {isa = PBXBuildFile; fileRef = 385F828D171A566E0059264F /* loading.png */; };
+		385F8290171A57160059264F /* loading.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 385F828F171A57160059264F /* loading.jpg */; };
+		385F8298171A5C840059264F /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 385F8295171A5C840059264F /* SVProgressHUD.bundle */; };
+		385F8299171A5C840059264F /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 385F8297171A5C840059264F /* SVProgressHUD.m */; };
+		385F829B171A5CAA0059264F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 385F829A171A5CAA0059264F /* QuartzCore.framework */; };
 		3860EF5F16B4DC43009791D9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3860EF5E16B4DC43009791D9 /* UIKit.framework */; };
 		3860EF6116B4DC43009791D9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3860EF6016B4DC43009791D9 /* Foundation.framework */; };
 		3860EF6316B4DC43009791D9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3860EF6216B4DC43009791D9 /* CoreGraphics.framework */; };
@@ -39,7 +44,6 @@
 		3861403416CAFB77009BD343 /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 3861403316CAFB77009BD343 /* Default-Landscape@2x~ipad.png */; };
 		38BE482816CB7DB000D2AAD4 /* ImageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38BE482716CB7DB000D2AAD4 /* ImageScrollView.m */; };
 		38BE482A16CB847800D2AAD4 /* test.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 38BE482916CB847800D2AAD4 /* test.jpg */; };
-		38BE482C16CB8AA100D2AAD4 /* loading.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 38BE482B16CB8AA100D2AAD4 /* loading.jpg */; };
 		38BE482E16CB8C1500D2AAD4 /* cdliapp_icon1024x124_600ppi.png in Resources */ = {isa = PBXBuildFile; fileRef = 38BE482D16CB8C1500D2AAD4 /* cdliapp_icon1024x124_600ppi.png */; };
 		38BE483016CB8C4500D2AAD4 /* cdliapp_icon1024x124_600ppi_smaller.png in Resources */ = {isa = PBXBuildFile; fileRef = 38BE482F16CB8C4500D2AAD4 /* cdliapp_icon1024x124_600ppi_smaller.png */; };
 		38C100A916B4E9F700354426 /* ThumbnailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C100A816B4E9F700354426 /* ThumbnailController.m */; };
@@ -80,6 +84,12 @@
 		3835209416F693D3002BE780 /* cdliapp_icon1024x1024c_600ppi_smaller.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cdliapp_icon1024x1024c_600ppi_smaller.png; sourceTree = "<group>"; };
 		384D8F3616B88B1F00AA80FA /* ThumbnailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThumbnailCell.h; sourceTree = "<group>"; };
 		384D8F3716B88B1F00AA80FA /* ThumbnailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThumbnailCell.m; sourceTree = "<group>"; };
+		385F828D171A566E0059264F /* loading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loading.png; sourceTree = "<group>"; };
+		385F828F171A57160059264F /* loading.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = loading.jpg; sourceTree = "<group>"; };
+		385F8295171A5C840059264F /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		385F8296171A5C840059264F /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		385F8297171A5C840059264F /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
+		385F829A171A5CAA0059264F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		3860EF5A16B4DC43009791D9 /* cdli tablet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "cdli tablet.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3860EF5E16B4DC43009791D9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3860EF6016B4DC43009791D9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -113,7 +123,6 @@
 		38BE482616CB7DB000D2AAD4 /* ImageScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageScrollView.h; sourceTree = "<group>"; };
 		38BE482716CB7DB000D2AAD4 /* ImageScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageScrollView.m; sourceTree = "<group>"; };
 		38BE482916CB847800D2AAD4 /* test.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = test.jpg; sourceTree = "<group>"; };
-		38BE482B16CB8AA100D2AAD4 /* loading.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = loading.jpg; sourceTree = "<group>"; };
 		38BE482D16CB8C1500D2AAD4 /* cdliapp_icon1024x124_600ppi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cdliapp_icon1024x124_600ppi.png; sourceTree = "<group>"; };
 		38BE482F16CB8C4500D2AAD4 /* cdliapp_icon1024x124_600ppi_smaller.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cdliapp_icon1024x124_600ppi_smaller.png; sourceTree = "<group>"; };
 		38C100A716B4E9F700354426 /* ThumbnailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThumbnailController.h; sourceTree = "<group>"; };
@@ -144,6 +153,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				385F829B171A5CAA0059264F /* QuartzCore.framework in Frameworks */,
 				38F85B88171409BB00C7F2FF /* MessageUI.framework in Frameworks */,
 				38D5C4F816B53640002E02D8 /* ImageIO.framework in Frameworks */,
 				3860EF5F16B4DC43009791D9 /* UIKit.framework in Frameworks */,
@@ -166,9 +176,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		385F8294171A5C840059264F /* SVProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				385F8295171A5C840059264F /* SVProgressHUD.bundle */,
+				385F8296171A5C840059264F /* SVProgressHUD.h */,
+				385F8297171A5C840059264F /* SVProgressHUD.m */,
+			);
+			path = SVProgressHUD;
+			sourceTree = "<group>";
+		};
 		3860EF4F16B4DC43009791D9 = {
 			isa = PBXGroup;
 			children = (
+				385F829A171A5CAA0059264F /* QuartzCore.framework */,
 				38F85B87171409BB00C7F2FF /* MessageUI.framework */,
 				38DBD051170039DC007238D5 /* cdliapp_icon1024x1024d_600ppi copy_smaller.png */,
 				38DBD04F170039AF007238D5 /* cdliapp_icon1024x1024d_600ppi copy.png */,
@@ -203,6 +224,7 @@
 		3860EF5D16B4DC43009791D9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				385F8294171A5C840059264F /* SVProgressHUD */,
 				38D5C4E916B533E6002E02D8 /* SDWebImage.framework */,
 				38D5C4F716B53640002E02D8 /* ImageIO.framework */,
 				3860EF5E16B4DC43009791D9 /* UIKit.framework */,
@@ -269,8 +291,9 @@
 		38C1002216B4E0C600354426 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				385F828F171A57160059264F /* loading.jpg */,
+				385F828D171A566E0059264F /* loading.png */,
 				38CCBE1416EF815700B39DA9 /* basic_thumbnail.jpg */,
-				38BE482B16CB8AA100D2AAD4 /* loading.jpg */,
 				38BE482916CB847800D2AAD4 /* test.jpg */,
 			);
 			path = images;
@@ -396,7 +419,6 @@
 				3861403216CAFB71009BD343 /* Default-Landscape~ipad.png in Resources */,
 				3861403416CAFB77009BD343 /* Default-Landscape@2x~ipad.png in Resources */,
 				38BE482A16CB847800D2AAD4 /* test.jpg in Resources */,
-				38BE482C16CB8AA100D2AAD4 /* loading.jpg in Resources */,
 				38BE482E16CB8C1500D2AAD4 /* cdliapp_icon1024x124_600ppi.png in Resources */,
 				38BE483016CB8C4500D2AAD4 /* cdliapp_icon1024x124_600ppi_smaller.png in Resources */,
 				38000BD516DDFF380030EEBE /* cdliapp_icon1024_600.png in Resources */,
@@ -408,6 +430,9 @@
 				3835209516F693D3002BE780 /* cdliapp_icon1024x1024c_600ppi_smaller.png in Resources */,
 				38DBD050170039AF007238D5 /* cdliapp_icon1024x1024d_600ppi copy.png in Resources */,
 				38DBD052170039DC007238D5 /* cdliapp_icon1024x1024d_600ppi copy_smaller.png in Resources */,
+				385F828E171A566E0059264F /* loading.png in Resources */,
+				385F8290171A57160059264F /* loading.jpg in Resources */,
+				385F8298171A5C840059264F /* SVProgressHUD.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -457,6 +482,7 @@
 				38000BDA16DE03730030EEBE /* DescriptionWebView.m in Sources */,
 				38CCBE1816EF827900B39DA9 /* LandingViewController.m in Sources */,
 				38DBD04E170032CD007238D5 /* AboutPageController.m in Sources */,
+				385F8299171A5C840059264F /* SVProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -586,8 +612,8 @@
 		3860EF9B16B4DC45009791D9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Robert Englund";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Robert Englund";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/TableEyeWitness\"",
@@ -598,8 +624,8 @@
 				INFOPLIST_FILE = "TableEyeWitness/cdli tablet-Info.plist";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "cdli tablet";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "1774216F-3A83-452B-BC40-F30C305B62DE";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1774216F-3A83-452B-BC40-F30C305B62DE";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
