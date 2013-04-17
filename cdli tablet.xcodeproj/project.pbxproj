@@ -189,8 +189,6 @@
 		3860EF4F16B4DC43009791D9 = {
 			isa = PBXGroup;
 			children = (
-				385F829A171A5CAA0059264F /* QuartzCore.framework */,
-				38F85B87171409BB00C7F2FF /* MessageUI.framework */,
 				38DBD051170039DC007238D5 /* cdliapp_icon1024x1024d_600ppi copy_smaller.png */,
 				38DBD04F170039AF007238D5 /* cdliapp_icon1024x1024d_600ppi copy.png */,
 				3835209416F693D3002BE780 /* cdliapp_icon1024x1024c_600ppi_smaller.png */,
@@ -224,6 +222,8 @@
 		3860EF5D16B4DC43009791D9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				38F85B87171409BB00C7F2FF /* MessageUI.framework */,
+				385F829A171A5CAA0059264F /* QuartzCore.framework */,
 				385F8294171A5C840059264F /* SVProgressHUD */,
 				38D5C4E916B533E6002E02D8 /* SDWebImage.framework */,
 				38D5C4F716B53640002E02D8 /* ImageIO.framework */,
@@ -624,8 +624,8 @@
 				INFOPLIST_FILE = "TableEyeWitness/cdli tablet-Info.plist";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "cdli tablet";
-				PROVISIONING_PROFILE = "1774216F-3A83-452B-BC40-F30C305B62DE";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1774216F-3A83-452B-BC40-F30C305B62DE";
+				PROVISIONING_PROFILE = "A6BB1994-EABE-4088-A84F-74E3EB9AEDD5";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "A6BB1994-EABE-4088-A84F-74E3EB9AEDD5";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
