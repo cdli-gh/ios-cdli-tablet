@@ -39,8 +39,16 @@
     self.aboutPage.delegate = self;
     
     //load about page
-    NSURL *url = [NSURL URLWithString:@"http://cdli.ucla.edu/cdlisearch/search/ipadweb/about/about.html"];
+    
+    NSURL *url;
+    
+    if([[[NSBundle mainBundle] objectForInfoDictionaryKey:@"IsInternalBuild"] boolValue])
+        url = [NSURL URLWithString:@"http://cdli.ucla.edu/cdlisearch/search/ipadweb_dev/about/about.html"];
+    else
+        url = [NSURL URLWithString:@"http://cdli.ucla.edu/cdlisearch/search/ipadweb/about/about.html"];
+        
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [[NSURLCache sharedURLCache] removeCachedResponseForRequest:request];
     [self.aboutPage loadRequest:request];
 }
 

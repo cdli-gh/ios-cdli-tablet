@@ -8,11 +8,11 @@
         <scene sceneID="Evl-79-hWP">
             <objects>
                 <viewController id="azZ-2Q-y4e" customClass="AboutPageController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="BeQ-nz-XN5">
+                    <view key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" id="BeQ-nz-XN5">
                         <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <webView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ojk-e7-acf">
+                            <webView opaque="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ojk-e7-acf">
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <dataDetectorType key="dataDetectorTypes"/>
                             </webView>
@@ -300,86 +300,12 @@
     <resources>
         <image name="basic_thumbnail.jpg" width="400" height="299"/>
     </resources>
-    <classes>
-        <class className="AboutPageController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AboutPageController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="aboutPage" candidateClass="UIWebView"/>
-            </relationships>
-        </class>
-        <class className="DescriptionView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/DescriptionView.h"/>
-            <relationships>
-                <relationship kind="outlet" name="descriptionField" candidateClass="DescriptionWebView"/>
-                <relationship kind="outlet" name="infoButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="DescriptionWebView" superclassName="UIWebView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/DescriptionWebView.h"/>
-        </class>
-        <class className="ImageScrollView" superclassName="UIScrollView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ImageScrollView.h"/>
-        </class>
-        <class className="LandingViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/LandingViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="i00" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="i01" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="i02" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="i10" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="i11" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="i12" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="i20" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="i21" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="i22" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="PageRootViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PageRootViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="showEmail:"/>
-            </relationships>
-        </class>
-        <class className="PageViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PageViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="infoButtonTapped:"/>
-                <relationship kind="outlet" name="descriptionView" candidateClass="DescriptionView"/>
-                <relationship kind="outlet" name="imageScrollView" candidateClass="ImageScrollView"/>
-            </relationships>
-        </class>
-        <class className="ThumbnailCell" superclassName="UICollectionViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ThumbnailCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-        <class className="ThumbnailController" superclassName="UICollectionViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ThumbnailController.h"/>
-        </class>
-        <class className="UICollectionReusableView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionReusableView.h"/>
-        </class>
-        <class className="UICollectionViewCell" superclassName="UICollectionReusableView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewCell.h"/>
-        </class>
-        <class className="UICollectionViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewController.h"/>
-        </class>
-        <class className="UICollectionViewFlowLayout" superclassName="UICollectionViewLayout">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewFlowLayout.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="U30-4r-hiE"/>
+        <segue reference="m4x-vD-7ku"/>
     </inferredMetricsTieBreakers>
 </document>

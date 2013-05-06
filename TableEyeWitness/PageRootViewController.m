@@ -145,6 +145,11 @@
 
 - (IBAction) showEmail: (id)sender
 {
+    if(![MFMailComposeViewController canSendMail]) {
+        [SVProgressHUD showErrorWithStatus:@"Cannot send email through this device. Please check your settings"];
+        return;
+    }
+    
     PageViewController *currentViewController = self.pageViewController.viewControllers[0];
     NSDictionary *tabletItem = (NSDictionary *)currentViewController.dataObject;
     
@@ -156,10 +161,11 @@
     
     // Fill out the email body text
     NSString *emailBody = [NSString stringWithFormat:@
+                           "I saw this entry on the iPad app \"cdli tablet\" and wanted to share it with you:<br/><br/>"
                            "<img src=%@ /> <br /><br />"
-                           "%@ <br /> <br />"
-                           "<a href=\"http://cdli.ucla.edu/cdlisearch/search/ipadweb/showcase?date=%@\">Click here for more details</a>"
-                           "<br /><br /> (Sent via cdli tablet app)",
+                           "\"%@\" <br /> <br />"
+                           "<a href=\"http://cdli.ucla.edu/cdlisearch/search/ipadweb/showcase?date=%@\"> Visit this page on the web</a> <br /><br />"
+                           "<a href=\"https://itunes.apple.com/us/app/cdli-tablet/id636437023?ls=1&mt=8\"> Download the free \"cdli tablet\" app </a>",
                            tabletItem[@"thumbnail-url"], tabletItem[@"blurb"], tabletItem[@"date"]];
     
     [picker setMessageBody:emailBody isHTML:YES];

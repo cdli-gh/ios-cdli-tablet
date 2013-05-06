@@ -56,6 +56,7 @@
 
 #pragma mark - CollectionView delegate
 
+
 - (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section;
 {
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
