@@ -7,6 +7,7 @@
 //
 
 #import "ThumbnailCell.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation ThumbnailCell
 
@@ -18,6 +19,17 @@
     }
     return self;
 }
+
+//http://www.omnigroup.com/blog/entry/ipad_drop_shadow_performance_test
+//- (void)willMoveToWindow:(UIWindow *)newWindow;
+//{
+//    [super willMoveToWindow:newWindow];
+//    
+//    if (newWindow) {
+//        self.layer.shouldRasterize =  YES;
+//        self.layer.rasterizationScale = [UIScreen mainScreen].scale;
+//    }
+//}
 
 /*
 // Only override drawRect: if you perform custom drawing.

@@ -68,19 +68,15 @@
     ThumbnailCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"ThumbnailCell" forIndexPath:indexPath];
     
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    NSString *imageNameToLoad = @"loading"; //[NSString stringWithFormat:@"%d_full", index%32];
-    NSString *pathToImage = [[NSBundle mainBundle] pathForResource:imageNameToLoad ofType:@"jpg"];
-    UIImage *placeholderImage = [[UIImage alloc] initWithContentsOfFile:pathToImage];
-    
     NSDictionary *tabletItem = appDelegate.tabletItems[indexPath.row];
     //NSLog(@"Thumnail: Trying to fetch %@", urlString);
     
     cell.layer.cornerRadius = 5;
     cell.layer.borderWidth = 3.5;
     cell.layer.borderColor = CGColorRetain([tabletItem[@"color"] CGColor]);
+    cell.clipsToBounds = NO;
     
-    [cell.imageView setImageWithURL:[NSURL URLWithString:tabletItem[@"thumbnail-url"]] placeholderImage:placeholderImage];
-    
+    [cell.imageView setImageWithURL:[NSURL URLWithString:tabletItem[@"thumbnail-url"]]];
     
     return cell;
 }
