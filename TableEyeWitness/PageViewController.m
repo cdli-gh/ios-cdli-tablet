@@ -12,7 +12,6 @@
 #import "ImageScrollView.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <QuartzCore/QuartzCore.h>
-#import "SVProgressHUD.h"
 
 
 #define BLURB_HEIGHT_MULTIPLIER 0.2
@@ -90,7 +89,7 @@
     //setup the look of the views
     self.descriptionView.layer.cornerRadius = 10;
     self.descriptionView.layer.borderWidth = 0.4;
-    self.descriptionView.layer.borderColor = CGColorRetain([[UIColor grayColor] CGColor]);
+    self.descriptionView.layer.borderColor = [[UIColor grayColor] CGColor];
     self.descriptionView.layer.masksToBounds = YES;
     
     self.descriptionView.infoButton.layer.cornerRadius = 5;
@@ -112,6 +111,7 @@
     self.descriptionView.titleLabel.text = self.dataObject[@"blurb-title"];
     [self.descriptionView.descriptionField loadHTMLString:[self htmlFromText:self.dataObject[@"blurb"] andDate:self.dataObject[@"date"]] baseURL:nil];
     [self.descriptionView.infoButton setTitle:@"More" forState:UIControlStateNormal];
+    //self.descriptionView.descriptionField.hidden = YES;
     self.showingFullDescription = NO;
 }
 
@@ -121,6 +121,7 @@
     //self.descriptionView.descriptionField.text = tabletItem[@"full-info"];
     [self.descriptionView.descriptionField loadHTMLString:[self htmlFromText:self.dataObject[@"full-info"] andDate:@""] baseURL:nil];
     [self.descriptionView.infoButton setTitle:@"Less" forState:UIControlStateNormal];
+    //self.descriptionView.descriptionField.hidden = YES;
     self.showingFullDescription = YES;
 }
 
@@ -143,6 +144,7 @@
 
 - (void) didReceiveMemoryWarning
 {
+    NSLog(@"Got memory warning!");
     [super didReceiveMemoryWarning];
 }
 
@@ -186,26 +188,11 @@
 - (void) viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    if([SVProgressHUD isVisible])
-        self.imageScrollView.showingProgress = NO;
-    else
-        self.imageScrollView.showingProgress = YES;
 }
 
 - (void) viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    self.imageScrollView.showingProgress = NO;
-}
-
-//This will try to fit the entire descriptionView so that the descriptionField will not have to scroll
-- (void) setAppropriateDescriptionFieldHeight
-{
-    [self.descriptionView invalidateIntrinsicContentSize];
-    [UIView animateWithDuration:0.25 animations:^{
-        [self.descriptionView layoutIfNeeded];
-    }];
-    //NSLog(@"Has ambigous layout? %d", self.view.hasAmbiguousLayout);
 }
 
 #pragma mark - InterfaceOrientationMethods
@@ -239,7 +226,17 @@
 
 - (void) webViewDidFinishLoad:(UIWebView *)webView
 {
-    [self setAppropriateDescriptionFieldHeight];
+    //TODO: hack. If blurb is more than full, then the animation goes haywire
+    if([self.dataObject[@"blurb"] length] >= [self.dataObject[@"full-info"] length]) {
+        return;
+    }
+    
+    [UIView animateWithDuration:0.20 animations:^{
+        self.descriptionView.frame = self.descriptionView.bounds; //TODO: hack to make the animation work
+        [self.descriptionView invalidateIntrinsicContentSize];
+        [self.descriptionView layoutIfNeeded];
+        //self.descriptionView.descriptionField.hidden = NO;
+    }];
 }
 
 

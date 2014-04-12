@@ -151,7 +151,7 @@ static NSArray *colorMap = nil;
     SDWebImageManager *manager = [SDWebImageManager sharedManager];
     [manager downloadWithURL:[NSURL URLWithString:imageURL]
                      options:0
-                    progress:^(NSUInteger receivedSize, long long expectedSize)
+                    progress:^(NSInteger receivedSize, NSInteger expectedSize)
      {
          // progression tracking code
      }

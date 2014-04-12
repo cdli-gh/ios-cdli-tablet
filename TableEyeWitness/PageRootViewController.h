@@ -11,6 +11,6 @@
 @interface PageRootViewController : UIViewController <UIPageViewControllerDelegate>
 
 @property (strong, nonatomic) UIPageViewController *pageViewController;
-@property (nonatomic) int startIndex;
+@property (nonatomic) NSUInteger startIndex;
 
 @end

@@ -12,7 +12,7 @@
 - (IBAction) infoButtonTapped: (id) sender;
 
 @property (strong, nonatomic) id dataObject;
-@property (nonatomic) int dataIndex;
+@property (nonatomic) NSUInteger dataIndex;
 @property (strong, nonatomic) NSString *baseURL;
 
 @end

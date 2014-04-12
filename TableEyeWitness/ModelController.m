@@ -74,7 +74,7 @@
     
     index--;
     
-    for(int i = index; i > 0 && i > index - CACHE_LIMIT; i--)
+    for(NSUInteger i = index; i > 0 && i > index - CACHE_LIMIT; i--)
         [Utils downloadImageAtURL:self.pageData[i][@"url"]];
 
     return [self viewControllerAtIndex:index storyboard:viewController.storyboard];
@@ -90,7 +90,7 @@
     
     index++;
     
-    for(int i = index; i < [self.pageData count] && i < index + CACHE_LIMIT; i++)
+    for(NSUInteger i = index; i < [self.pageData count] && i < index + CACHE_LIMIT; i++)
         [Utils downloadImageAtURL:self.pageData[i][@"url"]];
 
     

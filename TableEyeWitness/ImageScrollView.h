@@ -53,7 +53,7 @@
 //how much can the image be zoomed beyond its resolution
 //set it to 1 for default behaviour of the photos app
 @property (nonatomic) int maxImageZoom;
-
-@property(nonatomic) BOOL showingProgress;
+@property (nonatomic) IBOutlet UIProgressView *progressView;
+@property (nonatomic) IBOutlet UILabel *status;
 
 @end

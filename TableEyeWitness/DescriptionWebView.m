@@ -71,6 +71,11 @@
     return size;
 }
 
+- (void) layoutSubviews
+{
+    [super layoutSubviews];
+}
+
 - (void) setBounds:(CGRect)bounds
 {
     [super setBounds:bounds];

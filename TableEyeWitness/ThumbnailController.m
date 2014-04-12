@@ -50,6 +50,7 @@
 
 - (void)didReceiveMemoryWarning
 {
+    NSLog(@"Got memory warning at thumbnails!");
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
@@ -73,7 +74,7 @@
     
     cell.layer.cornerRadius = 5;
     cell.layer.borderWidth = 3.5;
-    cell.layer.borderColor = CGColorRetain([tabletItem[@"color"] CGColor]);
+    cell.layer.borderColor = [tabletItem[@"color"] CGColor];
     cell.clipsToBounds = NO;
     
     [cell.imageView setImageWithURL:[NSURL URLWithString:tabletItem[@"thumbnail-url"]]];

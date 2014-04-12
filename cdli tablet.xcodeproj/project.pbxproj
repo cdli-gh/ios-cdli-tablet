@@ -17,8 +17,6 @@
 		384D8F3816B88B1F00AA80FA /* ThumbnailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 384D8F3716B88B1F00AA80FA /* ThumbnailCell.m */; };
 		3855F4A71755B73B00AAF508 /* loading.png in Resources */ = {isa = PBXBuildFile; fileRef = 3855F4A51755B73B00AAF508 /* loading.png */; };
 		385F8290171A57160059264F /* loading.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 385F828F171A57160059264F /* loading.jpg */; };
-		385F8298171A5C840059264F /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 385F8295171A5C840059264F /* SVProgressHUD.bundle */; };
-		385F8299171A5C840059264F /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 385F8297171A5C840059264F /* SVProgressHUD.m */; };
 		385F829B171A5CAA0059264F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 385F829A171A5CAA0059264F /* QuartzCore.framework */; };
 		3860EF5F16B4DC43009791D9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3860EF5E16B4DC43009791D9 /* UIKit.framework */; };
 		3860EF6116B4DC43009791D9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3860EF6016B4DC43009791D9 /* Foundation.framework */; };
@@ -51,11 +49,11 @@
 		38CCBE1816EF827900B39DA9 /* LandingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38CCBE1716EF827900B39DA9 /* LandingViewController.m */; };
 		38CCBE1B16EF922900B39DA9 /* OHURLLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 38CCBE1A16EF922900B39DA9 /* OHURLLoader.m */; };
 		38CCBE1C16EF957900B39DA9 /* OHURLLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 38CCBE1A16EF922900B39DA9 /* OHURLLoader.m */; };
-		38D5C4EA16B533E6002E02D8 /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38D5C4E916B533E6002E02D8 /* SDWebImage.framework */; };
 		38D5C4F816B53640002E02D8 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38D5C4F716B53640002E02D8 /* ImageIO.framework */; };
 		38DBD04E170032CD007238D5 /* AboutPageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DBD04D170032CD007238D5 /* AboutPageController.m */; };
 		38DBD050170039AF007238D5 /* cdliapp_icon1024x1024d_600ppi copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 38DBD04F170039AF007238D5 /* cdliapp_icon1024x1024d_600ppi copy.png */; };
 		38DBD052170039DC007238D5 /* cdliapp_icon1024x1024d_600ppi copy_smaller.png in Resources */ = {isa = PBXBuildFile; fileRef = 38DBD051170039DC007238D5 /* cdliapp_icon1024x1024d_600ppi copy_smaller.png */; };
+		38DFC6E818E6453A00CD5451 /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38DFC6E718E6453A00CD5451 /* SDWebImage.framework */; };
 		38E6930916C26BB6003C55DF /* DescriptionField.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E6930816C26BB6003C55DF /* DescriptionField.m */; };
 		38E700D616B7B9DB001E39A1 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E700D516B7B9DB001E39A1 /* Utils.m */; };
 		38E700E616B7C455001E39A1 /* DescriptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E700E516B7C455001E39A1 /* DescriptionView.m */; };
@@ -87,9 +85,6 @@
 		384D8F3716B88B1F00AA80FA /* ThumbnailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThumbnailCell.m; sourceTree = "<group>"; };
 		3855F4A51755B73B00AAF508 /* loading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loading.png; sourceTree = "<group>"; };
 		385F828F171A57160059264F /* loading.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = loading.jpg; sourceTree = "<group>"; };
-		385F8295171A5C840059264F /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
-		385F8296171A5C840059264F /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
-		385F8297171A5C840059264F /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		385F829A171A5CAA0059264F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		3860EF5A16B4DC43009791D9 /* cdli tablet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "cdli tablet.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3860EF5E16B4DC43009791D9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -135,12 +130,12 @@
 		38CCBE1916EF922900B39DA9 /* OHURLLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OHURLLoader.h; sourceTree = "<group>"; };
 		38CCBE1A16EF922900B39DA9 /* OHURLLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OHURLLoader.m; sourceTree = "<group>"; };
 		38CF77AD171E3C3D00AD053D /* cdli tablet-Info-internal.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "cdli tablet-Info-internal.plist"; path = "TableEyeWitness/cdli tablet-Info-internal.plist"; sourceTree = "<group>"; };
-		38D5C4E916B533E6002E02D8 /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDWebImage.framework; path = TableEyeWitness/SDWebImage.framework; sourceTree = "<group>"; };
 		38D5C4F716B53640002E02D8 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		38DBD04C170032CD007238D5 /* AboutPageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutPageController.h; sourceTree = "<group>"; };
 		38DBD04D170032CD007238D5 /* AboutPageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutPageController.m; sourceTree = "<group>"; };
 		38DBD04F170039AF007238D5 /* cdliapp_icon1024x1024d_600ppi copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cdliapp_icon1024x1024d_600ppi copy.png"; sourceTree = "<group>"; };
 		38DBD051170039DC007238D5 /* cdliapp_icon1024x1024d_600ppi copy_smaller.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cdliapp_icon1024x1024d_600ppi copy_smaller.png"; sourceTree = "<group>"; };
+		38DFC6E718E6453A00CD5451 /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDWebImage.framework; sourceTree = "<group>"; };
 		38E6930716C26BB6003C55DF /* DescriptionField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DescriptionField.h; sourceTree = "<group>"; };
 		38E6930816C26BB6003C55DF /* DescriptionField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DescriptionField.m; sourceTree = "<group>"; };
 		38E700D416B7B9DB001E39A1 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
@@ -161,9 +156,9 @@
 				38F85B88171409BB00C7F2FF /* MessageUI.framework in Frameworks */,
 				38D5C4F816B53640002E02D8 /* ImageIO.framework in Frameworks */,
 				3860EF5F16B4DC43009791D9 /* UIKit.framework in Frameworks */,
+				38DFC6E818E6453A00CD5451 /* SDWebImage.framework in Frameworks */,
 				3860EF6116B4DC43009791D9 /* Foundation.framework in Frameworks */,
 				3860EF6316B4DC43009791D9 /* CoreGraphics.framework in Frameworks */,
-				38D5C4EA16B533E6002E02D8 /* SDWebImage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -180,16 +175,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		385F8294171A5C840059264F /* SVProgressHUD */ = {
-			isa = PBXGroup;
-			children = (
-				385F8295171A5C840059264F /* SVProgressHUD.bundle */,
-				385F8296171A5C840059264F /* SVProgressHUD.h */,
-				385F8297171A5C840059264F /* SVProgressHUD.m */,
-			);
-			path = SVProgressHUD;
-			sourceTree = "<group>";
-		};
 		3860EF4F16B4DC43009791D9 = {
 			isa = PBXGroup;
 			children = (
@@ -229,10 +214,9 @@
 		3860EF5D16B4DC43009791D9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				38DFC6E718E6453A00CD5451 /* SDWebImage.framework */,
 				38F85B87171409BB00C7F2FF /* MessageUI.framework */,
 				385F829A171A5CAA0059264F /* QuartzCore.framework */,
-				385F8294171A5C840059264F /* SVProgressHUD */,
-				38D5C4E916B533E6002E02D8 /* SDWebImage.framework */,
 				38D5C4F716B53640002E02D8 /* ImageIO.framework */,
 				3860EF5E16B4DC43009791D9 /* UIKit.framework */,
 				3860EF6016B4DC43009791D9 /* Foundation.framework */,
@@ -389,8 +373,14 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = EW;
+				LastTestingUpgradeCheck = 0510;
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "Sai Deep Tetali";
+				TargetAttributes = {
+					3860EF5916B4DC43009791D9 = {
+						DevelopmentTeam = 866K6U2K3J;
+					};
+				};
 			};
 			buildConfigurationList = 3860EF5416B4DC43009791D9 /* Build configuration list for PBXProject "cdli tablet" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -437,7 +427,6 @@
 				38DBD050170039AF007238D5 /* cdliapp_icon1024x1024d_600ppi copy.png in Resources */,
 				38DBD052170039DC007238D5 /* cdliapp_icon1024x1024d_600ppi copy_smaller.png in Resources */,
 				385F8290171A57160059264F /* loading.jpg in Resources */,
-				385F8298171A5C840059264F /* SVProgressHUD.bundle in Resources */,
 				38EB57E0171E4C9700F54770 /* editor6_smaller.png in Resources */,
 				38EB57E2171E4CCB00F54770 /* editor6_smallest.png in Resources */,
 				3855F4A71755B73B00AAF508 /* loading.png in Resources */,
@@ -490,7 +479,6 @@
 				38000BDA16DE03730030EEBE /* DescriptionWebView.m in Sources */,
 				38CCBE1816EF827900B39DA9 /* LandingViewController.m in Sources */,
 				38DBD04E170032CD007238D5 /* AboutPageController.m in Sources */,
-				385F8299171A5C840059264F /* SVProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -599,19 +587,23 @@
 		3860EF9A16B4DC45009791D9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: UCLA MobileDevNCOne (866K6U2K3J)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: UCLA MobileDevNCOne (866K6U2K3J)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/TableEyeWitness\"",
+					"\\\"$(SRCROOT)/TableEyeWitness\\\"",
+					/Users/saideep/Projects/iPhone/TableEyeWitness,
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TableEyeWitness/cdli tablet-Prefix.pch";
 				INFOPLIST_FILE = "TableEyeWitness/cdli tablet-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "cdli tablet";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "02945693-6714-4C1B-9D43-0F2F944F8F17";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "02945693-6714-4C1B-9D43-0F2F944F8F17";
+				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -619,19 +611,23 @@
 		3860EF9B16B4DC45009791D9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Robert Englund";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Robert Englund";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: UCLA MobileDevNCOne (866K6U2K3J)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: UCLA MobileDevNCOne (866K6U2K3J)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/TableEyeWitness\"",
+					"\\\"$(SRCROOT)/TableEyeWitness\\\"",
+					/Users/saideep/Projects/iPhone/TableEyeWitness,
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TableEyeWitness/cdli tablet-Prefix.pch";
 				INFOPLIST_FILE = "TableEyeWitness/cdli tablet-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "cdli tablet";
-				PROVISIONING_PROFILE = "7B2DA465-8374-4FCA-8BE5-D98652501495";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7B2DA465-8374-4FCA-8BE5-D98652501495";
+				PROVISIONING_PROFILE = "0161FFF1-7AA6-4389-BDF9-F0F806413243";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0161FFF1-7AA6-4389-BDF9-F0F806413243";
+				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -699,19 +695,23 @@
 		38CF77A5171E381900AD053D /* Release Internal */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Robert Englund";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Robert Englund";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: UCLA MobileDevNCOne (866K6U2K3J)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: UCLA MobileDevNCOne (866K6U2K3J)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/TableEyeWitness\"",
+					"\\\"$(SRCROOT)/TableEyeWitness\\\"",
+					/Users/saideep/Projects/iPhone/TableEyeWitness,
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TableEyeWitness/cdli tablet-Prefix.pch";
 				INFOPLIST_FILE = "TableEyeWitness/cdli tablet-Info-internal.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "cdli tablet";
-				PROVISIONING_PROFILE = "5816CB5B-6F33-4B9D-A19B-AC9472A6C200";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5816CB5B-6F33-4B9D-A19B-AC9472A6C200";
+				PROVISIONING_PROFILE = "0161FFF1-7AA6-4389-BDF9-F0F806413243";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0161FFF1-7AA6-4389-BDF9-F0F806413243";
+				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = "Release Internal";
@@ -765,19 +765,23 @@
 		38CF77A9171E3B5D00AD053D /* Debug Internal */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: UCLA MobileDevNCOne (866K6U2K3J)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: UCLA MobileDevNCOne (866K6U2K3J)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/TableEyeWitness\"",
+					"\\\"$(SRCROOT)/TableEyeWitness\\\"",
+					/Users/saideep/Projects/iPhone/TableEyeWitness,
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TableEyeWitness/cdli tablet-Prefix.pch";
 				INFOPLIST_FILE = "TableEyeWitness/cdli tablet-Info-internal.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "cdli tablet";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "02945693-6714-4C1B-9D43-0F2F944F8F17";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "02945693-6714-4C1B-9D43-0F2F944F8F17";
+				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = "Debug Internal";

@@ -48,7 +48,6 @@
 #import <Foundation/Foundation.h>
 #import "ImageScrollView.h"
 #import <SDWebImage/UIImageView+WebCache.h>
-#import "SVProgressHUD.h"
 
 #define TILE_IMAGES 0
 
@@ -75,6 +74,7 @@
         self.decelerationRate = UIScrollViewDecelerationRateFast;
         self.maxImageZoom = 1;
         self.delegate = self;
+        self.progressView.progress = 0;
     }
     return self;
 }
@@ -189,25 +189,30 @@
 
     //NSLog(@"BigPhoto: Trying to fetch %@", self.imageURL);
 
-    __weak ImageScrollView *current = self;
+    __weak ImageScrollView *welf = self;
     
-    // this will be set to true by the caller when it's appropriate to show it
-    // i.e. when the view becomes visible
-    self.showingProgress = NO;
-    
+    self.status.text = @"Hi";
     [_zoomView setImageWithURL:self.imageURL placeholderImage:nil options:SDWebImageRetryFailed
-                      progress:^(NSUInteger receivedSize, long long expectedSize) {
-                          if(current.showingProgress) {
+                      progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+                          if(!welf.hidden) {
                               float progressSoFar = receivedSize / expectedSize;
-                              [SVProgressHUD showProgress:progressSoFar status:@"Loading"];
+                              [welf.progressView setProgress:progressSoFar animated:YES];
+                              //NSLog(@"Progress: %f", progressSoFar);
                           }
                       }
                      completed:^(UIImage *img, NSError *err, SDImageCacheType ct) {
-                         [current configureForImageSize:img.size];
-                         current.showingProgress = NO;
-                         [SVProgressHUD dismiss];
+                         [welf configureForImageSize:img.size];
+                         
+                         welf.progressView.hidden = YES;
+                         welf.status.hidden = YES;
+                         welf.status.text = @"";
                          if(img == nil) {
-                             [SVProgressHUD showErrorWithStatus:@"Could not load image"];
+                             welf.status.text = @"Could not load image";
+                         }
+                         else {
+                             NSLog(@"Hiding status");
+                             welf.status.hidden = YES;
+                             [welf.status removeFromSuperview];
                          }
                      }
      ];

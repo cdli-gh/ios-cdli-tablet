@@ -1,13 +1,12 @@
 Client:
 
+- Pictures with white backgrounds go beyond the corner radius. Setting cell.clipsToBounds = YES; slows the loading down but it puts the image inside the rounded cornere. Another option is to reduce the image width and heigh by the border radius
+- While the thumbnail is being loaded, do not display anything — no rounded colored bordered etc. so the picture would just appear from the back — similar to what eye witness does
 - Replace loading.gif image
-- Replace synchronous download which is blocking the UI
-- Figure out when to referesh data
 - Do sanity checks on the initial json file and report error if all fields are not present in all tablet entries
 - Double tap should zoom in images
 - Info button should have a larger tap area
 - Let the landing page appear slower
-- Animate some thumbnails during landing?
 - Set appropriate properties to atomic if accessing through GCD
 
 Done:

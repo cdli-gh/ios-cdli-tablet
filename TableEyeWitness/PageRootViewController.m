@@ -10,7 +10,6 @@
 #import "ModelController.h"
 #import "PageViewController.h"
 #import <MessageUI/MFMailComposeViewController.h>
-#import "SVProgressHUD.h"
 
 @interface PageRootViewController () <MFMailComposeViewControllerDelegate>
 @property (readonly, strong, nonatomic) ModelController *modelController;
@@ -33,7 +32,12 @@
     PageViewController *startingViewController = [self.modelController viewControllerAtIndex:self.startIndex storyboard:self.storyboard];
     
     if(startingViewController == nil) {
-        [SVProgressHUD showErrorWithStatus:@"Could not load entries, check your internet connection"];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No network connection"
+                                                        message:@"Could not load entries, check your internet connection"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
         return;
     }
     
@@ -146,7 +150,13 @@
 - (IBAction) showEmail: (id)sender
 {
     if(![MFMailComposeViewController canSendMail]) {
-        [SVProgressHUD showErrorWithStatus:@"Cannot send email through this device. Please check your settings"];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Cannot send email"
+                                                        message:@"Cannot send email through this device. Please check your settings"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+        
         return;
     }
     
