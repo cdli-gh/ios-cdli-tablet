@@ -12,7 +12,7 @@
 #import "ImageScrollView.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <QuartzCore/QuartzCore.h>
-
+#import "POP.h"
 
 #define BLURB_HEIGHT_MULTIPLIER 0.2
 #define FULL_HEIGHT_MULTIPLIER 0.8
@@ -22,6 +22,8 @@
 @property (strong, nonatomic) IBOutlet ImageScrollView *imageScrollView;
 @property (strong, nonatomic) IBOutlet DescriptionView *descriptionView;
 @property (nonatomic) BOOL showingFullDescription;
+
+@property (nonatomic) BOOL hidingDescriptionViewForAutoLayout;
 @end
 
 @implementation PageViewController
@@ -95,7 +97,8 @@
     self.descriptionView.infoButton.layer.cornerRadius = 5;
     
     self.navigationItem.title = @"CDLI Tablet";
-
+    
+    self.hidingDescriptionViewForAutoLayout = NO;
 }
 
 - (void) viewDidDisappear:(BOOL)animated
@@ -159,20 +162,34 @@
         float endingAlpha = finalNavbarHidden?0:originalAlpha;
         self.descriptionView.alpha = startingAlpha;
         
+        POPBasicAnimation *animation = [POPBasicAnimation animation];
+        animation.property = [POPAnimatableProperty propertyWithName:kPOPViewAlpha];
+        
         if(!finalNavbarHidden)
             self.descriptionView.hidden = NO;
                 
-        [UIView animateWithDuration:0.24
-                         animations:^{
-                             self.descriptionView.alpha = endingAlpha;
-                         }
-                         completion:^(BOOL finished) {
-                             if(finalNavbarHidden) {
-                                 self.descriptionView.hidden = YES;
-                                 self.descriptionView.alpha = originalAlpha;
-                             }
-                         }];
+//        [UIView animateWithDuration:0.24
+//                         animations:^{
+//                             self.descriptionView.alpha = endingAlpha;
+//                         }
+//                         completion:^(BOOL finished) {
+//                             if(finalNavbarHidden) {
+//                                 self.descriptionView.hidden = YES;
+//                                 self.descriptionView.alpha = originalAlpha;
+//                             }
+//                         }];
 
+     
+        animation.toValue = [NSNumber numberWithFloat:endingAlpha];
+
+        animation.completionBlock = ^void(POPAnimation *a, BOOL finished) {
+            if(finalNavbarHidden) {
+                self.descriptionView.hidden = YES;
+                self.descriptionView.alpha = originalAlpha;
+            }
+        };
+            
+        [self.descriptionView pop_addAnimation:animation forKey:@"toggleNav"];
     }
 }
 
@@ -231,14 +248,38 @@
         return;
     }
     
-    [UIView animateWithDuration:0.20 animations:^{
-        self.descriptionView.frame = self.descriptionView.bounds; //TODO: hack to make the animation work
-        [self.descriptionView invalidateIntrinsicContentSize];
-        [self.descriptionView layoutIfNeeded];
-        //self.descriptionView.descriptionField.hidden = NO;
-    }];
+    POPSpringAnimation *animation = [POPSpringAnimation animation];
+    animation.property = [POPAnimatableProperty propertyWithName:kPOPViewFrame];
+    self.hidingDescriptionViewForAutoLayout = YES;
+    
+    animation.fromValue = [NSValue valueWithCGRect:self.descriptionView.frame];
+    
+    self.descriptionView.hidden = YES;
+    [self.descriptionView invalidateIntrinsicContentSize];
+    
+    animation.delegate = self;
+    
+    animation.springBounciness = 7.0;
+    animation.springSpeed = 9.0;
+    
+    [self.descriptionView pop_addAnimation:animation forKey:@"sizing"];
+    
+//    [UIView animateWithDuration:0.20 animations:^{
+//        self.descriptionView.frame = self.descriptionView.bounds; //TODO: hack to make the animation work
+//        [self.descriptionView invalidateIntrinsicContentSize];
+//        [self.descriptionView layoutIfNeeded];
+//        //self.descriptionView.descriptionField.hidden = NO;
+//    }];
+    
 }
 
+- (void)pop_animationDidApply:(POPAnimation *)anim
+{
+    if(self.hidingDescriptionViewForAutoLayout) {
+        self.descriptionView.hidden = NO;
+        self.hidingDescriptionViewForAutoLayout = NO;
+    }
+}
 
 -(BOOL) webView:(UIWebView *)inWeb shouldStartLoadWithRequest:(NSURLRequest *)inRequest navigationType:(UIWebViewNavigationType)inType
 {

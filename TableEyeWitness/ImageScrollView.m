@@ -191,7 +191,6 @@
 
     __weak ImageScrollView *welf = self;
     
-    self.status.text = @"Hi";
     [_zoomView setImageWithURL:self.imageURL placeholderImage:nil options:SDWebImageRetryFailed
                       progress:^(NSInteger receivedSize, NSInteger expectedSize) {
                           if(!welf.hidden) {
@@ -204,24 +203,22 @@
                          [welf configureForImageSize:img.size];
                          
                          welf.progressView.hidden = YES;
-                         welf.status.hidden = YES;
-                         welf.status.text = @"";
                          if(img == nil) {
-                             welf.status.text = @"Could not load image";
-                         }
-                         else {
-                             NSLog(@"Hiding status");
-                             welf.status.hidden = YES;
-                             [welf.status removeFromSuperview];
+                             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Could not load image"
+                                                                             message:@"Please check your internet connection"
+                                                                            delegate:nil
+                                                                   cancelButtonTitle:@"OK"
+                                                                   otherButtonTitles:nil];
+                             [alert show];
+
                          }
                      }
      ];
-
 }
 
 - (void)configureForImageSize:(CGSize)imageSize
 {
-    //NSLog(@"Configuring for image width: %f", imageSize.width);
+//    NSLog(@"Configuring for image width: %f", imageSize.width);
     _imageSize = imageSize;
     self.contentSize = imageSize;
     [self setMaxMinZoomScalesForCurrentBounds];
@@ -274,7 +271,7 @@
     CGPoint boundsCenter = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
     _pointToCenterAfterResize = [self convertPoint:boundsCenter toView:_zoomView];
     
-    _scaleToRestoreAfterResize = self.zoomScale;
+    _scaleToRestoreAfterResize = 0; //self.zoomScale;
     
     // If we're at the minimum zoom scale, preserve that by returning 0, which will be converted to the minimum
     // allowable scale when the scale is restored.

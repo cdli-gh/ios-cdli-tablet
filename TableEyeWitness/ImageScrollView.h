@@ -54,6 +54,5 @@
 //set it to 1 for default behaviour of the photos app
 @property (nonatomic) int maxImageZoom;
 @property (nonatomic) IBOutlet UIProgressView *progressView;
-@property (nonatomic) IBOutlet UILabel *status;
 
 @end

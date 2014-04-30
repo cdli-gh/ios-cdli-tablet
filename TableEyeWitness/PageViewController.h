@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "POPAnimation.h"
 
-@interface PageViewController : UIViewController <UIScrollViewDelegate, UIWebViewDelegate>
+@interface PageViewController : UIViewController <UIScrollViewDelegate, UIWebViewDelegate, POPAnimationDelegate>
 - (IBAction) infoButtonTapped: (id) sender;
 
 @property (strong, nonatomic) id dataObject;
