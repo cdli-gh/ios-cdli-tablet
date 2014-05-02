@@ -48,9 +48,9 @@
     NSString *feedURL;
     
     if([[[NSBundle mainBundle] objectForInfoDictionaryKey:@"IsInternalBuild"] boolValue])
-        feedURL = [NSString stringWithFormat:@"http://www.cdli.ucla.edu/cdlisearch/search/ipadweb_dev/json?all=true"];
+        feedURL = [NSString stringWithFormat:@"http://www.cdli.ucla.edu/cdlitablet/json?all=true"];
     else
-        feedURL = [NSString stringWithFormat:@"http://www.cdli.ucla.edu/cdlisearch/search/ipadweb/json"];
+        feedURL = [NSString stringWithFormat:@"http://www.cdli.ucla.edu/cdlitablet/json"];
     
     [Utils refreshDataAtURL:feedURL withHandler:self];
 }

@@ -17,13 +17,19 @@
 #define BLURB_HEIGHT_MULTIPLIER 0.2
 #define FULL_HEIGHT_MULTIPLIER 0.8
 
+#define DESCRIPTION_ALPHA 0.7
+
 @interface PageViewController ()
 
 @property (strong, nonatomic) IBOutlet ImageScrollView *imageScrollView;
 @property (strong, nonatomic) IBOutlet DescriptionView *descriptionView;
+@property (strong, nonatomic) IBOutlet DescriptionView *descriptionViewLong;
+
 @property (nonatomic) BOOL showingFullDescription;
 
-@property (nonatomic) BOOL hidingDescriptionViewForAutoLayout;
+@property (nonatomic) CGRect origSmallFrame;
+@property (nonatomic) CGRect origLargeFrame;
+
 @end
 
 @implementation PageViewController
@@ -31,37 +37,9 @@
 - (void) viewDidLoad
 {
     [super viewDidLoad];
-    
-    //description view width is one third of the main view's width
-    NSLayoutConstraint *cn = [NSLayoutConstraint constraintWithItem:self.descriptionView
-                                                          attribute:NSLayoutAttributeWidth
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:self.view
-                                                          attribute:NSLayoutAttributeWidth
-                                                         multiplier:0.33
-                                                           constant:0];
-    [self.view addConstraint:cn];
 
-    //set a minimum height
-    cn = [NSLayoutConstraint constraintWithItem:self.descriptionView
-                                                                attribute:NSLayoutAttributeHeight
-                                                                relatedBy:NSLayoutRelationGreaterThanOrEqual
-                                                                   toItem:self.view
-                                                                attribute:NSLayoutAttributeHeight
-                                                               multiplier:BLURB_HEIGHT_MULTIPLIER
-                                                                 constant:0];
-    [self.view addConstraint:cn];
-    
-
-    //set a maximum height
-    cn = [NSLayoutConstraint constraintWithItem:self.descriptionView
-                                                                attribute:NSLayoutAttributeHeight
-                                                                relatedBy:NSLayoutRelationLessThanOrEqual
-                                                                   toItem:self.view
-                                                                attribute:NSLayoutAttributeHeight
-                                                               multiplier:FULL_HEIGHT_MULTIPLIER
-                                                                 constant:0];
-    [self.view addConstraint:cn];
+    [self prepareDescriptionViewForLess:self.descriptionView];
+    [self prepareDescriptionViewForMore:self.descriptionViewLong];
 
     //toggle nav bar when the imageview is tapped
     self.imageScrollView.userInteractionEnabled = YES;
@@ -76,29 +54,140 @@
     self.imageScrollView.maxImageZoom = 2;
     self.imageScrollView.imageURL = [NSURL URLWithString:tabletItem[@"url"]];
 
-
-    self.descriptionView.descriptionField.delegate = self;
-    //self.descriptionView.descriptionField.shouldSizeAccurate = false;
-    self.descriptionView.descriptionField.shouldSizeAccurate = false;
-
     //load title and description
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    if([appDelegate.pageShowingMore[@(self.dataIndex)] boolValue])
-        [self showMore];
-    else
-        [self showLess];
+
+    if([appDelegate.pageShowingMore[@(self.dataIndex)] boolValue]) {
+        self.descriptionView.hidden = YES;
+        self.descriptionViewLong.hidden = NO;
+        self.showingFullDescription = YES;
+    }
+    else {
+        self.descriptionView.hidden = NO;
+        self.descriptionViewLong.hidden = YES;
+        self.showingFullDescription = NO;
+    }
     
-    //setup the look of the views
-    self.descriptionView.layer.cornerRadius = 10;
-    self.descriptionView.layer.borderWidth = 0.4;
-    self.descriptionView.layer.borderColor = [[UIColor grayColor] CGColor];
-    self.descriptionView.layer.masksToBounds = YES;
-    
-    self.descriptionView.infoButton.layer.cornerRadius = 5;
+    [self populateLessInDescriptionView:self.descriptionView];
+    [self populateMoreInDescriptionView:self.descriptionViewLong];
     
     self.navigationItem.title = @"CDLI Tablet";
     
-    self.hidingDescriptionViewForAutoLayout = NO;
+}
+
+- (void) prepareDescriptionView: (DescriptionView *) descriptionView
+{
+    //setup the look of the views
+    descriptionView.layer.cornerRadius = 10;
+    descriptionView.layer.borderWidth = 0.4;
+    descriptionView.layer.borderColor = [[UIColor grayColor] CGColor];
+    descriptionView.layer.masksToBounds = YES;
+    
+    descriptionView.infoButton.layer.cornerRadius = 5;
+
+    
+    descriptionView.descriptionField.shouldSizeAccurate = true;
+    descriptionView.descriptionField.delegate = self;
+    descriptionView.descriptionField.scrollView.delegate = self;
+}
+
+- (void) prepareDescriptionViewForMore: (DescriptionView *) descriptionView
+{
+    [self prepareDescriptionView:descriptionView];
+    //description view width is one third of the main view's width
+    NSLayoutConstraint *cn = [NSLayoutConstraint constraintWithItem:descriptionView
+                                                          attribute:NSLayoutAttributeWidth
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.view
+                                                          attribute:NSLayoutAttributeWidth
+                                                         multiplier:0.33
+                                                           constant:0];
+    [self.view addConstraint:cn];
+    
+    //set a maximum height
+    cn = [NSLayoutConstraint constraintWithItem:descriptionView
+                                      attribute:NSLayoutAttributeHeight
+                                      relatedBy:NSLayoutRelationLessThanOrEqual
+                                         toItem:self.view
+                                      attribute:NSLayoutAttributeHeight
+                                     multiplier:FULL_HEIGHT_MULTIPLIER
+                                       constant:0];
+    [self.view addConstraint:cn];
+    
+    cn = [NSLayoutConstraint constraintWithItem:descriptionView
+                                      attribute:NSLayoutAttributeTrailing
+                                      relatedBy:NSLayoutRelationEqual
+                                         toItem:self.view
+                                      attribute:NSLayoutAttributeTrailing
+                                     multiplier:1
+                                       constant:-20];
+    [self.view addConstraint:cn];
+    
+    cn = [NSLayoutConstraint constraintWithItem:descriptionView
+                                      attribute:NSLayoutAttributeBottom
+                                      relatedBy:NSLayoutRelationEqual
+                                         toItem:self.view
+                                      attribute:NSLayoutAttributeBottom
+                                     multiplier:1
+                                       constant:0];
+    
+    [self.view addConstraint:cn];
+}
+
+- (void) prepareDescriptionViewForLess: (DescriptionView *) descriptionView
+{
+    [self prepareDescriptionView:descriptionView];
+    
+    //description view width is one third of the main view's width
+    NSLayoutConstraint *cn = [NSLayoutConstraint constraintWithItem:descriptionView
+                                                          attribute:NSLayoutAttributeWidth
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.view
+                                                          attribute:NSLayoutAttributeWidth
+                                                         multiplier:0.33
+                                                           constant:0];
+    [self.view addConstraint:cn];
+    
+    //set a minimum height
+    cn = [NSLayoutConstraint constraintWithItem:descriptionView
+                                      attribute:NSLayoutAttributeHeight
+                                      relatedBy:NSLayoutRelationGreaterThanOrEqual
+                                         toItem:self.view
+                                      attribute:NSLayoutAttributeHeight
+                                     multiplier:BLURB_HEIGHT_MULTIPLIER
+                                       constant:0];
+    [self.view addConstraint:cn];
+    
+    
+    cn = [NSLayoutConstraint constraintWithItem:descriptionView
+                                      attribute:NSLayoutAttributeTrailing
+                                      relatedBy:NSLayoutRelationEqual
+                                         toItem:self.view
+                                      attribute:NSLayoutAttributeTrailing
+                                     multiplier:1
+                                       constant:-20];
+    [self.view addConstraint:cn];
+    
+    cn = [NSLayoutConstraint constraintWithItem:descriptionView
+                                      attribute:NSLayoutAttributeBottom
+                                      relatedBy:NSLayoutRelationEqual
+                                         toItem:self.view
+                                      attribute:NSLayoutAttributeBottom
+                                     multiplier:1
+                                       constant:0];
+    
+    [self.view addConstraint:cn];
+    
+//    cn = [NSLayoutConstraint constraintWithItem:descriptionView
+//                                      attribute:NSLayoutAttributeTop
+//                                      relatedBy:NSLayoutRelationEqual
+//                                         toItem:self.view
+//                                      attribute:NSLayoutAttributeTop
+//                                     multiplier:1
+//                                       constant:768];
+//    cn.priority = 100;
+    
+    [self.view addConstraint:cn];
 }
 
 - (void) viewDidDisappear:(BOOL)animated
@@ -109,23 +198,127 @@
     appDelegate.pageShowingMore[@(self.dataIndex)] = @(self.showingFullDescription);
 }
 
+
+- (void) populateLessInDescriptionView: (DescriptionView *) descriptionView
+{
+    descriptionView.titleLabel.text = self.dataObject[@"blurb-title"];
+    [descriptionView.descriptionField loadHTMLString:[self htmlFromText:self.dataObject[@"blurb"] andDate:self.dataObject[@"date"]] baseURL:nil];
+    [descriptionView.infoButton setTitle:@"More" forState:UIControlStateNormal];
+}
+
 - (void) showLess
 {
-    self.descriptionView.titleLabel.text = self.dataObject[@"blurb-title"];
-    [self.descriptionView.descriptionField loadHTMLString:[self htmlFromText:self.dataObject[@"blurb"] andDate:self.dataObject[@"date"]] baseURL:nil];
-    [self.descriptionView.infoButton setTitle:@"More" forState:UIControlStateNormal];
-    //self.descriptionView.descriptionField.hidden = YES;
+    if([self.descriptionView pop_animationForKey:@"more"] != nil){
+        NSLog(@"Pending animation, not showing less");
+        return;
+    }
+
+    [self saveDescriptionViewFrames];
+    self.descriptionView.hidden = NO;
+    self.descriptionView.alpha = 0;
+    
+    POPSpringAnimation *animation = [POPSpringAnimation animation];
+    animation.property = [POPAnimatableProperty propertyWithName:kPOPViewFrame];
+    animation.toValue = [NSValue valueWithCGRect:self.descriptionView.frame];
+    animation.delegate = self;
+    animation.springBounciness = 7.0;
+    animation.springSpeed = 9.0;
+    animation.name = @"less";
+    [self.descriptionViewLong pop_addAnimation:animation forKey:@"less"];
+    
     self.showingFullDescription = NO;
+}
+
+- (void) populateMoreInDescriptionView: (DescriptionView *) descriptionView
+{
+    descriptionView.titleLabel.text = self.dataObject[@"full-title"];
+    [descriptionView.descriptionField loadHTMLString:[self htmlFromText:self.dataObject[@"full-info"] andDate:@""] baseURL:nil];
+    [descriptionView.infoButton setTitle:@"Less" forState:UIControlStateNormal];
 }
 
 - (void) showMore
 {
-    self.descriptionView.titleLabel.text = self.dataObject[@"full-title"];
-    //self.descriptionView.descriptionField.text = tabletItem[@"full-info"];
-    [self.descriptionView.descriptionField loadHTMLString:[self htmlFromText:self.dataObject[@"full-info"] andDate:@""] baseURL:nil];
-    [self.descriptionView.infoButton setTitle:@"Less" forState:UIControlStateNormal];
-    //self.descriptionView.descriptionField.hidden = YES;
+    if([self.descriptionViewLong pop_animationForKey:@"less"] != nil){
+        NSLog(@"Pending animation, not showing more");
+        return;
+    }
+    
+    [self saveDescriptionViewFrames];
+    self.descriptionViewLong.hidden = NO;
+    self.descriptionViewLong.alpha = 0;
+
+    POPSpringAnimation *animation = [POPSpringAnimation animation];
+    animation.property = [POPAnimatableProperty propertyWithName:kPOPViewFrame];
+    animation.toValue = [NSValue valueWithCGRect:self.descriptionViewLong.frame];
+    animation.delegate = self;
+    animation.springBounciness = 7.0;
+    animation.springSpeed = 9.0;
+    animation.name = @"more";
+    [self.descriptionView pop_addAnimation:animation forKey:@"more"];
+    
     self.showingFullDescription = YES;
+}
+
+- (void) saveDescriptionViewFrames
+{
+    self.origSmallFrame = self.descriptionView.frame;
+    self.origLargeFrame = self.descriptionViewLong.frame;
+}
+
+- (void) restoreDescriptionViewFrames
+{
+    self.descriptionView.frame = self.origSmallFrame;
+    self.descriptionView.alpha = DESCRIPTION_ALPHA;
+    self.descriptionViewLong.frame = self.origLargeFrame;
+    self.descriptionViewLong.alpha = DESCRIPTION_ALPHA;
+}
+
+- (void) pop_animationDidApply:(POPAnimation *)anim
+{
+    if([anim.name isEqualToString:@"more"]) {
+        [self animateBigger];
+    }
+    else if([anim.name isEqualToString:@"less"]) {
+        [self animateSmaller];
+    }
+}
+
+- (void) animateBigger
+{
+    self.descriptionViewLong.frame = self.descriptionView.frame;
+    if(self.descriptionView.alpha >= 0) {
+        self.descriptionView.alpha -= 0.05;
+    }
+    
+    if(self.descriptionViewLong.alpha <= DESCRIPTION_ALPHA) {
+        self.descriptionViewLong.alpha += 0.05;
+    }
+}
+
+- (void) animateSmaller
+{
+    self.descriptionView.frame = self.descriptionViewLong.frame;
+    if(self.descriptionViewLong.alpha >= 0) {
+        self.descriptionViewLong.alpha -= 0.05;
+    }
+    
+    if(self.descriptionView.alpha <= DESCRIPTION_ALPHA) {
+        self.descriptionView.alpha += 0.05;
+    }
+}
+
+- (void) pop_animationDidStop:(POPAnimation *)anim finished:(BOOL)finished
+{
+    if([anim.name isEqualToString:@"more"]) {
+        self.descriptionView.hidden = YES;
+        [self.descriptionViewLong.descriptionField.scrollView setContentOffset:CGPointZero animated:NO];
+    }
+    else if([anim.name isEqualToString:@"less"]) {
+        self.descriptionViewLong.hidden = YES;
+        [self.descriptionView.descriptionField.scrollView setContentOffset:CGPointZero animated:NO];
+    }
+    
+    [self restoreDescriptionViewFrames];
 }
 
 - (NSString *) htmlFromText: (NSString *)text andDate: (NSString *) date
@@ -154,42 +347,32 @@
 - (void) toggleNavigationBar:(UITapGestureRecognizer *)sender
 {
     if (sender.state == UIGestureRecognizerStateEnded) {
+        DescriptionView *currentDescriptionView = self.showingFullDescription ? self.descriptionViewLong : self.descriptionView;
+        
         BOOL finalNavbarHidden = !self.navigationController.navigationBarHidden;
         [self.navigationController setNavigationBarHidden:finalNavbarHidden animated:YES];
         //description view and nav bar are displayed synchronously
-        float originalAlpha = self.descriptionView.alpha;
+        float originalAlpha = currentDescriptionView.alpha;
         float startingAlpha = finalNavbarHidden?originalAlpha:0;
         float endingAlpha = finalNavbarHidden?0:originalAlpha;
-        self.descriptionView.alpha = startingAlpha;
+        currentDescriptionView.alpha = startingAlpha;
         
         POPBasicAnimation *animation = [POPBasicAnimation animation];
         animation.property = [POPAnimatableProperty propertyWithName:kPOPViewAlpha];
         
         if(!finalNavbarHidden)
-            self.descriptionView.hidden = NO;
+            currentDescriptionView.hidden = NO;
                 
-//        [UIView animateWithDuration:0.24
-//                         animations:^{
-//                             self.descriptionView.alpha = endingAlpha;
-//                         }
-//                         completion:^(BOOL finished) {
-//                             if(finalNavbarHidden) {
-//                                 self.descriptionView.hidden = YES;
-//                                 self.descriptionView.alpha = originalAlpha;
-//                             }
-//                         }];
-
-     
         animation.toValue = [NSNumber numberWithFloat:endingAlpha];
 
         animation.completionBlock = ^void(POPAnimation *a, BOOL finished) {
             if(finalNavbarHidden) {
-                self.descriptionView.hidden = YES;
-                self.descriptionView.alpha = originalAlpha;
+                currentDescriptionView.hidden = YES;
+                currentDescriptionView.alpha = originalAlpha;
             }
         };
-            
-        [self.descriptionView pop_addAnimation:animation forKey:@"toggleNav"];
+        
+        [currentDescriptionView pop_addAnimation:animation forKey:@"toggleNav"];
     }
 }
 
@@ -199,7 +382,9 @@
     
     //keep nav bar and description view in sync
     //they might go out of sync of another page removes the nav bar and we come back to this one
-    self.descriptionView.hidden = self.navigationController.navigationBarHidden;
+    DescriptionView *currentDescriptionView = self.showingFullDescription ? self.descriptionViewLong : self.descriptionView;
+    
+    currentDescriptionView.hidden = self.navigationController.navigationBarHidden;
 }
 
 - (void) viewDidAppear:(BOOL)animated
@@ -222,6 +407,7 @@
 - (void) willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     self.descriptionView.descriptionField.shouldSizeAccurate = true;
+    self.descriptionViewLong.descriptionField.shouldSizeAccurate = true;
     [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
 }
 
@@ -230,12 +416,31 @@
 - (void) infoButtonTapped:(id)sender
 {
     if(!self.showingFullDescription) {
-        self.descriptionView.descriptionField.shouldSizeAccurate = false;
         [self showMore];
     }
     else {
-        self.descriptionView.descriptionField.shouldSizeAccurate = true;
         [self showLess];
+    }
+}
+
+#pragma mark - UIScrollView delegate
+
+- (void) scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if(scrollView.tracking) {
+        //NSLog(@"Scroll view scrolled to: %@", NSStringFromCGPoint(scrollView.contentOffset));
+        
+        if(!self.showingFullDescription && scrollView.contentOffset.y >= 40) {
+            //[scrollView setContentOffset:CGPointZero animated:NO];
+            //self.descriptionView.descriptionField.shouldSizeAccurate = false;
+            [self showMore];
+        }
+        
+        if(self.showingFullDescription && scrollView.contentOffset.y <= -80) {
+            //[scrollView setContentOffset:CGPointZero animated:NO];
+            //self.descriptionView.descriptionField.shouldSizeAccurate = true;
+            [self showLess];
+        }
     }
 }
 
@@ -243,45 +448,14 @@
 
 - (void) webViewDidFinishLoad:(UIWebView *)webView
 {
-    //TODO: hack. If blurb is more than full, then the animation goes haywire
-    if([self.dataObject[@"blurb"] length] >= [self.dataObject[@"full-info"] length]) {
-        return;
-    }
-    
-    POPSpringAnimation *animation = [POPSpringAnimation animation];
-    animation.property = [POPAnimatableProperty propertyWithName:kPOPViewFrame];
-    self.hidingDescriptionViewForAutoLayout = YES;
-    
-    animation.fromValue = [NSValue valueWithCGRect:self.descriptionView.frame];
-    
-    self.descriptionView.hidden = YES;
     [self.descriptionView invalidateIntrinsicContentSize];
-    
-    animation.delegate = self;
-    
-    animation.springBounciness = 7.0;
-    animation.springSpeed = 9.0;
-    
-    [self.descriptionView pop_addAnimation:animation forKey:@"sizing"];
-    
-//    [UIView animateWithDuration:0.20 animations:^{
-//        self.descriptionView.frame = self.descriptionView.bounds; //TODO: hack to make the animation work
-//        [self.descriptionView invalidateIntrinsicContentSize];
-//        [self.descriptionView layoutIfNeeded];
-//        //self.descriptionView.descriptionField.hidden = NO;
-//    }];
-    
+    [self.descriptionView layoutIfNeeded];
+    [self.descriptionViewLong invalidateIntrinsicContentSize];
+    [self.descriptionViewLong layoutIfNeeded];
 }
 
-- (void)pop_animationDidApply:(POPAnimation *)anim
-{
-    if(self.hidingDescriptionViewForAutoLayout) {
-        self.descriptionView.hidden = NO;
-        self.hidingDescriptionViewForAutoLayout = NO;
-    }
-}
 
--(BOOL) webView:(UIWebView *)inWeb shouldStartLoadWithRequest:(NSURLRequest *)inRequest navigationType:(UIWebViewNavigationType)inType
+- (BOOL) webView:(UIWebView *)inWeb shouldStartLoadWithRequest:(NSURLRequest *)inRequest navigationType:(UIWebViewNavigationType)inType
 {
     if ( inType == UIWebViewNavigationTypeLinkClicked ) {
         [[UIApplication sharedApplication] openURL:[inRequest URL]];

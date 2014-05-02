@@ -270,7 +270,7 @@
                                     <outlet property="progressView" destination="N57-dG-yQd" id="IVj-ru-mQA"/>
                                 </connections>
                             </scrollView>
-                            <view autoresizesSubviews="NO" alpha="0.69999999999999996" contentMode="bottomRight" restorationIdentifier="DescriptionView" translatesAutoresizingMaskIntoConstraints="NO" id="zWc-pT-3e9" customClass="DescriptionView">
+                            <view autoresizesSubviews="NO" alpha="0.69999999999999996" contentMode="bottomRight" ambiguous="YES" misplaced="YES" restorationIdentifier="DescriptionView" translatesAutoresizingMaskIntoConstraints="NO" id="zWc-pT-3e9" customClass="DescriptionView">
                                 <rect key="frame" x="581" y="768" width="167" height="255"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Title which describes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T3Y-94-1Qy" userLabel="Title">
@@ -279,7 +279,7 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DYV-bW-ulx">
+                                    <button opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DYV-bW-ulx">
                                         <rect key="frame" x="101" y="216" width="46" height="31"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="31" id="Sfo-BH-LnM"/>
@@ -291,7 +291,7 @@
                                             <action selector="infoButtonTapped:" destination="5" eventType="touchUpInside" id="s3d-DW-9l9"/>
                                         </connections>
                                     </button>
-                                    <webView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4LY-rQ-Om1" customClass="DescriptionWebView">
+                                    <webView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4LY-rQ-Om1" customClass="DescriptionWebView">
                                         <rect key="frame" x="0.0" y="20" width="167" height="188"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                                         <dataDetectorType key="dataDetectorTypes"/>
@@ -315,13 +315,55 @@
                                     <outlet property="titleLabel" destination="T3Y-94-1Qy" id="y7G-Ib-6Jj"/>
                                 </connections>
                             </view>
+                            <view autoresizesSubviews="NO" alpha="0.69999999999999996" contentMode="bottomRight" ambiguous="YES" misplaced="YES" restorationIdentifier="DescriptionViewLong" translatesAutoresizingMaskIntoConstraints="NO" id="NnK-Ec-FM8" userLabel="Description View Long" customClass="DescriptionView">
+                                <rect key="frame" x="300" y="385" width="167" height="255"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Title which describes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GrN-dT-XNg" userLabel="Title">
+                                        <rect key="frame" x="0.0" y="0.0" width="167" height="21"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" alpha="0.80000001192092896" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QGe-Jf-6rv">
+                                        <rect key="frame" x="101" y="216" width="46" height="31"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="31" id="Mvu-Ff-LNe"/>
+                                            <constraint firstAttribute="width" constant="46" id="gdr-x9-TNY"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                        <state key="normal" title="Less"/>
+                                        <connections>
+                                            <action selector="infoButtonTapped:" destination="5" eventType="touchUpInside" id="veD-6h-xFs"/>
+                                        </connections>
+                                    </button>
+                                    <webView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PbY-qf-vBJ" customClass="DescriptionWebView">
+                                        <rect key="frame" x="0.0" y="20" width="167" height="188"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
+                                        <dataDetectorType key="dataDetectorTypes"/>
+                                    </webView>
+                                </subviews>
+                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <constraints>
+                                    <constraint firstItem="GrN-dT-XNg" firstAttribute="trailing" secondItem="NnK-Ec-FM8" secondAttribute="trailing" id="B5g-Nn-2Tj"/>
+                                    <constraint firstItem="PbY-qf-vBJ" firstAttribute="leading" secondItem="NnK-Ec-FM8" secondAttribute="leading" id="I2v-8Q-5oN"/>
+                                    <constraint firstItem="QGe-Jf-6rv" firstAttribute="top" secondItem="PbY-qf-vBJ" secondAttribute="bottom" constant="8" symbolic="YES" id="OG7-7b-9Or"/>
+                                    <constraint firstAttribute="bottom" secondItem="QGe-Jf-6rv" secondAttribute="bottom" constant="8" id="Vne-pT-8IC"/>
+                                    <constraint firstItem="GrN-dT-XNg" firstAttribute="top" secondItem="NnK-Ec-FM8" secondAttribute="top" id="YKw-mT-2cT"/>
+                                    <constraint firstItem="PbY-qf-vBJ" firstAttribute="top" secondItem="NnK-Ec-FM8" secondAttribute="top" constant="20" symbolic="YES" id="atd-8s-7go"/>
+                                    <constraint firstAttribute="trailing" secondItem="QGe-Jf-6rv" secondAttribute="trailing" constant="20" symbolic="YES" id="jcO-Zd-1M7"/>
+                                    <constraint firstItem="GrN-dT-XNg" firstAttribute="leading" secondItem="NnK-Ec-FM8" secondAttribute="leading" id="noq-va-99K"/>
+                                    <constraint firstItem="PbY-qf-vBJ" firstAttribute="trailing" secondItem="NnK-Ec-FM8" secondAttribute="trailing" id="xzU-Wo-c5j"/>
+                                    <constraint firstItem="PbY-qf-vBJ" firstAttribute="leading" secondItem="NnK-Ec-FM8" secondAttribute="leading" id="yb9-mi-QEC"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="descriptionField" destination="PbY-qf-vBJ" id="ANX-ve-bBD"/>
+                                    <outlet property="infoButton" destination="QGe-Jf-6rv" id="cws-Zc-kmn"/>
+                                    <outlet property="titleLabel" destination="GrN-dT-XNg" id="lEZ-gV-SNi"/>
+                                </connections>
+                            </view>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="zWc-pT-3e9" firstAttribute="leading" secondItem="12" secondAttribute="leading" priority="7" constant="390" id="CkB-yt-VXz"/>
                             <constraint firstItem="cNA-rp-Jog" firstAttribute="bottom" secondItem="12" secondAttribute="bottom" id="Lx6-4e-rdz"/>
-                            <constraint firstItem="zWc-pT-3e9" firstAttribute="top" secondItem="12" secondAttribute="top" priority="100" constant="768" id="Rc3-xV-A43"/>
-                            <constraint firstAttribute="trailing" secondItem="zWc-pT-3e9" secondAttribute="trailing" constant="20" symbolic="YES" id="Zdc-Pu-TRW"/>
-                            <constraint firstItem="zWc-pT-3e9" firstAttribute="bottom" secondItem="12" secondAttribute="bottom" constant="-1" id="eY8-xY-dF9"/>
                             <constraint firstItem="cNA-rp-Jog" firstAttribute="leading" secondItem="12" secondAttribute="leading" id="ka7-w7-G5n"/>
                             <constraint firstItem="cNA-rp-Jog" firstAttribute="trailing" secondItem="12" secondAttribute="trailing" id="lN6-S6-wZj"/>
                             <constraint firstItem="cNA-rp-Jog" firstAttribute="top" secondItem="12" secondAttribute="top" id="oEY-kL-sKa"/>
@@ -330,6 +372,7 @@
                     </view>
                     <connections>
                         <outlet property="descriptionView" destination="zWc-pT-3e9" id="c7V-Fd-eQ7"/>
+                        <outlet property="descriptionViewLong" destination="NnK-Ec-FM8" id="1QP-wU-IlU"/>
                         <outlet property="imageScrollView" destination="cNA-rp-Jog" id="ZCE-i4-hIh"/>
                     </connections>
                 </viewController>
