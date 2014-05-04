@@ -29,7 +29,9 @@
 
 @property (nonatomic) CGRect origSmallFrame;
 @property (nonatomic) CGRect origLargeFrame;
-
+@property (nonatomic) NSValue *descriptionScrollStartingPoint;
+@property (nonatomic) POPAnimatableProperty *descriptionViewBiggerProperty;
+@property (nonatomic) POPAnimatableProperty *descriptionViewSmallerProperty;
 @end
 
 @implementation PageViewController
@@ -71,8 +73,73 @@
     [self populateLessInDescriptionView:self.descriptionView];
     [self populateMoreInDescriptionView:self.descriptionViewLong];
     
-    self.navigationItem.title = @"CDLI Tablet";
     
+    self.navigationItem.title = @"CDLI Tablet";
+
+    self.descriptionViewBiggerProperty = [POPAnimatableProperty propertyWithName:@"descriptionViewBigger" initializer:^(POPMutableAnimatableProperty *prop) {
+        prop.readBlock = ^(PageViewController *obj, CGFloat values[]) {
+            values[0] = obj.descriptionView.frame.origin.y;
+        };
+        // write value
+        prop.writeBlock = ^(PageViewController *obj, const CGFloat values[]) {
+            float newY = values[0];
+            
+            [obj updateDescriptionViewsWithY:newY];
+            
+            float currentHeight = obj.descriptionView.frame.size.height - obj.origSmallFrame.size.height;
+            float currentAlpha = [obj alphaForHeight:currentHeight];
+
+            obj.descriptionView.alpha = DESCRIPTION_ALPHA - currentAlpha;
+            obj.descriptionViewLong.alpha = currentAlpha;
+        };
+        // dynamics threshold
+        prop.threshold = 1;
+    }];
+    
+    self.descriptionViewSmallerProperty = [POPAnimatableProperty propertyWithName:@"descriptionViewSmaller" initializer:^(POPMutableAnimatableProperty *prop) {
+        prop.readBlock = ^(PageViewController *obj, CGFloat values[]) {
+            values[0] = obj.descriptionViewLong.frame.origin.y;
+        };
+        // write value
+        prop.writeBlock = ^(PageViewController *obj, const CGFloat values[]) {
+            float newY = values[0];
+            
+            [obj updateDescriptionViewsWithY:newY];
+            
+            float currentHeight = obj.origLargeFrame.size.height - obj.descriptionView.frame.size.height;
+            float currentAlpha = [obj alphaForHeight:currentHeight];
+            
+            obj.descriptionView.alpha = currentAlpha;
+            obj.descriptionViewLong.alpha = DESCRIPTION_ALPHA - currentAlpha;
+        };
+        // dynamics threshold
+        prop.threshold = 1;
+    }];
+}
+
+- (void) updateDescriptionViewsWithY: (float) newY
+{
+    float newHeight = self.origSmallFrame.origin.y - newY + self.origSmallFrame.size.height;
+    //            NSLog(@"newY: %f, newHeight: %f", newY, newHeight);
+    CGRect origFrame = self.descriptionView.frame;
+    CGRect newFrame = CGRectMake(origFrame.origin.x, newY, origFrame.size.width, newHeight);
+    self.descriptionView.frame = newFrame;
+    self.descriptionViewLong.frame = newFrame;
+}
+
+- (float) alphaForHeight: (float) currentHeight
+{
+    float midHeight = (self.origLargeFrame.size.height - self.origSmallFrame.size.height)/2;
+    
+    //    NSLog(@"Current height: %f, midpoint: %f", currentHeight, midHeight);
+    if (currentHeight >= midHeight) {
+        return DESCRIPTION_ALPHA;
+    }
+    else {
+        float currentAlpha = DESCRIPTION_ALPHA * currentHeight / midHeight;
+        //        NSLog(@"Current alpha: %f", currentAlpha);
+        return currentAlpha;
+    }
 }
 
 - (void) prepareDescriptionView: (DescriptionView *) descriptionView
@@ -212,19 +279,24 @@
         NSLog(@"Pending animation, not showing less");
         return;
     }
-
-    [self saveDescriptionViewFrames];
-    self.descriptionView.hidden = NO;
-    self.descriptionView.alpha = 0;
     
+    [self prepareToShowLess];
+
     POPSpringAnimation *animation = [POPSpringAnimation animation];
-    animation.property = [POPAnimatableProperty propertyWithName:kPOPViewFrame];
-    animation.toValue = [NSValue valueWithCGRect:self.descriptionView.frame];
-    animation.delegate = self;
+//    animation.property = [POPAnimatableProperty propertyWithName:kPOPViewFrame];
+    animation.property = self.descriptionViewSmallerProperty;
+//    animation.toValue = [NSValue valueWithCGRect:self.descriptionView.frame];
+    animation.toValue = @(self.descriptionView.frame.origin.y);
+//    animation.delegate = self;
     animation.springBounciness = 7.0;
     animation.springSpeed = 9.0;
     animation.name = @"less";
-    [self.descriptionViewLong pop_addAnimation:animation forKey:@"less"];
+    animation.completionBlock = ^void (POPAnimation *anim, BOOL finished) {
+        [self doneAnimatingSmaller];
+    };
+
+//    [self.descriptionViewLong pop_addAnimation:animation forKey:@"less"];
+    [self pop_addAnimation:animation forKey:@"less"];
     
     self.showingFullDescription = NO;
 }
@@ -243,19 +315,23 @@
         return;
     }
     
-    [self saveDescriptionViewFrames];
-    self.descriptionViewLong.hidden = NO;
-    self.descriptionViewLong.alpha = 0;
+    [self prepareToShowMore];
 
     POPSpringAnimation *animation = [POPSpringAnimation animation];
-    animation.property = [POPAnimatableProperty propertyWithName:kPOPViewFrame];
-    animation.toValue = [NSValue valueWithCGRect:self.descriptionViewLong.frame];
-    animation.delegate = self;
+//    animation.property = [POPAnimatableProperty propertyWithName:kPOPViewFrame];
+    animation.property = self.descriptionViewBiggerProperty;
+//    animation.toValue = [NSValue valueWithCGRect:self.descriptionViewLong.frame];
+    animation.toValue = @(self.descriptionViewLong.frame.origin.y);
+//    animation.delegate = self;
     animation.springBounciness = 7.0;
     animation.springSpeed = 9.0;
     animation.name = @"more";
-    [self.descriptionView pop_addAnimation:animation forKey:@"more"];
+    animation.completionBlock = ^void (POPAnimation *anim, BOOL finished) {
+        [self doneAnimatingBigger];
+    };
     
+//    [self.descriptionView pop_addAnimation:animation forKey:@"more"];
+    [self pop_addAnimation:animation forKey:@"more"];
     self.showingFullDescription = YES;
 }
 
@@ -263,6 +339,20 @@
 {
     self.origSmallFrame = self.descriptionView.frame;
     self.origLargeFrame = self.descriptionViewLong.frame;
+}
+
+- (void) prepareToShowMore
+{
+    [self saveDescriptionViewFrames];
+    self.descriptionViewLong.hidden = NO;
+    self.descriptionViewLong.alpha = 0;
+}
+
+- (void) prepareToShowLess
+{
+    [self saveDescriptionViewFrames];
+    self.descriptionView.hidden = NO;
+    self.descriptionView.alpha = 0;
 }
 
 - (void) restoreDescriptionViewFrames
@@ -273,51 +363,54 @@
     self.descriptionViewLong.alpha = DESCRIPTION_ALPHA;
 }
 
-- (void) pop_animationDidApply:(POPAnimation *)anim
+// midHeight -> DESCRIPTION_ALPHA
+// currentHeight -> ?
+//- (void) animateBigger
+//{
+//    self.descriptionViewLong.frame = self.descriptionView.frame;
+//    float midHeight = (self.origLargeFrame.size.height - self.origSmallFrame.size.height)/2;
+//    float currentHeight = self.descriptionView.frame.size.height - self.origSmallFrame.size.height;
+////    NSLog(@"Current height: %f, midpoint: %f", currentHeight, midHeight);
+//    if (currentHeight >= midHeight) {
+//        self.descriptionView.alpha = 0;
+//        self.descriptionViewLong.alpha = DESCRIPTION_ALPHA;
+//    }
+//    else {
+//        float currentAlpha = DESCRIPTION_ALPHA * currentHeight / midHeight;
+////        NSLog(@"Current alpha: %f", currentAlpha);
+//        self.descriptionView.alpha = DESCRIPTION_ALPHA - currentAlpha;
+//        self.descriptionViewLong.alpha = currentAlpha;
+//    }
+//}
+
+//- (void) animateSmaller
+//{
+//    self.descriptionView.frame = self.descriptionViewLong.frame;
+//    float midHeight = (self.origLargeFrame.size.height - self.origSmallFrame.size.height)/2;
+//    float currentHeight = self.origLargeFrame.size.height - self.descriptionView.frame.size.height;
+//    //    NSLog(@"Current height: %f, midpoint: %f", currentHeight, midPoint);
+//    if (currentHeight >= midHeight) {
+//        self.descriptionViewLong.alpha = 0;
+//        self.descriptionView.alpha = DESCRIPTION_ALPHA;
+//    }
+//    else {
+//        float currentAlpha = DESCRIPTION_ALPHA * currentHeight / midHeight;
+//        self.descriptionView.alpha = currentAlpha;
+//        self.descriptionViewLong.alpha = DESCRIPTION_ALPHA - currentAlpha;
+//    }
+//}
+
+- (void) doneAnimatingBigger
 {
-    if([anim.name isEqualToString:@"more"]) {
-        [self animateBigger];
-    }
-    else if([anim.name isEqualToString:@"less"]) {
-        [self animateSmaller];
-    }
+    self.descriptionView.hidden = YES;
+    //[self.descriptionViewLong.descriptionField.scrollView setContentOffset:CGPointZero animated:NO];
+    [self restoreDescriptionViewFrames];
 }
 
-- (void) animateBigger
+- (void) doneAnimatingSmaller
 {
-    self.descriptionViewLong.frame = self.descriptionView.frame;
-    if(self.descriptionView.alpha >= 0) {
-        self.descriptionView.alpha -= 0.05;
-    }
-    
-    if(self.descriptionViewLong.alpha <= DESCRIPTION_ALPHA) {
-        self.descriptionViewLong.alpha += 0.05;
-    }
-}
-
-- (void) animateSmaller
-{
-    self.descriptionView.frame = self.descriptionViewLong.frame;
-    if(self.descriptionViewLong.alpha >= 0) {
-        self.descriptionViewLong.alpha -= 0.05;
-    }
-    
-    if(self.descriptionView.alpha <= DESCRIPTION_ALPHA) {
-        self.descriptionView.alpha += 0.05;
-    }
-}
-
-- (void) pop_animationDidStop:(POPAnimation *)anim finished:(BOOL)finished
-{
-    if([anim.name isEqualToString:@"more"]) {
-        self.descriptionView.hidden = YES;
-        [self.descriptionViewLong.descriptionField.scrollView setContentOffset:CGPointZero animated:NO];
-    }
-    else if([anim.name isEqualToString:@"less"]) {
-        self.descriptionViewLong.hidden = YES;
-        [self.descriptionView.descriptionField.scrollView setContentOffset:CGPointZero animated:NO];
-    }
-    
+    self.descriptionViewLong.hidden = YES;
+    //[self.descriptionView.descriptionField.scrollView setContentOffset:CGPointZero animated:NO];
     [self restoreDescriptionViewFrames];
 }
 
@@ -425,23 +518,123 @@
 
 #pragma mark - UIScrollView delegate
 
+- (void) scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+//    NSLog(@"Drag began");
+    self.descriptionScrollStartingPoint = nil;
+}
+
+typedef enum {UP, DOWN} Direction;
+
+- (void) trackDirection: (Direction) direction
+{
+    DescriptionView *currentDescriptionView = direction == UP ? self.descriptionView : self.descriptionViewLong;
+    
+    float currentHeight = [currentDescriptionView.descriptionField.scrollView.panGestureRecognizer translationInView:self.view].y;
+    float deltaHeight = [self.descriptionScrollStartingPoint CGPointValue].y - currentHeight;
+    CGRect frame = direction == UP ? self.origSmallFrame : self.origLargeFrame;
+    float newY = frame.origin.y - deltaHeight;
+
+//    NSLog(@"Current height: %f, Delta height: %f", currentHeight,deltaHeight);
+//    CGRect newFrame = CGRectMake(frame.origin.x, frame.origin.y - deltaHeight, frame.size.width, frame.size.height + deltaHeight);
+    POPBasicAnimation *animation = [POPBasicAnimation animation];
+//    animation.property = [POPAnimatableProperty propertyWithName:kPOPViewFrame];
+    animation.property = direction == UP ? self.descriptionViewBiggerProperty : self.descriptionViewSmallerProperty;
+//    animation.toValue = [NSValue valueWithCGRect:newFrame];
+    animation.toValue = @(newY);
+    animation.delegate = self;
+
+    NSString *name = direction == UP ? @"more" : @"less";
+    animation.name = name;
+    animation.duration = 0.05;
+    [self pop_addAnimation:animation forKey:name];
+}
+
 - (void) scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    if(scrollView.tracking) {
-        //NSLog(@"Scroll view scrolled to: %@", NSStringFromCGPoint(scrollView.contentOffset));
+    if(!scrollView.tracking)
+        return;
+    
+    [self pop_removeAllAnimations];
+    
+    if(!self.showingFullDescription) {
+        float scrolledHeight = scrollView.contentOffset.y + scrollView.frame.size.height;
+        float totalHeight = scrollView.contentSize.height;
         
-        if(!self.showingFullDescription && scrollView.contentOffset.y >= 40) {
-            //[scrollView setContentOffset:CGPointZero animated:NO];
-            //self.descriptionView.descriptionField.shouldSizeAccurate = false;
-            [self showMore];
-        }
-        
-        if(self.showingFullDescription && scrollView.contentOffset.y <= -80) {
-            //[scrollView setContentOffset:CGPointZero animated:NO];
-            //self.descriptionView.descriptionField.shouldSizeAccurate = true;
-            [self showLess];
+        if(scrolledHeight >= totalHeight) {
+            if(self.descriptionScrollStartingPoint == nil) {
+                self.descriptionScrollStartingPoint = [NSValue valueWithCGPoint:[scrollView.panGestureRecognizer translationInView:self.view]];
+                
+                [self prepareToShowMore];
+            }
+            
+            [self.descriptionView pop_removeAllAnimations];
+            [self trackDirection:UP];
         }
     }
+    else {
+        float deltaHeight = scrollView.contentOffset.y;
+        if(deltaHeight < 0) {
+            if(self.descriptionScrollStartingPoint == nil) {
+                self.descriptionScrollStartingPoint = [NSValue valueWithCGPoint:[scrollView.panGestureRecognizer translationInView:self.view]];
+                
+                [self prepareToShowLess];
+            }
+            
+            [self.descriptionViewLong pop_removeAllAnimations];
+            [self trackDirection:DOWN];
+        }
+    }
+}
+
+- (void) scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+//    NSLog(@"dragging ended");
+    [self pop_removeAllAnimations];
+    
+    if(self.descriptionScrollStartingPoint == nil) {
+        return;
+    }
+
+    self.descriptionScrollStartingPoint = nil;
+
+    float velocity = [scrollView.panGestureRecognizer velocityInView:self.view].y;
+    Direction direction = velocity < 0 ? UP : DOWN;
+
+    POPSpringAnimation *animation = [POPSpringAnimation animation];
+//    animation.property = [POPAnimatableProperty propertyWithName:kPOPViewFrame];
+    animation.toValue = @(direction == UP ? self.origLargeFrame.origin.y: self.origSmallFrame.origin.y);
+//    animation.delegate = self;
+    animation.springBounciness = 7.0;
+    animation.springSpeed = 9.0;
+    animation.completionBlock = ^void (POPAnimation *anim, BOOL finished) {
+//        NSLog(@"animation done");
+        if(direction == UP)
+            [self doneAnimatingBigger];
+        else
+            [self doneAnimatingSmaller];
+    };
+
+    animation.velocity = @(velocity);
+    
+    if(!self.showingFullDescription) {
+        //animation.name = @"more";
+        animation.property = self.descriptionViewBiggerProperty;
+        [self pop_addAnimation:animation forKey:@"more"];
+    }
+    else {
+//        animation.name = @"less";
+        animation.property = self.descriptionViewSmallerProperty;
+        [self pop_addAnimation:animation forKey:@"less"];
+    }
+    
+    if(direction == UP) {
+        self.showingFullDescription = YES;
+    }
+    else {
+        self.showingFullDescription = NO;
+    }
+
 }
 
 #pragma mark - UIWebView delegate
