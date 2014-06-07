@@ -31,7 +31,6 @@
 
 - (CGSize) intrinsicContentSize
 {
-    CGSize size;
     //NSLog(@"Intrinsic height: %f for text: %@, length: %d", self.contentSize.height, self.text, self.text.length);
     //NSLog(@"Frame height: %f", self.frame.size.height);
     
@@ -55,20 +54,22 @@
 
     if(!self.shouldSizeAccurate) {
         //contentSize = self.scrollView.contentSize;
-        //hack because scrollView's contentSize is a bigger than what the required size 
-        contentSize = CGSizeMake(self.scrollView.contentSize.width, self.scrollView.contentSize.height - 10);
+        //hack because scrollView's contentSize is a bigger than what the required size
+        CGFloat displyableHeight = MIN(self.scrollView.contentSize.height, self.maxHeight);
+        
+        contentSize = CGSizeMake(self.scrollView.contentSize.width, displyableHeight - 10);
     }
-    else
+    else {
+        CGFloat displayableHeight = MIN([[self stringByEvaluatingJavaScriptFromString: @"document.body.offsetHeight"] integerValue], self.maxHeight);
         contentSize = CGSizeMake(self.scrollView.contentSize.width,
-                                [[self stringByEvaluatingJavaScriptFromString: @"document.body.offsetHeight"] integerValue] + 10);
+                                 displayableHeight + 10);
+    }
     
     
-    size.width = contentSize.width;
-    size.height = contentSize.height;
-    
-    //NSLog(@"Intrinsic height: %f, widght: %f", contentSize.height, contentSize.width);
+   
+//    NSLog(@"Intrinsic height: %f, widght: %f", contentSize.height, contentSize.width);
 
-    return size;
+    return contentSize;
 }
 
 - (void) layoutSubviews

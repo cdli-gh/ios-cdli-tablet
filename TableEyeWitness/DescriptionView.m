@@ -37,4 +37,15 @@
     [self.infoButton invalidateIntrinsicContentSize];
 }
 
+//- (CGSize) intrinsicContentSize
+//{
+//    CGSize actualSize = [super intrinsicContentSize];
+//    if (actualSize.height >= 600) {
+//        actualSize.height = 600;
+//    }
+//    
+//    NSLog(@"Returning intrinsic size: %@", NSStringFromCGSize(actualSize));
+//    return actualSize;
+//}
+
 @end

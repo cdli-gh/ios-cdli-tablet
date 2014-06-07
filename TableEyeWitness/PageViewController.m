@@ -32,6 +32,7 @@
 @property (nonatomic) NSValue *descriptionScrollStartingPoint;
 @property (nonatomic) POPAnimatableProperty *descriptionViewBiggerProperty;
 @property (nonatomic) POPAnimatableProperty *descriptionViewSmallerProperty;
+
 @end
 
 @implementation PageViewController
@@ -39,6 +40,8 @@
 - (void) viewDidLoad
 {
     [super viewDidLoad];
+    
+//    self.view.translatesAutoresizingMaskIntoConstraints = NO;
 
     [self prepareDescriptionViewForLess:self.descriptionView];
     [self prepareDescriptionViewForMore:self.descriptionViewLong];
@@ -115,6 +118,8 @@
         // dynamics threshold
         prop.threshold = 1;
     }];
+    
+    [self setDescViewMaxHeightForOrientation:self.interfaceOrientation];
 }
 
 - (void) updateDescriptionViewsWithY: (float) newY
@@ -170,17 +175,20 @@
                                                          multiplier:0.33
                                                            constant:0];
     [self.view addConstraint:cn];
-    
+
+    //Hack: setting this creates internal errors in auto layout
+    //Workaround: Setting the intrinsic size of webview to not cross the boundaries instead
     //set a maximum height
-    cn = [NSLayoutConstraint constraintWithItem:descriptionView
-                                      attribute:NSLayoutAttributeHeight
-                                      relatedBy:NSLayoutRelationLessThanOrEqual
-                                         toItem:self.view
-                                      attribute:NSLayoutAttributeHeight
-                                     multiplier:FULL_HEIGHT_MULTIPLIER
-                                       constant:0];
-    [self.view addConstraint:cn];
-    
+//    cn = [NSLayoutConstraint constraintWithItem:descriptionView
+//                                      attribute:NSLayoutAttributeHeight
+//                                      relatedBy:NSLayoutRelationLessThanOrEqual
+//                                         toItem:self.view
+//                                      attribute:NSLayoutAttributeHeight
+//                                     multiplier:FULL_HEIGHT_MULTIPLIER
+//                                       constant:0];
+//    [self.view addConstraint:cn];
+//
+
     cn = [NSLayoutConstraint constraintWithItem:descriptionView
                                       attribute:NSLayoutAttributeTrailing
                                       relatedBy:NSLayoutRelationEqual
@@ -216,14 +224,14 @@
     [self.view addConstraint:cn];
     
     //set a minimum height
-    cn = [NSLayoutConstraint constraintWithItem:descriptionView
-                                      attribute:NSLayoutAttributeHeight
-                                      relatedBy:NSLayoutRelationGreaterThanOrEqual
-                                         toItem:self.view
-                                      attribute:NSLayoutAttributeHeight
-                                     multiplier:BLURB_HEIGHT_MULTIPLIER
-                                       constant:0];
-    [self.view addConstraint:cn];
+//    cn = [NSLayoutConstraint constraintWithItem:descriptionView
+//                                      attribute:NSLayoutAttributeHeight
+//                                      relatedBy:NSLayoutRelationGreaterThanOrEqual
+//                                         toItem:self.view
+//                                      attribute:NSLayoutAttributeHeight
+//                                     multiplier:BLURB_HEIGHT_MULTIPLIER
+//                                       constant:0];
+//    [self.view addConstraint:cn];
     
     
     cn = [NSLayoutConstraint constraintWithItem:descriptionView
@@ -490,6 +498,20 @@
     [super viewWillDisappear:animated];
 }
 
+- (void) setDescViewMaxHeightForOrientation: (UIInterfaceOrientation) orientation
+{
+    CGFloat maxHeight;
+    if (UIInterfaceOrientationIsLandscape(orientation)) {
+        maxHeight = (768.0) * FULL_HEIGHT_MULTIPLIER;
+    }
+    else {
+        maxHeight = (1024.0) * FULL_HEIGHT_MULTIPLIER;
+    }
+    
+    self.descriptionView.descriptionField.maxHeight = maxHeight;
+    self.descriptionViewLong.descriptionField.maxHeight = maxHeight;
+}
+
 #pragma mark - InterfaceOrientationMethods
 
 - (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -499,6 +521,8 @@
 
 - (void) willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
+    [self pop_removeAllAnimations];
+    [self setDescViewMaxHeightForOrientation:toInterfaceOrientation];
     self.descriptionView.descriptionField.shouldSizeAccurate = true;
     self.descriptionViewLong.descriptionField.shouldSizeAccurate = true;
     [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
@@ -645,6 +669,16 @@ typedef enum {UP, DOWN} Direction;
     [self.descriptionView layoutIfNeeded];
     [self.descriptionViewLong invalidateIntrinsicContentSize];
     [self.descriptionViewLong layoutIfNeeded];
+    
+//    NSLayoutConstraint *cn = [NSLayoutConstraint constraintWithItem:self.descriptionViewLong
+//                                      attribute:NSLayoutAttributeHeight
+//                                      relatedBy:NSLayoutRelationLessThanOrEqual
+//                                         toItem:self.view
+//                                      attribute:NSLayoutAttributeHeight
+//                                     multiplier:FULL_HEIGHT_MULTIPLIER
+//                                       constant:0];
+//    [self.view addConstraint:cn];
+
 }
 
 

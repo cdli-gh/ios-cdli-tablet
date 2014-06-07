@@ -12,5 +12,6 @@
 
 //setting this to true will take longer time to get the right size
 @property (nonatomic) BOOL shouldSizeAccurate;
+@property (nonatomic) CGFloat maxHeight;
 
 @end
