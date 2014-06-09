@@ -99,11 +99,8 @@
     [self displayImage];
 }
 
-
-- (void)layoutSubviews
+- (void) centerZoomFrame
 {
-    [super layoutSubviews];
-    
     // center the zoom view as it becomes smaller than the size of the screen
     CGSize boundsSize = self.bounds.size;
     CGRect frameToCenter = _zoomView.frame;
@@ -121,6 +118,14 @@
         frameToCenter.origin.y = 0;
     
     _zoomView.frame = frameToCenter;
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+//    NSLog(@"Layout subviews called");
+    
+    [self centerZoomFrame];
 }
 
 //- (void)setFrame:(CGRect)frame
@@ -143,9 +148,9 @@
 {
     BOOL sizeChanging = !CGSizeEqualToSize(bounds.size, self.bounds.size);
     
-    if (sizeChanging) {
-        [self prepareToResize];
-    }
+//    if (sizeChanging) {
+//        [self prepareToResize];
+//    }
     
     [super setBounds:bounds];
     
@@ -266,59 +271,69 @@
 
 #pragma mark - Rotation support
 
-- (void)prepareToResize
-{
-    CGPoint boundsCenter = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
-    _pointToCenterAfterResize = [self convertPoint:boundsCenter toView:_zoomView];
-    
-    _scaleToRestoreAfterResize = 0; //self.zoomScale;
-    
-    // If we're at the minimum zoom scale, preserve that by returning 0, which will be converted to the minimum
-    // allowable scale when the scale is restored.
-    if (_scaleToRestoreAfterResize <= self.minimumZoomScale + FLT_EPSILON)
-        _scaleToRestoreAfterResize = 0;
-}
+//- (void)prepareToResize
+//{
+//    CGPoint boundsCenter = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
+//    _pointToCenterAfterResize = [self convertPoint:boundsCenter toView:_zoomView];
+//    
+//    _scaleToRestoreAfterResize = self.zoomScale;
+//    
+//    // If we're at the minimum zoom scale, preserve that by returning 0, which will be converted to the minimum
+//    // allowable scale when the scale is restored.
+//    if (_scaleToRestoreAfterResize <= self.minimumZoomScale + FLT_EPSILON)
+//        _scaleToRestoreAfterResize = 0;
+//}
+
+//- (void)recoverFromResizing
+//{
+//    [self setMaxMinZoomScalesForCurrentBounds];
+//    
+//    // Step 1: restore zoom scale, first making sure it is within the allowable range.
+//    CGFloat maxZoomScale = MAX(self.minimumZoomScale, _scaleToRestoreAfterResize);
+//    self.zoomScale = MIN(self.maximumZoomScale, maxZoomScale);
+//    
+//    // Step 2: restore center point, first making sure it is within the allowable range.
+//    
+//    // 2a: convert our desired center point back to our own coordinate space
+//    CGPoint boundsCenter = [self convertPoint:_pointToCenterAfterResize fromView:_zoomView];
+//    
+//    // 2b: calculate the content offset that would yield that center point
+//    CGPoint offset = CGPointMake(boundsCenter.x - self.bounds.size.width / 2.0,
+//                                 boundsCenter.y - self.bounds.size.height / 2.0);
+//    
+//    // 2c: restore offset, adjusted to be within the allowable range
+//    CGPoint maxOffset = [self maximumContentOffset];
+//    CGPoint minOffset = [self minimumContentOffset];
+//    
+//    CGFloat realMaxOffset = MIN(maxOffset.x, offset.x);
+//    offset.x = MAX(minOffset.x, realMaxOffset);
+//    
+//    realMaxOffset = MIN(maxOffset.y, offset.y);
+//    offset.y = MAX(minOffset.y, realMaxOffset);
+//    
+//    self.contentOffset = offset;
+//}
 
 - (void)recoverFromResizing
 {
     [self setMaxMinZoomScalesForCurrentBounds];
     
-    // Step 1: restore zoom scale, first making sure it is within the allowable range.
-    CGFloat maxZoomScale = MAX(self.minimumZoomScale, _scaleToRestoreAfterResize);
-    self.zoomScale = MIN(self.maximumZoomScale, maxZoomScale);
-    
-    // Step 2: restore center point, first making sure it is within the allowable range.
-    
-    // 2a: convert our desired center point back to our own coordinate space
-    CGPoint boundsCenter = [self convertPoint:_pointToCenterAfterResize fromView:_zoomView];
-    
-    // 2b: calculate the content offset that would yield that center point
-    CGPoint offset = CGPointMake(boundsCenter.x - self.bounds.size.width / 2.0,
-                                 boundsCenter.y - self.bounds.size.height / 2.0);
-    
-    // 2c: restore offset, adjusted to be within the allowable range
-    CGPoint maxOffset = [self maximumContentOffset];
-    CGPoint minOffset = [self minimumContentOffset];
-    
-    CGFloat realMaxOffset = MIN(maxOffset.x, offset.x);
-    offset.x = MAX(minOffset.x, realMaxOffset);
-    
-    realMaxOffset = MIN(maxOffset.y, offset.y);
-    offset.y = MAX(minOffset.y, realMaxOffset);
-    
-    self.contentOffset = offset;
+    self.contentOffset = CGPointZero;
+    self.zoomScale = self.minimumZoomScale;
+    // [self layoutSubviews];
+    [self centerZoomFrame];
 }
 
-- (CGPoint)maximumContentOffset
-{
-    CGSize contentSize = self.contentSize;
-    CGSize boundsSize = self.bounds.size;
-    return CGPointMake(contentSize.width - boundsSize.width, contentSize.height - boundsSize.height);
-}
-
-- (CGPoint)minimumContentOffset
-{
-    return CGPointZero;
-}
+//- (CGPoint)maximumContentOffset
+//{
+//    CGSize contentSize = self.contentSize;
+//    CGSize boundsSize = self.bounds.size;
+//    return CGPointMake(contentSize.width - boundsSize.width, contentSize.height - boundsSize.height);
+//}
+//
+//- (CGPoint)minimumContentOffset
+//{
+//    return CGPointZero;
+//}
 
 @end

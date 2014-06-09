@@ -43,9 +43,9 @@
     NSURL *url;
     
     if([[[NSBundle mainBundle] objectForInfoDictionaryKey:@"IsInternalBuild"] boolValue])
-        url = [NSURL URLWithString:@"http://cdli.ucla.edu/cdlisearch/search/ipadweb_dev/about/about.html"];
+        url = [NSURL URLWithString:@"http://www.cdli.ucla.edu/cdlitablet/about/about.html"];
     else
-        url = [NSURL URLWithString:@"http://cdli.ucla.edu/cdlisearch/search/ipadweb/about/about.html"];
+        url = [NSURL URLWithString:@"http://www.cdli.ucla.edu/cdlitablet/about/about.html"];
         
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [[NSURLCache sharedURLCache] removeCachedResponseForRequest:request];
