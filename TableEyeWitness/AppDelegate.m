@@ -45,12 +45,16 @@
 
     NSLog(@"Rereshing data (became active)");
     
-    NSString *feedURL;
+    //NSString *feedURL;
+    //NSString *feedURL = [NSString stringWithFormat:@"http://www.cdli.ucla.edu/cdlitablet/json?all=true"];
+    NSString *feedURL = [NSString stringWithFormat:@"http://www.cdli.ucla.edu/cdlitablet/json"];
     
-    if([[[NSBundle mainBundle] objectForInfoDictionaryKey:@"IsInternalBuild"] boolValue])
+    /*if ([[[NSProcessInfo processInfo] environment] objectForKey:@"IsInternalBuild"]) {
+        NSLog(@"Running internal build");
         feedURL = [NSString stringWithFormat:@"http://www.cdli.ucla.edu/cdlitablet/json?all=true"];
+    }
     else
-        feedURL = [NSString stringWithFormat:@"http://www.cdli.ucla.edu/cdlitablet/json"];
+        feedURL = [NSString stringWithFormat:@"http://www.cdli.ucla.edu/cdlitablet/json"]; */
     
     [Utils refreshDataAtURL:feedURL withHandler:self];
 }

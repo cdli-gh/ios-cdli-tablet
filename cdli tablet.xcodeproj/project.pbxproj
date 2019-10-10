@@ -31,11 +31,6 @@
 		3860EF7B16B4DC43009791D9 /* PageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3860EF7A16B4DC43009791D9 /* PageViewController.m */; };
 		3860EF7E16B4DC43009791D9 /* ModelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3860EF7D16B4DC43009791D9 /* ModelController.m */; };
 		3860EF8116B4DC44009791D9 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3860EF7F16B4DC44009791D9 /* MainStoryboard.storyboard */; };
-		3860EF8916B4DC45009791D9 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3860EF8816B4DC45009791D9 /* SenTestingKit.framework */; };
-		3860EF8A16B4DC45009791D9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3860EF5E16B4DC43009791D9 /* UIKit.framework */; };
-		3860EF8B16B4DC45009791D9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3860EF6016B4DC43009791D9 /* Foundation.framework */; };
-		3860EF9316B4DC45009791D9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3860EF9116B4DC45009791D9 /* InfoPlist.strings */; };
-		3860EF9616B4DC45009791D9 /* TableEyeWitnessTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3860EF9516B4DC45009791D9 /* TableEyeWitnessTests.m */; };
 		3861402E16CAFB25009BD343 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 3861402D16CAFB25009BD343 /* Default-Portrait~ipad.png */; };
 		3861403016CAFB2C009BD343 /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 3861402F16CAFB2C009BD343 /* Default-Portrait@2x~ipad.png */; };
 		3861403216CAFB71009BD343 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 3861403116CAFB71009BD343 /* Default-Landscape~ipad.png */; };
@@ -67,7 +62,6 @@
 		38C100A916B4E9F700354426 /* ThumbnailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C100A816B4E9F700354426 /* ThumbnailController.m */; };
 		38CCBE1516EF815700B39DA9 /* basic_thumbnail.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 38CCBE1416EF815700B39DA9 /* basic_thumbnail.jpg */; };
 		38CCBE1816EF827900B39DA9 /* LandingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38CCBE1716EF827900B39DA9 /* LandingViewController.m */; };
-		38CCBE1B16EF922900B39DA9 /* OHURLLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 38CCBE1A16EF922900B39DA9 /* OHURLLoader.m */; };
 		38CCBE1C16EF957900B39DA9 /* OHURLLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 38CCBE1A16EF922900B39DA9 /* OHURLLoader.m */; };
 		38D5C4F816B53640002E02D8 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38D5C4F716B53640002E02D8 /* ImageIO.framework */; };
 		38DBD04E170032CD007238D5 /* AboutPageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DBD04D170032CD007238D5 /* AboutPageController.m */; };
@@ -81,16 +75,6 @@
 		38EB57E2171E4CCB00F54770 /* editor6_smallest.png in Resources */ = {isa = PBXBuildFile; fileRef = 38EB57E1171E4CCB00F54770 /* editor6_smallest.png */; };
 		38F85B88171409BB00C7F2FF /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38F85B87171409BB00C7F2FF /* MessageUI.framework */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		3860EF8C16B4DC45009791D9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3860EF5116B4DC43009791D9 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 3860EF5916B4DC43009791D9;
-			remoteInfo = TableEyeWitness;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		38000BD416DDFF380030EEBE /* cdliapp_icon1024_600.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cdliapp_icon1024_600.png; sourceTree = "<group>"; };
@@ -126,7 +110,6 @@
 		3860EF7C16B4DC43009791D9 /* ModelController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModelController.h; sourceTree = "<group>"; };
 		3860EF7D16B4DC43009791D9 /* ModelController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModelController.m; sourceTree = "<group>"; };
 		3860EF8016B4DC44009791D9 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		3860EF8716B4DC45009791D9 /* cdli tabletTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "cdli tabletTests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3860EF8816B4DC45009791D9 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		3860EF9016B4DC45009791D9 /* cdli tabletTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "cdli tabletTests-Info.plist"; sourceTree = "<group>"; };
 		3860EF9216B4DC45009791D9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -236,22 +219,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3860EF8316B4DC45009791D9 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3860EF8916B4DC45009791D9 /* SenTestingKit.framework in Frameworks */,
-				3860EF8A16B4DC45009791D9 /* UIKit.framework in Frameworks */,
-				3860EF8B16B4DC45009791D9 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		3860EF4F16B4DC43009791D9 = {
 			isa = PBXGroup;
 			children = (
+				3860EF6416B4DC43009791D9 /* cdli tablet */,
 				38CF77AD171E3C3D00AD053D /* cdli tablet-Info-internal.plist */,
 				38DBD051170039DC007238D5 /* cdliapp_icon1024x1024d_600ppi copy_smaller.png */,
 				38DBD04F170039AF007238D5 /* cdliapp_icon1024x1024d_600ppi copy.png */,
@@ -269,7 +243,6 @@
 				3861403116CAFB71009BD343 /* Default-Landscape~ipad.png */,
 				3861402F16CAFB2C009BD343 /* Default-Portrait@2x~ipad.png */,
 				3861402D16CAFB25009BD343 /* Default-Portrait~ipad.png */,
-				3860EF6416B4DC43009791D9 /* cdli tablet */,
 				3860EF8E16B4DC45009791D9 /* cdli tablet Tests */,
 				3860EF5D16B4DC43009791D9 /* Frameworks */,
 				3860EF5B16B4DC43009791D9 /* Products */,
@@ -280,7 +253,6 @@
 			isa = PBXGroup;
 			children = (
 				3860EF5A16B4DC43009791D9 /* cdli tablet.app */,
-				3860EF8716B4DC45009791D9 /* cdli tabletTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -491,25 +463,6 @@
 			productReference = 3860EF5A16B4DC43009791D9 /* cdli tablet.app */;
 			productType = "com.apple.product-type.application";
 		};
-		3860EF8616B4DC45009791D9 /* cdli tabletTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 3860EF9C16B4DC45009791D9 /* Build configuration list for PBXNativeTarget "cdli tabletTests" */;
-			buildPhases = (
-				3860EF8216B4DC45009791D9 /* Sources */,
-				3860EF8316B4DC45009791D9 /* Frameworks */,
-				3860EF8416B4DC45009791D9 /* Resources */,
-				3860EF8516B4DC45009791D9 /* ShellScript */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				3860EF8D16B4DC45009791D9 /* PBXTargetDependency */,
-			);
-			name = "cdli tabletTests";
-			productName = TableEyeWitnessTests;
-			productReference = 3860EF8716B4DC45009791D9 /* cdli tabletTests.octest */;
-			productType = "com.apple.product-type.bundle";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -522,7 +475,7 @@
 				ORGANIZATIONNAME = "Sai Deep Tetali";
 				TargetAttributes = {
 					3860EF5916B4DC43009791D9 = {
-						DevelopmentTeam = 866K6U2K3J;
+						DevelopmentTeam = C48LY5UG42;
 					};
 				};
 			};
@@ -539,7 +492,6 @@
 			projectRoot = "";
 			targets = (
 				3860EF5916B4DC43009791D9 /* cdli tablet */,
-				3860EF8616B4DC45009791D9 /* cdli tabletTests */,
 			);
 		};
 /* End PBXProject section */
@@ -579,31 +531,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3860EF8416B4DC45009791D9 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3860EF9316B4DC45009791D9 /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		3860EF8516B4DC45009791D9 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3860EF5616B4DC43009791D9 /* Sources */ = {
@@ -646,24 +574,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3860EF8216B4DC45009791D9 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3860EF9616B4DC45009791D9 /* TableEyeWitnessTests.m in Sources */,
-				38CCBE1B16EF922900B39DA9 /* OHURLLoader.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		3860EF8D16B4DC45009791D9 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 3860EF5916B4DC43009791D9 /* cdli tablet */;
-			targetProxy = 3860EF8C16B4DC45009791D9 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		3860EF6716B4DC43009791D9 /* InfoPlist.strings */ = {
@@ -723,7 +634,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
@@ -746,7 +657,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -760,8 +671,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: UCLA MobileDevNCOne (866K6U2K3J)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: UCLA MobileDevNCOne (866K6U2K3J)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: University of California, Los Angeles  (C48LY5UG42)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\\\"$(SRCROOT)/TableEyeWitness\\\"",
@@ -774,8 +685,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "cdli tablet";
-				PROVISIONING_PROFILE = "02945693-6714-4C1B-9D43-0F2F944F8F17";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "02945693-6714-4C1B-9D43-0F2F944F8F17";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = NO;
 				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = app;
@@ -786,8 +697,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: UCLA MobileDevNCOne (866K6U2K3J)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: UCLA MobileDevNCOne (866K6U2K3J)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: University of California, Los Angeles  (C48LY5UG42)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\\\"$(SRCROOT)/TableEyeWitness\\\"",
@@ -800,45 +711,11 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "cdli tablet";
-				PROVISIONING_PROFILE = "E3033955-543E-43B8-AB4D-B265547DB25D";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E3033955-543E-43B8-AB4D-B265547DB25D";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = NO;
 				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = app;
-			};
-			name = Release;
-		};
-		3860EF9D16B4DC45009791D9 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TableEyeWitness.app/TableEyeWitness";
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "TableEyeWitness/TableEyeWitness-Prefix.pch";
-				INFOPLIST_FILE = "TableEyeWitnessTests/cdli tabletTests-Info.plist";
-				PRODUCT_NAME = "cdli tabletTests";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Debug;
-		};
-		3860EF9E16B4DC45009791D9 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TableEyeWitness.app/TableEyeWitness";
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "TableEyeWitness/TableEyeWitness-Prefix.pch";
-				INFOPLIST_FILE = "TableEyeWitnessTests/cdli tabletTests-Info.plist";
-				PRODUCT_NAME = "cdli tabletTests";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
 		};
@@ -858,7 +735,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -872,8 +749,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: UCLA MobileDevNCOne (866K6U2K3J)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: UCLA MobileDevNCOne (866K6U2K3J)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: University of California, Los Angeles  (C48LY5UG42)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\\\"$(SRCROOT)/TableEyeWitness\\\"",
@@ -886,28 +763,11 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "cdli tablet";
-				PROVISIONING_PROFILE = "E3033955-543E-43B8-AB4D-B265547DB25D";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E3033955-543E-43B8-AB4D-B265547DB25D";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = NO;
 				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = app;
-			};
-			name = "Release Internal";
-		};
-		38CF77A6171E381900AD053D /* Release Internal */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TableEyeWitness.app/TableEyeWitness";
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "TableEyeWitness/TableEyeWitness-Prefix.pch";
-				INFOPLIST_FILE = "TableEyeWitnessTests/cdli tabletTests-Info.plist";
-				PRODUCT_NAME = "cdli tabletTests";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = "Release Internal";
 		};
@@ -933,7 +793,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
@@ -944,8 +804,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: UCLA MobileDevNCOne (866K6U2K3J)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: UCLA MobileDevNCOne (866K6U2K3J)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: University of California, Los Angeles  (C48LY5UG42)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\\\"$(SRCROOT)/TableEyeWitness\\\"",
@@ -958,28 +818,11 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "cdli tablet";
-				PROVISIONING_PROFILE = "02945693-6714-4C1B-9D43-0F2F944F8F17";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "02945693-6714-4C1B-9D43-0F2F944F8F17";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = NO;
 				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = app;
-			};
-			name = "Debug Internal";
-		};
-		38CF77AA171E3B5D00AD053D /* Debug Internal */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TableEyeWitness.app/TableEyeWitness";
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "TableEyeWitness/TableEyeWitness-Prefix.pch";
-				INFOPLIST_FILE = "TableEyeWitnessTests/cdli tabletTests-Info.plist";
-				PRODUCT_NAME = "cdli tabletTests";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = "Debug Internal";
 		};
@@ -1004,17 +847,6 @@
 				38CF77A9171E3B5D00AD053D /* Debug Internal */,
 				3860EF9B16B4DC45009791D9 /* Release */,
 				38CF77A5171E381900AD053D /* Release Internal */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		3860EF9C16B4DC45009791D9 /* Build configuration list for PBXNativeTarget "cdli tabletTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				3860EF9D16B4DC45009791D9 /* Debug */,
-				38CF77AA171E3B5D00AD053D /* Debug Internal */,
-				3860EF9E16B4DC45009791D9 /* Release */,
-				38CF77A6171E381900AD053D /* Release Internal */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

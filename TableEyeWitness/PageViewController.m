@@ -42,6 +42,7 @@
     [super viewDidLoad];
     
 //    self.view.translatesAutoresizingMaskIntoConstraints = NO;
+    self.imageScrollView.translatesAutoresizingMaskIntoConstraints = NO;
 
     [self prepareDescriptionViewForLess:self.descriptionView];
     [self prepareDescriptionViewForMore:self.descriptionViewLong];
@@ -52,7 +53,7 @@
     tapGestureRecognizer.numberOfTapsRequired = 1;
     tapGestureRecognizer.numberOfTouchesRequired = 1;
     [self.imageScrollView addGestureRecognizer:tapGestureRecognizer];
-        
+
     NSDictionary *tabletItem = (NSDictionary *)self.dataObject;
     
     //load the main image
@@ -370,43 +371,6 @@
     self.descriptionViewLong.frame = self.origLargeFrame;
     self.descriptionViewLong.alpha = DESCRIPTION_ALPHA;
 }
-
-// midHeight -> DESCRIPTION_ALPHA
-// currentHeight -> ?
-//- (void) animateBigger
-//{
-//    self.descriptionViewLong.frame = self.descriptionView.frame;
-//    float midHeight = (self.origLargeFrame.size.height - self.origSmallFrame.size.height)/2;
-//    float currentHeight = self.descriptionView.frame.size.height - self.origSmallFrame.size.height;
-////    NSLog(@"Current height: %f, midpoint: %f", currentHeight, midHeight);
-//    if (currentHeight >= midHeight) {
-//        self.descriptionView.alpha = 0;
-//        self.descriptionViewLong.alpha = DESCRIPTION_ALPHA;
-//    }
-//    else {
-//        float currentAlpha = DESCRIPTION_ALPHA * currentHeight / midHeight;
-////        NSLog(@"Current alpha: %f", currentAlpha);
-//        self.descriptionView.alpha = DESCRIPTION_ALPHA - currentAlpha;
-//        self.descriptionViewLong.alpha = currentAlpha;
-//    }
-//}
-
-//- (void) animateSmaller
-//{
-//    self.descriptionView.frame = self.descriptionViewLong.frame;
-//    float midHeight = (self.origLargeFrame.size.height - self.origSmallFrame.size.height)/2;
-//    float currentHeight = self.origLargeFrame.size.height - self.descriptionView.frame.size.height;
-//    //    NSLog(@"Current height: %f, midpoint: %f", currentHeight, midPoint);
-//    if (currentHeight >= midHeight) {
-//        self.descriptionViewLong.alpha = 0;
-//        self.descriptionView.alpha = DESCRIPTION_ALPHA;
-//    }
-//    else {
-//        float currentAlpha = DESCRIPTION_ALPHA * currentHeight / midHeight;
-//        self.descriptionView.alpha = currentAlpha;
-//        self.descriptionViewLong.alpha = DESCRIPTION_ALPHA - currentAlpha;
-//    }
-//}
 
 - (void) doneAnimatingBigger
 {

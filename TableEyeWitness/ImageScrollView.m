@@ -199,24 +199,28 @@
     [_zoomView setImageWithURL:self.imageURL placeholderImage:nil options:SDWebImageRetryFailed
                       progress:^(NSInteger receivedSize, NSInteger expectedSize) {
                           if(!welf.hidden) {
-                              float progressSoFar = receivedSize / expectedSize;
-                              [welf.progressView setProgress:progressSoFar animated:YES];
-                              //NSLog(@"Progress: %f", progressSoFar);
+                              dispatch_async(dispatch_get_main_queue(), ^{
+                                  float progressSoFar = receivedSize / expectedSize;
+                                  [welf.progressView setProgress:progressSoFar animated:YES];
+                                  //NSLog(@"Progress: %f", progressSoFar);
+                              });
                           }
                       }
                      completed:^(UIImage *img, NSError *err, SDImageCacheType ct) {
-                         [welf configureForImageSize:img.size];
-                         
-                         welf.progressView.hidden = YES;
-                         if(img == nil) {
-                             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Could not load image"
-                                                                             message:@"Please check your internet connection"
-                                                                            delegate:nil
-                                                                   cancelButtonTitle:@"OK"
-                                                                   otherButtonTitles:nil];
-                             [alert show];
+                         dispatch_async(dispatch_get_main_queue(), ^{
+                             [welf configureForImageSize:img.size];
+                             
+                             welf.progressView.hidden = YES;
+                             if(img == nil) {
+                                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Could not load image"
+                                                                                 message:@"Please check your internet connection"
+                                                                                delegate:nil
+                                                                       cancelButtonTitle:@"OK"
+                                                                       otherButtonTitles:nil];
+                                 [alert show];
 
-                         }
+                             }
+                         });
                      }
      ];
 }

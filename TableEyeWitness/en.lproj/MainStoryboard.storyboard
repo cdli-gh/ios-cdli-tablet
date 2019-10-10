@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13D65" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="tAG-pG-nUX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="tAG-pG-nUX">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6153.11"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
     </dependencies>
     <scenes>
         <!--About Page Controller-->
@@ -39,7 +40,7 @@
             </objects>
             <point key="canvasLocation" x="843" y="-831"/>
         </scene>
-        <!--Page Root View Controller - cdli tablet-->
+        <!--cdli tablet-->
         <scene sceneID="4">
             <objects>
                 <viewController id="2" customClass="PageRootViewController" sceneMemberID="viewController">
@@ -48,10 +49,11 @@
                         <viewControllerLayoutGuide type="bottom" id="eT8-iO-IYL"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="16">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="960"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" title="cdli tablet" id="xrM-tO-p6O"/>
                     <connections>
                         <segue destination="azZ-2Q-y4e" kind="push" identifier="ShowAboutPage" id="U30-4r-hiE"/>
@@ -77,7 +79,7 @@
             </objects>
             <point key="canvasLocation" x="-968" y="403"/>
         </scene>
-        <!--Thumbnail Controller - cdli tablet-->
+        <!--cdli tablet-->
         <scene sceneID="6Ze-On-EyT">
             <objects>
                 <collectionViewController autoresizesArchivedViewToFullSize="NO" id="VJE-wZ-3zb" customClass="ThumbnailController" sceneMemberID="viewController">
@@ -270,7 +272,7 @@
                                 <rect key="frame" x="581" y="768" width="167" height="255"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" text="Title which describes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T3Y-94-1Qy" userLabel="Title">
-                                        <rect key="frame" x="0.0" y="0.0" width="167" height="21"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="166.5" height="20.5"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -315,7 +317,7 @@
                                 <rect key="frame" x="300" y="385" width="167" height="255"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" text="Title which describes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GrN-dT-XNg" userLabel="Title">
-                                        <rect key="frame" x="0.0" y="0.0" width="167" height="21"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="167" height="20.5"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
